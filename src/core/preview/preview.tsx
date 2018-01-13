@@ -15,6 +15,7 @@ export interface IPreviewTarget {
 
 export interface IPreviewConfig {
     jsAssets: string[];
+    cssAssets: string[];
 }
 
 export interface IPreviewProps {
@@ -25,7 +26,23 @@ export interface IPreviewProps {
 }
 
 export default class Preview extends React.Component<IPreviewProps, {}> {
+    getStyles() {
+        if (!this.props._config.cssAssets) {
+            return null;
+        }
+
+        return this.props._config.cssAssets.map((item, key) => {
+            return (
+                <link media="all" rel="stylesheet" href={app.publicPath + 'inc/' + item} key={key} />
+            );
+        });
+    }
+
     getScripts() {
+        if (!this.props._config.jsAssets) {
+            return null;
+        }
+
         return this.props._config.jsAssets.map((item, key) => {
             return (
                 <script src={app.publicPath + 'inc/' + item} key={key} />
@@ -49,6 +66,7 @@ export default class Preview extends React.Component<IPreviewProps, {}> {
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
                     <meta httpEquiv="X-UA-Compatible" content="IE=Edge" />
                     <title>{this.props._target.label} | Preview Layout</title>
+                    {this.getStyles()}
                 </head>
                 <body>
                     <div id="root" dangerouslySetInnerHTML={{ __html: this.props.yield }} />
