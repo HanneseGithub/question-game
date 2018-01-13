@@ -1,0 +1,30 @@
+{
+  "name": "react-base-project",
+  "version": "0.0.0",
+  "description": "A base project for React apps.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --config webpack.config.js"
+  },
+  "author": "gotoAndPlay <info@play.ee> (https://play.ee)",
+  "license": "ISC",
+  "devDependencies": {
+    "@frctl/fractal": "^1.1.7",
+    "@gotoandplay/nighthawk": "^1.2.0",
+    "expose-loader": "^0.7.4",
+    "ts-loader": "^3.2.0",
+    "tslint": "^5.9.1",
+    "tslint-loader": "^3.5.3",
+    "tslint-react": "^3.4.0",
+    "typescript": "^2.6.2",
+    "webpack": "^3.10.0"
+  },
+  "fractal": {
+    "main": "fractal.config.js"
+  },
+  "dependencies": {
+    "@types/react": "^16.0.34",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
+}

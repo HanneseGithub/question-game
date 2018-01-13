@@ -1,0 +1,23 @@
+{
+  "name": "fractal-tsx-adapter",
+  "version": "0.0.0",
+  "description": "A React + TypeScript adapter for Fractal.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mihkel Eidast <mihkeleidast@gmail.com> (https://eida.st)",
+  "license": "ISC",
+  "dependencies": {
+    "@frctl/fractal": "1.1.5",
+    "bluebird": "^3.5.0",
+    "lodash": "^4.17.1",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "ts-node": "^4.0.1",
+    "typescript": "^2.6.2"
+  },
+  "devDependencies": {
+    "eslint": "^4.10.0"
+  }
+}

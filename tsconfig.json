@@ -1,0 +1,49 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "es5",
+      "es2015.iterable"
+    ],
+    "target": "es5",
+    "allowJs": true,
+    "jsx": "react",
+    "sourceMap": true,
+    "removeComments": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@button": [
+        "src/components/button/button"
+      ],
+      "@editor": [
+        "src/components/editor/editor"
+      ],
+      "@erikson": [
+        "src/components/erikson/erikson"
+      ],
+      "@test": [
+        "src/components/test/test"
+      ],
+      "@video": [
+        "src/components/video/video"
+      ],
+      "@preview": [
+        "src/core/preview/preview"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "jspm_packages"
+  ],
+  "include": [
+    "src/**/*"
+  ],
+  "typeRoots": [
+    "./node_modules/@types"
+  ]
+}
