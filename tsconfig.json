@@ -4,7 +4,8 @@
     "lib": [
       "dom",
       "es5",
-      "es2015.iterable"
+      "es2015",
+      "es2017"
     ],
     "target": "es5",
     "allowJs": true,
@@ -14,10 +15,17 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ],
     "baseUrl": "./src",
     "paths": {
       "@button": [
         "components/button/button"
+      ],
+      "@icon": [
+        "components/icon/icon"
       ],
       "@preview": [
         "core/preview/preview"
@@ -30,8 +38,5 @@
   ],
   "include": [
     "src/**/*"
-  ],
-  "typeRoots": [
-    "./node_modules/@types"
   ]
 }

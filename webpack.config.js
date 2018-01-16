@@ -4,6 +4,7 @@ const FractalModuleResolverPlugin = require('./packages/fractal-module-resolver-
 const FractalPlugin               = require('./packages/fractal-webpack-plugin');
 const StyleLintPlugin             = require('stylelint-webpack-plugin');
 const ExtractTextPlugin           = require("extract-text-webpack-plugin");
+const SvgStorePlugin              = require('external-svg-sprite-loader/lib/SvgStorePlugin');
 
 const extractSass = new ExtractTextPlugin({
     filename: 'css/[name].css'
@@ -20,11 +21,13 @@ module.exports = function(env) {
         output: {
             filename: 'js/[name].js',
             path: path.resolve(__dirname, 'app/styleguide/public/inc'),
-            library: 'gotoAndPlay',
-            libraryTarget: 'umd'
+            publicPath: env && env.production ? '../../inc/' : '/inc/',
+            library: '[name]',
+            libraryTarget: 'window'
         },
         plugins: [
             extractSass,
+            new SvgStorePlugin(),
             new FractalPlugin(env ? env : {}),
             new StyleLintPlugin(),
             new webpack.EnvironmentPlugin({
@@ -105,6 +108,27 @@ module.exports = function(env) {
                         ],
                         fallback: 'style-loader'
                     })
+                },
+                {
+                    test: /\.(svg)$/,
+                    include: path.resolve(__dirname, 'src/components/icon/import/svg/'),
+                    use: [{
+                        loader: 'external-svg-sprite-loader',
+                        options: {
+                            name: 'svg/icons.svg',
+                            iconName: '[name]'
+                        }
+                    },
+                    {
+                        loader: 'svgo-loader',
+                        options: {
+                            plugins: [
+                                {
+                                    removeViewBox: false
+                                }
+                            ]
+                        }
+                    }]
                 }
             ]
         }
