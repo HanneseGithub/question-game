@@ -9,16 +9,8 @@ const Adapter    = require('@frctl/fractal').Adapter;
 const utils      = require('@frctl/fractal').utils;
 
 require('ts-node').register();
+require('tsconfig-paths').register();
 
-/*
- * Adapter options
- * ---------------
- * These options can be overridden when the adapter is set up.
- * Syntax: require('./react-adapter')({ options })
- *
- * - renderMethod: 'renderToStaticMarkup' or 'renderToString'
- *                 https://facebook.github.io/react/docs/react-dom-server.html
- */
 const DEFAULT_OPTIONS = {
     renderMethod: 'renderToStaticMarkup'
 };

@@ -19,18 +19,6 @@
       "@button": [
         "src/components/button/button"
       ],
-      "@editor": [
-        "src/components/editor/editor"
-      ],
-      "@erikson": [
-        "src/components/erikson/erikson"
-      ],
-      "@test": [
-        "src/components/test/test"
-      ],
-      "@video": [
-        "src/components/video/video"
-      ],
       "@preview": [
         "src/core/preview/preview"
       ]
