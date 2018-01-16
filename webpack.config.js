@@ -38,12 +38,11 @@ module.exports = function(env) {
         },
         module: {
             rules: [
-                // wont work with tsconfig-paths
-                /*{
+                {
                     test: /\.(ts|tsx)$/,
                     enforce: 'pre',
                     loader: 'tslint-loader'
-                },*/
+                },
                 {
                     test: /\.tsx?$/,
                     use: 'ts-loader',

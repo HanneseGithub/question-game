@@ -21,12 +21,12 @@ FractalPlugin.prototype.generateTsConfig = function() {
     fractal.components.load().then(function(components) {
         let map = {};
         components.flatten().each(function(item) {
-            map[`@${item.handle}`] = [path.relative(__dirname, path.resolve(path.parse(item.viewPath).dir, path.parse(item.viewPath).name)).replace(/\\/g, '/').replace('../../', '')];
+            map[`@${item.handle}`] = [path.relative(__dirname, path.resolve(path.parse(item.viewPath).dir, path.parse(item.viewPath).name)).replace(/\\/g, '/').replace('../../', '').replace('src/', '')];
         });
 
         tsconfig.compilerOptions.paths = map;
 
-        fs.writeFile(fileName, JSON.stringify(tsconfig, null, 2), function(err) {
+        fs.writeFile(fileName, JSON.stringify(tsconfig, null, 2) + '\n', function(err) {
             if (err) {
                 return console.log(err);
             }

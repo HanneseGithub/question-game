@@ -14,13 +14,13 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
       "@button": [
-        "src/components/button/button"
+        "components/button/button"
       ],
       "@preview": [
-        "src/core/preview/preview"
+        "core/preview/preview"
       ]
     }
   },
