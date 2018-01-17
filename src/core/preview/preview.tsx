@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 export interface IPreviewEnv {
-    _reactClass: string;
+    reactClass: string;
 }
 
 export interface IPreviewTarget {
@@ -47,7 +47,7 @@ export default class Preview extends React.Component<IPreviewProps, {}> {
     }
 
     getHydrateScript() {
-        const contents = 'ReactDOM.hydrate( React.createElement(global.' + this.props._env._reactClass + ', ' + JSON.stringify(this.props._target.context) + '), document.getElementById("root") );';
+        const contents = 'ReactDOM.hydrate( React.createElement(global.' + this.props._env.reactClass + ', ' + JSON.stringify(this.props._target.context) + '), document.getElementById("root") );';
 
         return (
             <script dangerouslySetInnerHTML={{ __html: contents }} />

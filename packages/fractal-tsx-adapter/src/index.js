@@ -12,7 +12,7 @@ require('ts-node').register();
 require('tsconfig-paths').register();
 
 const DEFAULT_OPTIONS = {
-    renderMethod: 'renderToStaticMarkup'
+    renderMethod: 'renderToString'
 };
 
 /*
@@ -39,7 +39,7 @@ class ReactAdapter extends Adapter {
         meta = meta || {};
 
         meta.env.publicPath = this.getPath('/', meta);
-        meta.env._reactClass = component.name;
+        meta.env.reactClass = component.name;
 
         setEnv('_self', meta.self, context);
         setEnv('_target', meta.target, context);
@@ -61,7 +61,7 @@ class ReactAdapter extends Adapter {
     renderLayout(path, str, context, meta) {
         meta = meta || {};
 
-        meta.env.publicFolder = this.getPath('/', meta);
+        meta.env.publicPath = this.getPath('/', meta);
 
         setEnv('_self', meta.self, context);
         setEnv('_target', meta.target, context);
