@@ -24,8 +24,29 @@
       "@button": [
         "components/button/button"
       ],
+      "@button--anchor-button": [
+        "components/button/button"
+      ],
+      "@helpers": [
+        "components/helpers/helpers"
+      ],
       "@icon": [
         "components/icon/icon"
+      ],
+      "@icon--menu": [
+        "components/icon/icon"
+      ],
+      "@icon--check": [
+        "components/icon/icon"
+      ],
+      "@reset": [
+        "components/reset/reset"
+      ],
+      "@typography": [
+        "components/typography/typography"
+      ],
+      "@typography--example": [
+        "components/typography/typography--example"
       ],
       "@preview": [
         "core/preview/preview"

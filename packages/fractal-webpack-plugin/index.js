@@ -20,8 +20,10 @@ function FractalPlugin(env) {
 FractalPlugin.prototype.generateTsConfig = function() {
     fractal.components.load().then(function(components) {
         let map = {};
-        components.flatten().each(function(item) {
-            map[`@${item.handle}`] = [path.relative(__dirname, path.resolve(path.parse(item.viewPath).dir, path.parse(item.viewPath).name)).replace(/\\/g, '/').replace('../../', '').replace('src/', '')];
+        components.flattenDeep().each(function(item) {
+            const handle = item.handle.replace('--default', '');
+
+            map[`@${handle}`] = [path.relative(__dirname, path.resolve(path.parse(item.viewPath).dir, path.parse(item.viewPath).name)).replace(/\\/g, '/').replace('../../', '').replace('src/', '')];
         });
 
         tsconfig.compilerOptions.paths = map;
