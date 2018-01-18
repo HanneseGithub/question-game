@@ -129,7 +129,26 @@ module.exports = function(env) {
                             ]
                         }
                     }]
-                }
+                },
+                {
+                    test: /\.(woff|woff2|eot|ttf|otf)$/,
+                    use: [{
+                        loader: 'file-loader',
+                        options: {
+                            name: 'fonts/[name].[ext]'
+                        }
+                    }]
+                },
+                {
+                    test: /\.(png|svg|jpg|gif)$/,
+                    exclude: path.resolve(__dirname, 'src/components/icon/import/svg/'),
+                    use: [{
+                        loader: 'file-loader',
+                        options: {
+                            name: 'img/[name].[ext]'
+                        }
+                    }]
+                },
             ]
         }
     }
