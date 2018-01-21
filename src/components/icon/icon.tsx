@@ -3,6 +3,8 @@ import * as React from 'react';
 
 require('es6-object-assign/auto');
 
+import {IPreviewEnv} from '@preview';
+
 let icons: any = null;
 
 if (process.env.webpack) {
@@ -18,6 +20,7 @@ if (process.env.webpack) {
 }
 
 export interface IIconProps {
+    _env: IPreviewEnv;
     className?: string;
     modifier?: string;
     name: string;
@@ -29,7 +32,7 @@ export default class Icon extends React.Component<IIconProps, {}> {
             return icons[this.props.name].symbol;
         }
 
-        return app.publicPath + 'inc/svg/icons.svg#' + this.props.name;
+        return this.props._env.publicPath + 'inc/svg/icons.svg#' + this.props.name;
     }
 
     render(): JSX.Element {

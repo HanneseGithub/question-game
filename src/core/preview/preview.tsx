@@ -2,6 +2,7 @@ import * as React from 'react';
 
 export interface IPreviewEnv {
     reactClass: string;
+    publicPath: string;
 }
 
 export interface IPreviewTarget {
@@ -29,7 +30,7 @@ export default class Preview extends React.Component<IPreviewProps, {}> {
 
         return this.props._config.cssAssets.map((item, key) => {
             return (
-                <link media="all" rel="stylesheet" href={app.publicPath + 'inc/' + item} key={key} />
+                <link media="all" rel="stylesheet" href={this.props._env.publicPath + 'inc/' + item} key={key} />
             );
         });
     }
@@ -41,7 +42,7 @@ export default class Preview extends React.Component<IPreviewProps, {}> {
 
         return this.props._config.jsAssets.map((item, key) => {
             return (
-                <script src={app.publicPath + 'inc/' + item} key={key} />
+                <script src={this.props._env.publicPath + 'inc/' + item} key={key} />
             );
         });
     }

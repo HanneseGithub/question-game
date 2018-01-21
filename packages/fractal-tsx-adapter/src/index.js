@@ -34,7 +34,7 @@ class ReactAdapter extends Adapter {
     render(path, str, context, meta) {
         let component = require(path);
 
-        component = component.default ? component.default : component;
+        component = component.default || component;
 
         meta = meta || {};
 
@@ -45,10 +45,6 @@ class ReactAdapter extends Adapter {
         setEnv('_target', meta.target, context);
         setEnv('_env', meta.env, context);
         setEnv('_config', this._app.config(), context);
-
-        global.app = {
-            publicPath: this.getPath('/', meta)
-        };
 
         delete require.cache[path];
 
@@ -68,15 +64,11 @@ class ReactAdapter extends Adapter {
         setEnv('_env', meta.env, context);
         setEnv('_config', this._app.config(), context);
 
-        global.app = {
-            publicPath: this.getPath('/', meta)
-        };
-
         delete require.cache[path];
 
         let component = require(path);
 
-        component = component.default ? component.default : component;
+        component = component.default || component;
         const element   = React.createElement(component, context);
         const html      = '<!DOCTYPE html>' + ReactDOM.renderToStaticMarkup(element);
 
