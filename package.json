@@ -13,6 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "@frctl/fractal": "^1.1.7",
+    "@gotoandplay/fractal-tsx-adapter": "git+https://git@github.com/gtap-dev/fractal-tsx-adapter.git",
     "@gotoandplay/nighthawk": "^1.2.0",
     "autoprefixer": "^7.2.5",
     "css-loader": "^0.28.8",

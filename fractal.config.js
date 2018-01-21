@@ -6,7 +6,7 @@
 let fractal = module.exports = require('@frctl/fractal').create();
 let pkg            = require('./package.json');
 let nighthawkTheme = require('@gotoandplay/nighthawk');
-let tsxAdapter     = require('./packages/fractal-tsx-adapter');
+let tsxAdapter     = require('@gotoandplay/fractal-tsx-adapter');
 
 /**
  * Give your project a title.
