@@ -38,7 +38,7 @@ fractal.components.set('statuses', {
         description: "Ready to implement."
     }
 });
-fractal.components.set('default.status', 'prototype');
+fractal.components.set('default.status', null);
 fractal.components.set('ext', '.tsx');
 
 /**
