@@ -5,9 +5,14 @@ export interface IPreviewEnv {
     publicPath: string;
 }
 
+export interface IPreviewTargetMeta {
+    previewDisplay?: React.StyleHTMLAttributes<HTMLBodyElement>;
+}
+
 export interface IPreviewTarget {
     label: string;
     context: any;
+    meta?: IPreviewTargetMeta;
 }
 
 export interface IPreviewConfig {
@@ -65,7 +70,7 @@ export default class Preview extends React.Component<IPreviewProps, {}> {
                     <title>{this.props._target.label} | Preview Layout</title>
                     {this.getStyles()}
                 </head>
-                <body>
+                <body style={this.props._target.meta.previewDisplay}>
                     <div id="root" dangerouslySetInnerHTML={{ __html: this.props.yield }} />
                     {this.getScripts()}
                     {this.getHydrateScript()}
