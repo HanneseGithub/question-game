@@ -6,11 +6,11 @@ if (process.env.webpack) {
 }
 
 export interface IButtonProps {
+    text: string;
     url?: string;
     modifier?: string;
     className?: string;
     type?: string;
-    text?: string;
 }
 
 export default class Button extends React.Component<IButtonProps, {}> {
