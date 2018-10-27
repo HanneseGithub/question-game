@@ -1,18 +1,25 @@
-const webpack                     = require('webpack');
-const path                        = require('path');
-const FractalModuleResolverPlugin = require('./packages/fractal-module-resolver-webpack-plugin');
-const FractalPlugin               = require('./packages/fractal-webpack-plugin');
-const StyleLintPlugin             = require('stylelint-webpack-plugin');
-const ExtractTextPlugin           = require("extract-text-webpack-plugin");
-const SvgStorePlugin              = require('external-svg-sprite-loader/lib/SvgStorePlugin');
+const path = require('path');
 
-const extractSass = new ExtractTextPlugin({
-    filename: 'css/[name].css'
-});
+const webpack               = require('webpack');
+const StyleLintPlugin       = require('stylelint-webpack-plugin');
+const MiniCssExtractPlugin  = require('mini-css-extract-plugin');
+const SvgStorePlugin        = require('external-svg-sprite-loader');
+const FractalModuleResolver = require('@gotoandplay/fractal-module-resolver-webpack-plugin');
+
+const fractal           = require('./fractal.config.js');
+const tsconfig          = require('./tsconfig.json');
+const FractalPlugin     = require('./packages/fractal-webpack-plugin');
+const TSConfigGenerator = require('./packages/tsconfig-generator-plugin');
 
 module.exports = function(env) {
+    const options = Object.assign({}, {
+        production: false,
+    }, env);
+    const chunksOrder   = ['vendor', 'global'];
+
     return {
-        watch: true,
+        watch: !options.production,
+        mode: options.production ? 'production' : 'development',
         devtool: 'source-map',
         entry: {
             vendor: ['react-dom'],
@@ -21,23 +28,37 @@ module.exports = function(env) {
         output: {
             filename: 'js/[name].js',
             path: path.resolve(__dirname, 'app/styleguide/public/inc'),
-            publicPath: env && env.production ? '../../inc/' : '/inc/',
+            publicPath: options.production ? '../../inc/' : '/inc/',
             library: '[name]',
             libraryTarget: 'window'
         },
         plugins: [
-            extractSass,
+            new MiniCssExtractPlugin({
+                filename: 'css/[name].css',
+            }),
             new SvgStorePlugin(),
-            new FractalPlugin(env ? env : {}),
+            new FractalPlugin({
+                fractal: fractal,
+                isProduction: options.production,
+                chunksOrder: chunksOrder,
+            }),
             new StyleLintPlugin(),
             new webpack.EnvironmentPlugin({
                 webpack: true
-            })
+            }),
+            new TSConfigGenerator({
+                fractal: fractal,
+                tsConfig: tsconfig,
+                fileName: path.resolve(__dirname, path.join('tsconfig.json')),
+            }),
         ],
         resolve: {
             plugins: [
-                new FractalModuleResolverPlugin()
-            ]
+                new FractalModuleResolver({
+                    fractal: fractal,
+                }),
+            ],
+            extensions: ['.tsx', '.jsx', '.ts', '.js'],
         },
         module: {
             rules: [
@@ -66,54 +87,54 @@ module.exports = function(env) {
                     }]
                 },
                 {
-                    test: /\.scss$/,
-                    use: extractSass.extract({
-                        use: [
-                            {
-                                loader: 'css-loader',
-                                options: {
-                                    sourceMap: true
-                                }
-                            },
-                            {
-                                loader: 'postcss-loader',
-                                options: {
-                                    sourceMap: true,
-                                    plugins: [
-                                        require('autoprefixer')()
-                                    ]
-                                }
-                            },
-                            {
-                                loader: 'resolve-url-loader',
-                                options: {
-                                    sourceMap: true
-                                }
-                            },
-                            {
-                                loader: 'sass-loader',
-                                options: {
-                                    sourceMap: true
-                                }
-                            },
-                            {
-                                loader: 'sass-resources-loader',
-                                options: {
-                                    resources: [
-                                        './src/core/variables.scss',
-                                        './src/core/mixins.scss'
-                                    ]
-                                }
+                    test: /\.(css|scss)$/,
+                    use: [
+                        {
+                            loader: MiniCssExtractPlugin.loader,
+                        },
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: true
                             }
-                        ],
-                        fallback: 'style-loader'
-                    })
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: true,
+                                plugins: [
+                                    require('autoprefixer')()
+                                ]
+                            }
+                        },
+                        {
+                            loader: 'resolve-url-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        },
+                        {
+                            loader: 'sass-resources-loader',
+                            options: {
+                                resources: [
+                                    './src/core/variables.scss',
+                                    './src/core/mixins.scss'
+                                ]
+                            }
+                        }
+                    ],
                 },
                 {
                     test: /\.(svg)$/,
                     include: path.resolve(__dirname, 'src/components/icon/import/svg/'),
                     use: [{
-                        loader: 'external-svg-sprite-loader',
+                        loader: SvgStorePlugin.loader,
                         options: {
                             name: 'svg/icons.svg',
                             iconName: '[name]'
@@ -131,7 +152,7 @@ module.exports = function(env) {
                     }]
                 },
                 {
-                    test: /\.(woff|woff2|eot|ttf|otf)$/,
+                    test: /\.(woff|woff2)$/,
                     use: [{
                         loader: 'file-loader',
                         options: {

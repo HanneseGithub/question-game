@@ -42,11 +42,6 @@ fractal.components.set('default.status', null);
 fractal.components.set('ext', '.tsx');
 
 /**
- * Tell Fractal where to look for documentation pages.
- */
-fractal.docs.set('path', 'src/docs');
-
-/**
  * Tell the Fractal web preview plugin where to look for static assets.
  */
 fractal.web.set('server.sync', true);
