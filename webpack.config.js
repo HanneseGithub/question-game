@@ -23,7 +23,7 @@ module.exports = function(env) {
         devtool: 'source-map',
         entry: {
             vendor: ['react-dom'],
-            global: ['./src/index.ts']
+            global: ['./src/index.fractal.ts']
         },
         output: {
             filename: 'js/[name].js',

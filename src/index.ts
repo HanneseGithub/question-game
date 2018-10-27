@@ -18,9 +18,3 @@ export {default as Helpers} from '@helpers';
 export {default as Icon} from '@icon';
 
 export {default as Typography} from '@typography';
-
-/**
- * Component examples
- * @todo should probably not bundle them in production app
- */
-export {default as TypographyExample} from '@typography--example';
