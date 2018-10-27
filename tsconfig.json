@@ -19,7 +19,7 @@
       "./node_modules/@types",
       "./types"
     ],
-    "baseUrl": "./src",
+    "baseUrl": "./src/patterns",
     "paths": {
       "@button": [
         "components/button/button"

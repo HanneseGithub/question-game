@@ -15,11 +15,13 @@ class TSConfigGenerator {
     }
 
     generate(callback = null) {
+        const baseUrl = this.tsconfig.compilerOptions.baseUrl.replace('./', '') + '/';
+
         this.fractal.components.load().then((components) => {
             let map = {};
             components.flattenDeep().each((item) => {
                 const handle      = item.handle.replace('--default', '');
-                map[`@${handle}`] = [path.relative(__dirname, path.resolve(path.parse(item.viewPath).dir, path.parse(item.viewPath).name)).replace(/\\/g, '/').replace('../../', '').replace('src/', '')];
+                map[`@${handle}`] = [path.relative(__dirname, path.resolve(path.parse(item.viewPath).dir, path.parse(item.viewPath).name)).replace(/\\/g, '/').replace('../../', '').replace(baseUrl, '')];
             });
 
             this.tsconfig.compilerOptions.paths = map;

@@ -23,7 +23,7 @@ module.exports = function(env) {
         devtool: 'source-map',
         entry: {
             vendor: ['react-dom'],
-            global: ['./src/index.fractal.ts']
+            global: ['./src/patterns/index.fractal.ts']
         },
         output: {
             filename: 'js/[name].js',
@@ -123,8 +123,8 @@ module.exports = function(env) {
                             loader: 'sass-resources-loader',
                             options: {
                                 resources: [
-                                    './src/core/variables.scss',
-                                    './src/core/mixins.scss'
+                                    './src/patterns/core/variables.scss',
+                                    './src/patterns/core/mixins.scss'
                                 ]
                             }
                         }
@@ -132,7 +132,7 @@ module.exports = function(env) {
                 },
                 {
                     test: /\.(svg)$/,
-                    include: path.resolve(__dirname, 'src/components/icon/import/svg/'),
+                    include: path.resolve(__dirname, 'src/patterns/components/icon/import/svg/'),
                     use: [{
                         loader: SvgStorePlugin.loader,
                         options: {
@@ -162,7 +162,7 @@ module.exports = function(env) {
                 },
                 {
                     test: /\.(png|svg|jpg|gif)$/,
-                    exclude: path.resolve(__dirname, 'src/components/icon/import/svg/'),
+                    exclude: path.resolve(__dirname, 'src/patterns/components/icon/import/svg/'),
                     use: [{
                         loader: 'file-loader',
                         options: {
