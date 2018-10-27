@@ -1,9 +1,6 @@
-import * as classNames from 'classnames';
-import * as React from 'react';
+import React from 'react';
 
-require('es6-object-assign/auto');
-
-import {IPreviewEnv} from '@preview';
+import classNames from 'classnames';
 
 let icons: any = null;
 
@@ -13,14 +10,14 @@ if (process.env.webpack) {
     icons = (req.keys()).reduce((glyphs, key) => {
         const filename = key.match(new RegExp(/[^/]+(?=\.svg$)/))[0];
 
-        return Object.assign({}, glyphs, {
+        return {
+            ...glyphs,
             [filename]: req(key),
-        });
+        };
     }, {});
 }
 
 export interface IIconProps {
-    _env: IPreviewEnv;
     className?: string;
     modifier?: string;
     name: string;
@@ -32,7 +29,10 @@ export default class Icon extends React.Component<IIconProps, {}> {
             return icons[this.props.name].symbol;
         }
 
-        return this.props._env.publicPath + 'inc/svg/icons.svg#' + this.props.name;
+        if (!process.env.webpack) {
+            // this is only for fractal ssr
+            return app.publicFolder + 'inc/svg/icons.svg#' + this.props.name;
+        }
     }
 
     render(): JSX.Element {

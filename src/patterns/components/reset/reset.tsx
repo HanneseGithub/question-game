@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 if (process.env.webpack) {
     require('./reset.scss');

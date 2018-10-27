@@ -1,5 +1,6 @@
-import * as classNames from 'classnames';
-import * as React from 'react';
+import React from 'react';
+
+import classNames from 'classnames';
 
 if (process.env.webpack) {
     require('./button.scss');
