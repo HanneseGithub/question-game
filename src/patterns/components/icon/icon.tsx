@@ -18,9 +18,9 @@ if (process.env.webpack) {
 }
 
 export interface IIconProps {
-    className?: string;
-    modifier?: string;
     name: string;
+    modifier?: string;
+    className?: string;
 }
 
 export default class Icon extends React.Component<IIconProps, {}> {

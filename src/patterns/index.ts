@@ -13,6 +13,8 @@ export {default as Reset} from '@reset';
  */
 export {default as Button} from '@button';
 
+export {default as Check} from '@check';
+
 export {default as Helpers} from '@helpers';
 
 export {default as Icon} from '@icon';

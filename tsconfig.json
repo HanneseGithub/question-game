@@ -28,6 +28,18 @@
       "@button--anchor-button": [
         "components/button/button"
       ],
+      "@check": [
+        "components/forms/check/check"
+      ],
+      "@check--disabled": [
+        "components/forms/check/check"
+      ],
+      "@check--checked": [
+        "components/forms/check/check"
+      ],
+      "@check--checked-disabled": [
+        "components/forms/check/check"
+      ],
       "@helpers": [
         "components/helpers/helpers"
       ],
