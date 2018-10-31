@@ -18,7 +18,7 @@ fractal.set('project.version', pkg.version);
  * Tell Fractal where to look for components.
  */
 fractal.components.engine(tsxAdapter);
-fractal.components.set('path', 'src');
+fractal.components.set('path', 'src/patterns');
 fractal.components.set('title', 'Patterns');
 fractal.components.set('default.preview', '@preview');
 fractal.components.set('statuses', {
