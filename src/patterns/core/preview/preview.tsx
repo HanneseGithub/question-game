@@ -70,7 +70,7 @@ export default class Preview extends React.Component<IPreviewProps, {}> {
                     <title>{this.props._target.label} | Preview Layout</title>
                     {this.getStyles()}
                 </head>
-                <body style={this.props._target.meta.previewDisplay}>
+                <body style={this.props._target.meta && this.props._target.meta.previewDisplay}>
                     <div id="root" dangerouslySetInnerHTML={{ __html: this.props.yield }} />
                     {this.getScripts()}
                     {this.getHydrateScript()}

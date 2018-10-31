@@ -8,11 +8,12 @@ if (process.env.webpack) {
     require('./icon.scss');
     const req = require.context('./import/svg/', false, /^\.\/.*\.svg$/);
     icons = (req.keys()).reduce((glyphs, key) => {
-        const filename = key.match(new RegExp(/[^/]+(?=\.svg$)/))[0];
+        const match = key.match(new RegExp(/[^/]+(?=\.svg$)/));
+        const filename = match && match[0];
 
         return {
             ...glyphs,
-            [filename]: req(key),
+            ['' + filename]: req(key),
         };
     }, {});
 }
@@ -24,7 +25,7 @@ export interface IIconProps {
 }
 
 export default class Icon extends React.Component<IIconProps, {}> {
-    getHref(): string {
+    getHref(): string | undefined {
         if (icons && icons[this.props.name]) {
             return icons[this.props.name].symbol;
         }

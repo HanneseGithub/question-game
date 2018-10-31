@@ -31,7 +31,7 @@ export default class Check extends React.Component<ICheckProps, ICheckState> {
         checked: false,
     };
 
-    static getDerivedStateFromProps(props: ICheckProps, state: ICheckState): ICheckState {
+    static getDerivedStateFromProps(props: ICheckProps, state: ICheckState): ICheckState | null {
         if (typeof props.checked !== 'undefined' && props.checked !== state.prevChecked) {
             return {
                 checked: props.checked,
@@ -46,8 +46,8 @@ export default class Check extends React.Component<ICheckProps, ICheckState> {
         super(props);
 
         this.state = {
-            checked: props.checked,
-            prevChecked: props.checked,
+            checked: props.checked || false,
+            prevChecked: props.checked || false,
         };
     }
 

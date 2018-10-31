@@ -7,19 +7,21 @@ if (process.env.webpack) {
 export default class Helpers extends React.Component<{}, {}> {
     static disableBodyScroll(hideScrollbar: boolean) {
         if (!document.body.classList.contains('is-scroll-disabled')) {
-            const curScroll = document.documentElement.scrollTop;
+            if (document.documentElement) {
+                const curScroll = document.documentElement.scrollTop;
 
-            document.body.classList.add('is-scroll-disabled');
-            document.body.style.top = -curScroll + 'px';
+                document.body.classList.add('is-scroll-disabled');
+                document.body.style.top = -curScroll + 'px';
+            }
         }
     }
 
     static enableBodyScroll() {
-        const bodyScroll = parseInt(document.body.style.top, 10);
+        const bodyScroll = parseInt(document.body.style.top || '0', 10);
 
         document.body.classList.remove('is-scroll-disabled');
 
-        if (bodyScroll) {
+        if (bodyScroll && document.documentElement) {
             document.documentElement.scrollTop = -bodyScroll;
             document.body.style.top = null;
         }
