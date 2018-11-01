@@ -14,11 +14,13 @@ export interface ITextFieldProps {
     type?: string;
     attributes?: React.InputHTMLAttributes<HTMLInputElement>;
     onChange?: (value: string) => void;
+    element?: 'textarea';
     invalid?: boolean;
     disabled?: boolean;
     error?: string;
     description?: string;
     labelClassName?: string;
+    inputClassName?: string;
     modifier?: string;
     className?: string;
 }
@@ -104,6 +106,26 @@ export default class TextField extends React.Component<ITextFieldProps, ITextFie
         );
     }
 
+    renderInput(): JSX.Element {
+        const className = classNames('textfield__input', this.props.inputClassName);
+        const InputElement = this.props.element || 'input';
+
+        return (
+            <InputElement
+                {...this.props.attributes}
+                className={className}
+                type={this.props.type}
+                id={this.props.id}
+                name={this.props.name}
+                value={this.state.value}
+                disabled={this.props.disabled}
+                onChange={this.handleChange}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur}
+            />
+        );
+    }
+
     render(): JSX.Element {
         const className = classNames(
             'textfield',
@@ -120,18 +142,7 @@ export default class TextField extends React.Component<ITextFieldProps, ITextFie
         return (
             <div className={className}>
                 <div className="textfield__inner">
-                    <input
-                        {...this.props.attributes}
-                        className="textfield__input"
-                        type={this.props.type}
-                        id={this.props.id}
-                        name={this.props.name}
-                        value={this.state.value}
-                        disabled={this.props.disabled}
-                        onChange={this.handleChange}
-                        onFocus={this.handleFocus}
-                        onBlur={this.handleBlur}
-                    />
+                    {this.renderInput()}
                     {this.renderLabel()}
                 </div>
                 {this.props.error && this.renderError()}
