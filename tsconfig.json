@@ -65,6 +65,15 @@
       "@radio--checked-disabled": [
         "components/forms/radio/radio"
       ],
+      "@textfield": [
+        "components/forms/textfield/textfield"
+      ],
+      "@textfield--invalid": [
+        "components/forms/textfield/textfield"
+      ],
+      "@textfield--disabled": [
+        "components/forms/textfield/textfield"
+      ],
       "@helpers": [
         "components/helpers/helpers"
       ],

@@ -22,4 +22,5 @@ export { default as Icon } from '@icon';
 
 export { default as Radio } from '@radio';
 
+export { default as TextField } from '@textfield';
 export { default as Typography } from '@typography';
