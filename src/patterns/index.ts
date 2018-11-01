@@ -19,4 +19,6 @@ export {default as Helpers} from '@helpers';
 
 export {default as Icon} from '@icon';
 
+export {default as Radio} from '@radio';
+
 export {default as Typography} from '@typography';

@@ -41,6 +41,18 @@
       "@check--checked-disabled": [
         "components/forms/check/check"
       ],
+      "@radio": [
+        "components/forms/radio/radio"
+      ],
+      "@radio--disabled": [
+        "components/forms/radio/radio"
+      ],
+      "@radio--checked": [
+        "components/forms/radio/radio"
+      ],
+      "@radio--checked-disabled": [
+        "components/forms/radio/radio"
+      ],
       "@helpers": [
         "components/helpers/helpers"
       ],
