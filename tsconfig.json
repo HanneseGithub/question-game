@@ -41,6 +41,18 @@
       "@check--checked-disabled": [
         "components/forms/check/check"
       ],
+      "@choice-group": [
+        "components/forms/choice-group/choice-group"
+      ],
+      "@choice-group--radio": [
+        "components/forms/choice-group/choice-group"
+      ],
+      "@choice-group--invalid": [
+        "components/forms/choice-group/choice-group"
+      ],
+      "@choice-group--description": [
+        "components/forms/choice-group/choice-group"
+      ],
       "@radio": [
         "components/forms/radio/radio"
       ],
