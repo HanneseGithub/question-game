@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Button from '@button';
+import App from './src/App';
 
-ReactDOM.render(<Button text="tere" />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));

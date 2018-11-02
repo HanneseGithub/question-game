@@ -52,8 +52,10 @@
     "main": "fractal.config.js"
   },
   "dependencies": {
+    "@reach/router": "^1.2.1",
     "@types/classnames": "^2.2.6",
     "@types/node": "^10.12.0",
+    "@types/reach__router": "^1.2.1",
     "@types/react": "^16.4.18",
     "@types/react-dom": "^16.0.9",
     "@types/webpack": "^4.4.17",
