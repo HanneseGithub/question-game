@@ -15,6 +15,7 @@ export { default as Button } from '@button';
 
 export { default as Check } from '@check';
 export { default as ChoiceGroup } from '@choice-group';
+export { default as Container } from '@container';
 
 export { default as Helpers } from '@helpers';
 

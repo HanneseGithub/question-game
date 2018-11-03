@@ -29,6 +29,9 @@
       "@button--anchor-button": [
         "components/button/button"
       ],
+      "@container": [
+        "components/container/container"
+      ],
       "@check": [
         "components/forms/check/check"
       ],
