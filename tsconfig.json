@@ -130,6 +130,9 @@
       ],
       "@m-header": [
         "modules/header/header"
+      ],
+      "@t-login": [
+        "templates/login/login"
       ]
     }
   },

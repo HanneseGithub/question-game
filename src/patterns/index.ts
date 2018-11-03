@@ -37,3 +37,8 @@ export { default as Typography } from '@typography';
  * Modules
  */
 export { default as Header } from '@m-header';
+
+/**
+ * Templates
+ */
+export { default as TemplateLogin } from '@t-login';
