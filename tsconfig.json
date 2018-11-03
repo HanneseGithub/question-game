@@ -127,6 +127,9 @@
       ],
       "@preview": [
         "core/preview/preview"
+      ],
+      "@m-header": [
+        "modules/header/header"
       ]
     }
   },
