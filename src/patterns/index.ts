@@ -21,6 +21,8 @@ export { default as Helpers } from '@helpers';
 
 export { default as Icon } from '@icon';
 
+export { default as Main } from '@main';
+
 export { default as Radio } from '@radio';
 
 export { default as Select } from '@select';

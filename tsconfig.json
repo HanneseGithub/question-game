@@ -110,6 +110,9 @@
       "@icon--check": [
         "components/icon/icon"
       ],
+      "@main": [
+        "components/main/main"
+      ],
       "@reset": [
         "components/reset/reset"
       ],
