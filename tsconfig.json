@@ -65,6 +65,15 @@
       "@radio--checked-disabled": [
         "components/forms/radio/radio"
       ],
+      "@select": [
+        "components/forms/select/select"
+      ],
+      "@select--invalid": [
+        "components/forms/select/select"
+      ],
+      "@select--disabled": [
+        "components/forms/select/select"
+      ],
       "@textarea": [
         "components/forms/textarea/textarea"
       ],
@@ -87,6 +96,9 @@
         "components/helpers/helpers"
       ],
       "@icon": [
+        "components/icon/icon"
+      ],
+      "@icon--arrow-down": [
         "components/icon/icon"
       ],
       "@icon--menu": [

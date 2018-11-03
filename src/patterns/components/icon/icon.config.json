@@ -6,6 +6,12 @@
       "hidden": true
     },
     {
+      "name": "arrow-down",
+      "context": {
+        "name": "arrow-down"
+      }
+    },
+    {
       "name": "menu",
       "context": {
         "name": "menu"
