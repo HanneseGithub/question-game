@@ -23,6 +23,8 @@ export { default as Icon } from '@icon';
 
 export { default as Main } from '@main';
 
+export { default as Navigation } from '@navigation';
+
 export { default as Radio } from '@radio';
 
 export { default as Select } from '@select';

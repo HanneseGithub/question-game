@@ -113,6 +113,9 @@
       "@main": [
         "components/main/main"
       ],
+      "@navigation": [
+        "components/navigation/navigation"
+      ],
       "@reset": [
         "components/reset/reset"
       ],
