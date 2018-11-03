@@ -133,6 +133,9 @@
       ],
       "@t-login": [
         "templates/login/login"
+      ],
+      "@v-base": [
+        "views/base/base"
       ]
     }
   },
