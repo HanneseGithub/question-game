@@ -136,6 +136,9 @@
       ],
       "@v-base": [
         "views/base/base"
+      ],
+      "@v-login": [
+        "views/login/login"
       ]
     }
   },
