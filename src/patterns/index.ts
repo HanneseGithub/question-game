@@ -1,3 +1,6 @@
+import 'react';
+import 'react-dom';
+
 /**
  * Polyfills and plugins for the browser.
  */

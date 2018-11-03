@@ -108,7 +108,6 @@ class gotoAndReact {
         switch (name) {
             case 'styleguide':
                 entry = {
-                    vendor: ['react-dom'],
                     global: ['./src/patterns/index.fractal.ts']
                 };
                 break;
@@ -293,6 +292,10 @@ class gotoAndReact {
                         }]
                     },
                 ]
+            },
+            stats: {
+                modules: false,
+                children: false,
             },
         };
     }
