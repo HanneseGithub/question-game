@@ -1,6 +1,5 @@
 {
   "context": {
-    "header": "@m-header",
     "login": "@t-login"
   }
 }
