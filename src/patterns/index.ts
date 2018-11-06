@@ -24,6 +24,8 @@ export { default as Helpers } from '@helpers';
 
 export { default as Icon } from '@icon';
 
+export { default as Languages } from '@languages';
+
 export { default as Main } from '@main';
 
 export { default as Navigation } from '@navigation';

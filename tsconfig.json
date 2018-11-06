@@ -110,6 +110,9 @@
       "@icon--check": [
         "components/icon/icon"
       ],
+      "@languages": [
+        "components/languages/languages"
+      ],
       "@main": [
         "components/main/main"
       ],
