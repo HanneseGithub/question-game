@@ -61,6 +61,8 @@
     "@types/webpack": "^4.4.17",
     "@types/webpack-env": "^1.13.6",
     "classnames": "^2.2.6",
+    "lazysizes": "^4.1.4",
+    "picturefill": "^3.0.3",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "svgxuse": "^1.2.6"

@@ -1,0 +1,27 @@
+{
+  "context": {
+    "srcset": "//placehold.it/100x100 100w, //placehold.it/200x200 200w",
+    "alt": "image alt text"
+  },
+  "variants": [
+    {
+      "name": "picture",
+      "context": {
+        "sources": [
+          {
+            "srcset": "//placehold.it/100x175 100w, //placehold.it/200x350 200w",
+            "media": "(min-width: 1170px)"
+          },
+          {
+            "srcset": "//placehold.it/100x150 100w, //placehold.it/200x300 200w",
+            "media": "(min-width: 1024px)"
+          },
+          {
+            "srcset": "//placehold.it/100x125 100w, //placehold.it/200x250 200w",
+            "media": "(min-width: 768px)"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+<div class="image {{ modifier }} {{ class }}">
+    {% if data.sources %}
+        <picture class="image__picture">
+            {% for source in data.sources %}
+                <source data-srcset="{{ source.srcset }}" media="{{ media[loop.index0] }}"/>
+            {% endfor %}
+            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-srcset="{{ data.srcset }}" data-sizes="auto" alt="{{ data.alt }}" class="image__img lazyload">
+        </picture>
+    {% else %}
+        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-srcset="{{ data.srcset }}" data-sizes="auto" alt="{{ data.alt }}" class="image__img lazyload">
+    {% endif %}
+</div>

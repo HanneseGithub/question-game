@@ -110,6 +110,12 @@
       "@icon--check": [
         "components/icon/icon"
       ],
+      "@image": [
+        "components/image/image"
+      ],
+      "@image--picture": [
+        "components/image/image"
+      ],
       "@languages": [
         "components/languages/languages"
       ],
