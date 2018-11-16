@@ -55,7 +55,7 @@ export default class Image extends React.Component<IImageProps> {
     }
 
     render(): JSX.Element {
-        const className = classNames('image', this.props.modifier, this.props.className);
+        const className: string = classNames('image', this.props.modifier, this.props.className);
 
         return (
             <div className={className}>

@@ -10,7 +10,7 @@ if (process.env.webpack) {
 
 export default class TextArea extends React.Component<ITextFieldProps, {}> {
     render(): JSX.Element {
-        const className = classNames('textarea', this.props.modifier, this.props.className);
+        const className: string = classNames('textarea', this.props.modifier, this.props.className);
 
         return (
             <TextField

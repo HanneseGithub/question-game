@@ -2,14 +2,14 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-let icons: any = null;
+let icons: any = null; // tslint:disable-line no-any
 
 if (process.env.webpack) {
     require('./icon.scss');
-    const req = require.context('./import/svg/', false, /^\.\/.*\.svg$/);
-    icons = (req.keys()).reduce((glyphs, key) => {
-        const match = key.match(new RegExp(/[^/]+(?=\.svg$)/));
-        const filename = match && match[0];
+    const req: __WebpackModuleApi.RequireContext = require.context('./import/svg/', false, /^\.\/.*\.svg$/);
+    icons = (req.keys()).reduce((glyphs: {}, key: string) => {
+        const match: RegExpMatchArray | null = key.match(new RegExp(/[^/]+(?=\.svg$)/));
+        const filename: string | null = match && match[0];
 
         return {
             ...glyphs,
@@ -37,7 +37,7 @@ export default class Icon extends React.Component<IIconProps, {}> {
     }
 
     render(): JSX.Element {
-        const className = classNames('icon', this.props.modifier, this.props.className);
+        const className: string = classNames('icon', this.props.modifier, this.props.className);
 
         return (
             <svg className={className}>

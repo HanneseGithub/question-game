@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default class TypographyExample extends React.Component<{}, {}> {
-    render() {
+export default class TypographyExample extends React.Component {
+    render(): JSX.Element {
         return (
             <div className="text">
                 <h1>Heading 1</h1>

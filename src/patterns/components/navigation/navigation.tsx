@@ -21,7 +21,7 @@ export interface INavigationProps {
 export default class Navigation extends React.Component<INavigationProps> {
     renderItems(): JSX.Element[] {
         return this.props.items.map((item: INavigationItem, index: number) => {
-            const className = classNames(
+            const className: string = classNames(
                 'navigation__item',
                 {
                     'is-current': item.current,
@@ -35,8 +35,9 @@ export default class Navigation extends React.Component<INavigationProps> {
             );
         });
     }
+
     render(): JSX.Element {
-        const className = classNames('navigation', this.props.className);
+        const className: string = classNames('navigation', this.props.className);
 
         return (
             <nav className={className}>

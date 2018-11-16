@@ -36,18 +36,6 @@ export default class TextField extends React.Component<ITextFieldProps, ITextFie
         type: 'text',
     };
 
-    static getDerivedStateFromProps(props: ITextFieldProps, state: ITextFieldState): ITextFieldState | null {
-        if (typeof props.value !== 'undefined' && props.value !== state.prevValue) {
-            return {
-                value: props.value,
-                prevValue: props.value,
-                focused: state.focused,
-            };
-        }
-
-        return null;
-    }
-
     constructor(props: ITextFieldProps) {
         super(props);
 
@@ -97,7 +85,7 @@ export default class TextField extends React.Component<ITextFieldProps, ITextFie
     }
 
     renderLabel(): JSX.Element {
-        const className = classNames('textfield__label', this.props.labelClassName);
+        const className: string = classNames('textfield__label', this.props.labelClassName);
 
         return (
             <label className={className} htmlFor={this.props.id}>
@@ -107,8 +95,8 @@ export default class TextField extends React.Component<ITextFieldProps, ITextFie
     }
 
     renderInput(): JSX.Element {
-        const className = classNames('textfield__input', this.props.inputClassName);
-        const InputElement = this.props.element || 'input';
+        const className: string = classNames('textfield__input', this.props.inputClassName);
+        const InputElement: string = this.props.element || 'input';
 
         return (
             <InputElement
@@ -127,7 +115,7 @@ export default class TextField extends React.Component<ITextFieldProps, ITextFie
     }
 
     render(): JSX.Element {
-        const className = classNames(
+        const className: string = classNames(
             'textfield',
             {
                 'is-dirty': this.state.value,
@@ -149,5 +137,17 @@ export default class TextField extends React.Component<ITextFieldProps, ITextFie
                 {this.props.description && this.renderDescription()}
             </div>
         );
+    }
+
+    static getDerivedStateFromProps(props: ITextFieldProps, state: ITextFieldState): ITextFieldState | null {
+        if (typeof props.value !== 'undefined' && props.value !== state.prevValue) {
+            return {
+                value: props.value,
+                prevValue: props.value,
+                focused: state.focused,
+            };
+        }
+
+        return null;
     }
 }

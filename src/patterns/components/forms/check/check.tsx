@@ -31,17 +31,6 @@ export default class Check extends React.Component<ICheckProps, ICheckState> {
         checked: false,
     };
 
-    static getDerivedStateFromProps(props: ICheckProps, state: ICheckState): ICheckState | null {
-        if (typeof props.checked !== 'undefined' && props.checked !== state.prevChecked) {
-            return {
-                checked: props.checked,
-                prevChecked: props.checked,
-            };
-        }
-
-        return null;
-    }
-
     constructor(props: ICheckProps) {
         super(props);
 
@@ -64,7 +53,7 @@ export default class Check extends React.Component<ICheckProps, ICheckState> {
     }
 
     render(): JSX.Element {
-        const className = classNames('check', this.props.modifier, this.props.className);
+        const className: string = classNames('check', this.props.modifier, this.props.className);
 
         return (
             <div className={className}>
@@ -87,5 +76,16 @@ export default class Check extends React.Component<ICheckProps, ICheckState> {
                 </label>
             </div>
         );
+    }
+
+    static getDerivedStateFromProps(props: ICheckProps, state: ICheckState): ICheckState | null {
+        if (typeof props.checked !== 'undefined' && props.checked !== state.prevChecked) {
+            return {
+                checked: props.checked,
+                prevChecked: props.checked,
+            };
+        }
+
+        return null;
     }
 }

@@ -12,7 +12,7 @@ export interface IContainerProps {
 
 export default class Container extends React.Component<IContainerProps> {
     render(): JSX.Element {
-        const className = classNames('container', this.props.className);
+        const className: string = classNames('container', this.props.className);
 
         return (
             <div className={className}>

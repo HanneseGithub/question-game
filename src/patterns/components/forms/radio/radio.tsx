@@ -29,17 +29,6 @@ export default class Radio extends React.Component<IRadioProps, IRadioState> {
         checked: false,
     };
 
-    static getDerivedStateFromProps(props: IRadioProps, state: IRadioState): IRadioState | null {
-        if (typeof props.checked !== 'undefined' && props.checked !== state.prevChecked) {
-            return {
-                checked: props.checked,
-                prevChecked: props.checked,
-            };
-        }
-
-        return null;
-    }
-
     constructor(props: IRadioProps) {
         super(props);
 
@@ -62,7 +51,7 @@ export default class Radio extends React.Component<IRadioProps, IRadioState> {
     }
 
     render(): JSX.Element {
-        const className = classNames('radio', this.props.modifier, this.props.className);
+        const className: string = classNames('radio', this.props.modifier, this.props.className);
 
         return (
             <div className={className}>
@@ -83,5 +72,16 @@ export default class Radio extends React.Component<IRadioProps, IRadioState> {
                 </label>
             </div>
         );
+    }
+
+    static getDerivedStateFromProps(props: IRadioProps, state: IRadioState): IRadioState | null {
+        if (typeof props.checked !== 'undefined' && props.checked !== state.prevChecked) {
+            return {
+                checked: props.checked,
+                prevChecked: props.checked,
+            };
+        }
+
+        return null;
     }
 }

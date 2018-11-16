@@ -30,17 +30,6 @@ export interface IChoiceGroupState {
 }
 
 export default class ChoiceGroup extends React.Component<IChoiceGroupProps, IChoiceGroupState> {
-    static getDerivedStateFromProps(props: IChoiceGroupProps, state: IChoiceGroupState): IChoiceGroupState | null {
-        if (typeof props.value !== 'undefined' && props.value !== state.prevValue) {
-            return {
-                value: props.value,
-                prevValue: props.value,
-            };
-        }
-
-        return null;
-    }
-
     constructor(props: IChoiceGroupProps) {
         super(props);
 
@@ -69,14 +58,14 @@ export default class ChoiceGroup extends React.Component<IChoiceGroupProps, ICho
     }
 
     handleChoiceChange = (value: string, checked: boolean): void => {
-        this.setState((prevState) => {
+        this.setState((prevState: IChoiceGroupState) => {
             if (Array.isArray(prevState.value)) {
-                let newValue = prevState.value;
+                let newValue: string[] = prevState.value;
 
                 if (checked) {
                     newValue.push(value);
                 } else {
-                    newValue = newValue.filter((item) => item !== value);
+                    newValue = newValue.filter((item: string) => item !== value);
                 }
 
                 return {
@@ -88,8 +77,6 @@ export default class ChoiceGroup extends React.Component<IChoiceGroupProps, ICho
                 };
             }
         }, () => {
-            console.log(this.state.value);
-
             if (this.props.onChange) {
                 this.props.onChange(this.state.value);
             }
@@ -97,9 +84,9 @@ export default class ChoiceGroup extends React.Component<IChoiceGroupProps, ICho
     }
 
     renderChoices(): JSX.Element[] {
-        const ChoiceType = this.props.type === 'check' ? Check : Radio;
+        const ChoiceType: typeof Check | typeof Radio = this.props.type === 'check' ? Check : Radio;
 
-        return this.props.choices.map((item) => {
+        return this.props.choices.map((item: IRadioProps | ICheckProps) => {
             return (
                 <ChoiceType
                     {...item}
@@ -129,7 +116,7 @@ export default class ChoiceGroup extends React.Component<IChoiceGroupProps, ICho
     }
 
     render(): JSX.Element {
-        const className = classNames(
+        const className: string = classNames(
             'choice-group',
             {
                 'is-invalid': this.props.invalid,
@@ -148,5 +135,16 @@ export default class ChoiceGroup extends React.Component<IChoiceGroupProps, ICho
                 {this.props.description && this.renderDescription()}
             </fieldset>
         );
+    }
+
+    static getDerivedStateFromProps(props: IChoiceGroupProps, state: IChoiceGroupState): IChoiceGroupState | null {
+        if (typeof props.value !== 'undefined' && props.value !== state.prevValue) {
+            return {
+                value: props.value,
+                prevValue: props.value,
+            };
+        }
+
+        return null;
     }
 }

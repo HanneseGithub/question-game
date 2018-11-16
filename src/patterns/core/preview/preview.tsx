@@ -11,7 +11,7 @@ export interface IPreviewTargetMeta {
 
 export interface IPreviewTarget {
     label: string;
-    context: any;
+    context: any; // tslint:disable-line no-any
     meta?: IPreviewTargetMeta;
 }
 
@@ -28,39 +28,39 @@ export interface IPreviewProps {
 }
 
 export default class Preview extends React.Component<IPreviewProps, {}> {
-    getStyles() {
+    getStyles(): JSX.Element[] | null {
         if (!this.props._config.cssAssets) {
             return null;
         }
 
-        return this.props._config.cssAssets.map((item, key) => {
+        return this.props._config.cssAssets.map((item: string, index: number) => {
             return (
-                <link media="all" rel="stylesheet" href={this.props._env.publicPath + 'inc/' + item} key={key} />
+                <link media="all" rel="stylesheet" href={this.props._env.publicPath + 'inc/' + item} key={index} />
             );
         });
     }
 
-    getScripts() {
+    getScripts(): JSX.Element[] | null {
         if (!this.props._config.jsAssets) {
             return null;
         }
 
-        return this.props._config.jsAssets.map((item, key) => {
+        return this.props._config.jsAssets.map((item: string, index: number) => {
             return (
-                <script src={this.props._env.publicPath + 'inc/' + item} key={key} />
+                <script src={this.props._env.publicPath + 'inc/' + item} key={index} />
             );
         });
     }
 
-    getHydrateScript() {
-        const contents = 'ReactDOM.hydrate( React.createElement(global.' + this.props._env.reactClass + ', ' + JSON.stringify(this.props._target.context) + '), document.getElementById("root") );';
+    getHydrateScript(): JSX.Element {
+        const contents: string = 'ReactDOM.hydrate( React.createElement(global.' + this.props._env.reactClass + ', ' + JSON.stringify(this.props._target.context) + '), document.getElementById("root") );';
 
         return (
             <script dangerouslySetInnerHTML={{ __html: contents }} />
         );
     }
 
-    render() {
+    render(): JSX.Element {
         return (
             <html>
                 <head>

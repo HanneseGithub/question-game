@@ -38,17 +38,6 @@ export interface ISelectState {
 }
 
 export default class Select extends React.Component<ISelectProps, ISelectState> {
-    static getDerivedStateFromProps(props: ISelectProps, state: ISelectState): ISelectState | null {
-        if (typeof props.value !== 'undefined' && props.value !== state.prevValue) {
-            return {
-                value: props.value,
-                prevValue: props.value,
-            };
-        }
-
-        return null;
-    }
-
     constructor(props: ISelectProps) {
         super(props);
 
@@ -85,7 +74,7 @@ export default class Select extends React.Component<ISelectProps, ISelectState> 
     }
 
     renderLabel(): JSX.Element {
-        const className = classNames('select__label', this.props.labelClassName);
+        const className: string = classNames('select__label', this.props.labelClassName);
 
         return (
             <label className={className} htmlFor={this.props.id}>
@@ -108,7 +97,7 @@ export default class Select extends React.Component<ISelectProps, ISelectState> 
     }
 
     renderInput(): JSX.Element {
-        const className = classNames('select__input', this.props.inputClassName);
+        const className: string = classNames('select__input', this.props.inputClassName);
 
         return (
             <select
@@ -126,7 +115,7 @@ export default class Select extends React.Component<ISelectProps, ISelectState> 
     }
 
     render(): JSX.Element {
-        const className = classNames(
+        const className: string = classNames(
             'select',
             {
                 'is-dirty': this.state.value,
@@ -148,5 +137,16 @@ export default class Select extends React.Component<ISelectProps, ISelectState> 
                 {this.props.description && this.renderDescription()}
             </div>
         );
+    }
+
+    static getDerivedStateFromProps(props: ISelectProps, state: ISelectState): ISelectState | null {
+        if (typeof props.value !== 'undefined' && props.value !== state.prevValue) {
+            return {
+                value: props.value,
+                prevValue: props.value,
+            };
+        }
+
+        return null;
     }
 }

@@ -21,8 +21,8 @@ export interface ILanguagesProps {
 
 export default class Languages extends React.Component<ILanguagesProps> {
     renderItems(): JSX.Element[] {
-        return this.props.items.map((item, index) => {
-            const className = classNames(
+        return this.props.items.map((item: ILanguagesItem, index: number) => {
+            const className: string = classNames(
                 'languages__item',
                 {
                     'is-current': item.current,
@@ -47,7 +47,7 @@ export default class Languages extends React.Component<ILanguagesProps> {
     }
 
     render(): JSX.Element {
-        const className = classNames(
+        const className: string = classNames(
             'languages',
             this.props.modifier,
             this.props.className,

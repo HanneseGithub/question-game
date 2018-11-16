@@ -1,9 +1,9 @@
 import React from 'react';
 
-import {RouteComponentProps, Router} from '@reach/router';
+import { RouteComponentProps } from '@reach/router';
 
 export default class Login extends React.Component<RouteComponentProps> {
-    render() {
+    render(): JSX.Element {
         return (
             <div>LOGIN</div>
         );
