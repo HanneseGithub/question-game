@@ -7,6 +7,8 @@ import './core/utils.scss';
  */
 export { default as TypographyExample } from '@typography--example';
 
+export { default as ModalExample } from '@modal--example';
+
 /**
  * View examples
  */

@@ -12,15 +12,21 @@
       }
     },
     {
-      "name": "menu",
-      "context": {
-        "name": "menu"
-      }
-    },
-    {
       "name": "check",
       "context": {
         "name": "check"
+      }
+    },
+    {
+      "name": "close",
+      "context": {
+        "name": "close"
+      }
+    },
+    {
+      "name": "menu",
+      "context": {
+        "name": "menu"
       }
     }
   ]

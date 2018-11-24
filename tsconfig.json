@@ -106,10 +106,13 @@
       "@icon--arrow-down": [
         "components/icon/icon"
       ],
-      "@icon--menu": [
+      "@icon--check": [
         "components/icon/icon"
       ],
-      "@icon--check": [
+      "@icon--close": [
+        "components/icon/icon"
+      ],
+      "@icon--menu": [
         "components/icon/icon"
       ],
       "@image": [
@@ -123,6 +126,12 @@
       ],
       "@main": [
         "components/main/main"
+      ],
+      "@modal": [
+        "components/modal/modal"
+      ],
+      "@modal--example": [
+        "components/modal/modal--example"
       ],
       "@navigation": [
         "components/navigation/navigation"

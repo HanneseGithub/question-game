@@ -1,0 +1,7 @@
+{
+  "context": {
+    "id": "modal-example",
+    "isOpen": true,
+    "children": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur nemo commodi eius minima ratione suscipit, itaque odit incidunt, porro doloribus cumque placeat, fugiat modi dignissimos beatae optio nulla ad saepe."
+  }
+}

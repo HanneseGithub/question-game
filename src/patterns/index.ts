@@ -28,6 +28,7 @@ export { default as Image } from '@image';
 export { default as Languages } from '@languages';
 
 export { default as Main } from '@main';
+export { default as Modal } from '@modal';
 
 export { default as Navigation } from '@navigation';
 

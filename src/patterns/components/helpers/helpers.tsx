@@ -9,25 +9,32 @@ export default class Helpers extends React.Component {
         return 'This component is not actually a React component.';
     }
 
-    static disableBodyScroll(): void {
-        if (!document.body.classList.contains('is-scroll-disabled')) {
+    static disableScroll(): void {
+        const contentElement: HTMLElement | null = document.querySelector('#page');
+
+        if (contentElement && !document.body.classList.contains('is-scroll-disabled')) {
             if (document.documentElement) {
-                const curScroll: number = document.documentElement.scrollTop;
+                const curScroll: number = window.scrollY || window.pageYOffset || document.body.scrollTop + (document.documentElement && document.documentElement.scrollTop || 0);
 
                 document.body.classList.add('is-scroll-disabled');
-                document.body.style.top = -curScroll + 'px';
+                contentElement.style.top = -curScroll + 'px';
+                window.scroll(0, 0);
             }
         }
     }
 
-    static enableBodyScroll(): void {
-        const bodyScroll: number = parseInt(document.body.style.top || '0', 10);
+    static enableScroll(): void {
+        const contentElement: HTMLElement | null = document.querySelector('#page');
 
-        document.body.classList.remove('is-scroll-disabled');
+        if (contentElement) {
+            const bodyScroll: number = parseInt(contentElement.style.top || '0', 10);
 
-        if (bodyScroll && document.documentElement) {
-            document.documentElement.scrollTop = -bodyScroll;
-            document.body.style.top = null;
+            document.body.classList.remove('is-scroll-disabled');
+
+            if (bodyScroll && document.documentElement) {
+                window.scroll(0, -bodyScroll);
+                contentElement.style.top = null;
+            }
         }
     }
 
