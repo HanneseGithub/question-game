@@ -6,7 +6,7 @@ if (process.env.webpack) {
     require('./navigation.scss');
 }
 
-export interface INavigationItem {
+export interface INavigationItemProps {
     url: string;
     label: string;
     onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
@@ -14,38 +14,46 @@ export interface INavigationItem {
 }
 
 export interface INavigationProps {
-    items: INavigationItem[];
+    items: INavigationItemProps[];
     className?: string;
 }
 
-export default class Navigation extends React.Component<INavigationProps> {
-    renderItems(): JSX.Element[] {
-        return this.props.items.map((item: INavigationItem, index: number) => {
-            const className: string = classNames(
-                'navigation__item',
-                {
-                    'is-current': item.current,
-                },
-            );
+export const NavigationItem: React.FC<INavigationItemProps> = (props: INavigationItemProps) => {
+    const className: string = classNames(
+        'navigation__item',
+        {
+            'is-current': props.current,
+        },
+    );
 
+    return (
+        <li className={className}>
+            <a href={props.url} className="navigation__link">{props.label}</a>
+        </li>
+    );
+};
+
+const Navigation: React.FC<INavigationProps> = (props: INavigationProps) => {
+    const className: string = classNames('navigation', props.className);
+
+    const renderItems: () => JSX.Element[] = (): JSX.Element[] => {
+        return props.items.map((item: INavigationItemProps, index: number) => {
             return (
-                <li className={className} key={index}>
-                    <a href={item.url} className="navigation__link">{item.label}</a>
-                </li>
+                <NavigationItem
+                    key={index}
+                    {...item}
+                />
             );
         });
-    }
+    };
 
-    render(): JSX.Element {
-        const className: string = classNames('navigation', this.props.className);
+    return (
+        <nav className={className}>
+            <ul className="navigation__list">
+                {renderItems()}
+            </ul>
+        </nav>
+    );
+};
 
-        return (
-            <nav className={className}>
-                <ul className="navigation__list">
-                    {this.renderItems()}
-                </ul>
-            </nav>
-
-        );
-    }
-}
+export default Navigation;

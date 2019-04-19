@@ -22,19 +22,21 @@ export interface IImageProps {
     className?: string;
 }
 
-export default class Image extends React.Component<IImageProps> {
-    renderImg(): JSX.Element {
-        return (
-            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-srcset={this.props.srcset} data-sizes="auto" alt={this.props.alt} className="image__img lazyload" />
-        );
-    }
+const Image: React.FC<IImageProps> = (props: IImageProps) => {
+    const className: string = classNames('image', props.modifier, props.className);
 
-    renderSources(): JSX.Element[] | null {
-        if (!this.props.sources) {
+    const renderImg: () => JSX.Element = () => {
+        return (
+            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-srcset={props.srcset} data-sizes="auto" alt={props.alt} className="image__img lazyload" />
+        );
+    };
+
+    const renderSources: () => JSX.Element[] | null = () => {
+        if (!props.sources) {
             return null;
         }
 
-        return this.props.sources.map((source: IImageSource, index: number) => {
+        return props.sources.map((source: IImageSource, index: number) => {
             return (
                 <source
                     key={index}
@@ -43,24 +45,22 @@ export default class Image extends React.Component<IImageProps> {
                 />
             );
         });
-    }
+    };
 
-    renderPicture(): JSX.Element {
+    const renderPicture: () => JSX.Element = () => {
         return (
             <picture className="image__picture">
-                {this.renderSources()}
-                {this.renderImg()}
+                {renderSources()}
+                {renderImg()}
             </picture>
         );
-    }
+    };
 
-    render(): JSX.Element {
-        const className: string = classNames('image', this.props.modifier, this.props.className);
+    return (
+        <div className={className}>
+            {props.sources ? renderPicture() : renderImg()}
+        </div>
+    );
+};
 
-        return (
-            <div className={className}>
-                {this.props.sources ? this.renderPicture() : this.renderImg()}
-            </div>
-        );
-    }
-}
+export default Image;

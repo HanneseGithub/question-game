@@ -4,12 +4,16 @@ if (process.env.webpack) {
     require('./main.scss');
 }
 
-export default class Main extends React.Component {
-    render(): JSX.Element {
-        return (
-            <div className="main">
-                {this.props.children}
-            </div>
-        );
-    }
+export interface IMainProps {
+    children: React.ReactNode;
 }
+
+const Main: React.FC<IMainProps> = (props: IMainProps) => {
+    return (
+        <div className="main">
+            {props.children}
+        </div>
+    );
+};
+
+export default Main;

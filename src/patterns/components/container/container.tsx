@@ -7,17 +7,18 @@ if (process.env.webpack) {
 }
 
 export interface IContainerProps {
+    children: React.ReactNode;
     className?: string;
 }
 
-export default class Container extends React.Component<IContainerProps> {
-    render(): JSX.Element {
-        const className: string = classNames('container', this.props.className);
+const Container: React.FC<IContainerProps> = (props: IContainerProps) => {
+    const className: string = classNames('container', props.className);
 
-        return (
-            <div className={className}>
-                {this.props.children}
-            </div>
-        );
-    }
-}
+    return (
+        <div className={className}>
+            {props.children}
+        </div>
+    );
+};
+
+export default Container;

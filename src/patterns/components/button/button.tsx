@@ -15,20 +15,20 @@ export interface IButtonProps {
     onClick?: (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
 }
 
-export default class Button extends React.Component<IButtonProps, {}> {
-    render(): JSX.Element {
-        const ButtonTag: 'a' | 'button' = this.props.url ? 'a' : 'button';
-        const className: string = classNames('button', this.props.modifier, this.props.className);
+const Button: React.FC<IButtonProps> = (props: IButtonProps) => {
+    const ButtonTag: 'a' | 'button' = props.url ? 'a' : 'button';
+    const className: string = classNames('button', props.modifier, props.className);
 
-        return (
-            <ButtonTag
-                className={className}
-                onClick={this.props.onClick}
-                type={this.props.url ? undefined : this.props.type}
-                href={this.props.url}
-            >
-                {this.props.text}
-            </ButtonTag>
-        );
-    }
-}
+    return (
+        <ButtonTag
+            className={className}
+            onClick={props.onClick}
+            type={props.url ? undefined : props.type}
+            href={props.url}
+        >
+            {props.text}
+        </ButtonTag>
+    );
+};
+
+export default Button;

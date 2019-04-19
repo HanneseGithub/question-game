@@ -6,7 +6,7 @@ if (process.env.webpack) {
     require('./languages.scss');
 }
 
-export interface ILanguagesItem {
+export interface ILanguagesItemProps {
     url: string;
     label: string;
     current?: boolean;
@@ -14,51 +14,57 @@ export interface ILanguagesItem {
 }
 
 export interface ILanguagesProps {
-    items: ILanguagesItem[];
+    items: ILanguagesItemProps[];
     modifier?: string;
     className?: string;
 }
 
-export default class Languages extends React.Component<ILanguagesProps> {
-    renderItems(): JSX.Element[] {
-        return this.props.items.map((item: ILanguagesItem, index: number) => {
-            const className: string = classNames(
-                'languages__item',
-                {
-                    'is-current': item.current,
-                },
-            );
+export const LanguagesItem: React.FC<ILanguagesItemProps> = (props: ILanguagesItemProps) => {
+    const className: string = classNames(
+        'languages__item',
+        {
+            'is-current': props.current,
+        },
+    );
 
+    return (
+        <li className={className}>
+            <a
+                href={props.url}
+                className="languages__link"
+                onClick={props.onClick}
+            >
+                {props.label}
+            </a>
+        </li>
+    );
+};
+
+const Languages: React.FC<ILanguagesProps> = (props: ILanguagesProps) => {
+    const className: string = classNames(
+        'languages',
+        props.modifier,
+        props.className,
+    );
+
+    const renderItems: () => JSX.Element[] = (): JSX.Element[] => {
+        return props.items.map((item: ILanguagesItemProps, index: number) => {
             return (
-                <li
+                <LanguagesItem
                     key={index}
-                    className={className}
-                >
-                    <a
-                        href={item.url}
-                        className="languages__link"
-                        onClick={item.onClick}
-                    >
-                        {item.label}
-                    </a>
-                </li>
+                    {...item}
+                />
             );
         });
-    }
+    };
 
-    render(): JSX.Element {
-        const className: string = classNames(
-            'languages',
-            this.props.modifier,
-            this.props.className,
-        );
+    return (
+        <nav className={className}>
+            <ul className="languages__list">
+                {renderItems()}
+            </ul>
+        </nav>
+    );
+};
 
-        return (
-            <nav className={className}>
-                <ul className="languages__list">
-                    {this.renderItems()}
-                </ul>
-            </nav>
-        );
-    }
-}
+export default Languages;

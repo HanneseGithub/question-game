@@ -24,25 +24,25 @@ export interface IIconProps {
     className?: string;
 }
 
-export default class Icon extends React.Component<IIconProps, {}> {
-    getHref(): string | undefined {
-        if (icons && icons[this.props.name]) {
-            return icons[this.props.name].symbol;
+const Icon: React.FC<IIconProps> = (props: IIconProps) => {
+    const className: string = classNames('icon', props.modifier, props.className);
+
+    const getHref: () => string | undefined = (): string | undefined => {
+        if (icons && icons[props.name]) {
+            return icons[props.name].symbol;
         }
 
         if (!process.env.webpack) {
             // this is only for fractal ssr
-            return app.publicFolder + 'inc/svg/icons.svg#' + this.props.name;
+            return app.publicFolder + 'inc/svg/icons.svg#' + props.name;
         }
-    }
+    };
 
-    render(): JSX.Element {
-        const className: string = classNames('icon', this.props.modifier, this.props.className);
+    return (
+        <svg className={className}>
+            <use xlinkHref={getHref()} />
+        </svg>
+    );
+};
 
-        return (
-            <svg className={className}>
-                <use xlinkHref={this.getHref()} />
-            </svg>
-        );
-    }
-}
+export default Icon;
