@@ -11,13 +11,13 @@ export interface IButtonProps {
     url?: string;
     modifier?: string;
     className?: string;
-    type?: string;
+    type?: 'button' | 'submit' | 'reset';
     onClick?: (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
 }
 
 export default class Button extends React.Component<IButtonProps, {}> {
     render(): JSX.Element {
-        const ButtonTag: string = this.props.url ? 'a' : 'button';
+        const ButtonTag: 'a' | 'button' = this.props.url ? 'a' : 'button';
         const className: string = classNames('button', this.props.modifier, this.props.className);
 
         return (

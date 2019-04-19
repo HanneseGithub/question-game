@@ -12,7 +12,7 @@ export interface ITextFieldProps {
     name: string;
     value?: string;
     type?: string;
-    attributes?: React.InputHTMLAttributes<HTMLInputElement>;
+    attributes?: React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>;
     onChange?: (value: string) => void;
     element?: 'textarea';
     invalid?: boolean;
@@ -46,7 +46,7 @@ export default class TextField extends React.Component<ITextFieldProps, ITextFie
         };
     }
 
-    handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
+    handleChange = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         this.setState({
             value: event.currentTarget.value,
         }, () => {
@@ -96,7 +96,7 @@ export default class TextField extends React.Component<ITextFieldProps, ITextFie
 
     renderInput(): JSX.Element {
         const className: string = classNames('textfield__input', this.props.inputClassName);
-        const InputElement: string = this.props.element || 'input';
+        const InputElement: 'input' | 'textarea' = this.props.element || 'input';
 
         return (
             <InputElement

@@ -2,8 +2,8 @@ body {
     overflow-y: scroll;
 }
 
-#page { // stylelint-disable-next-line selector-max-id
-    body.is-scroll-disabled & {
+#page { // stylelint-disable-line selector-max-id
+    body.is-scroll-disabled & { // stylelint-disable-line selector-max-id
         overflow-y: hidden;
         position: fixed;
         width: 100%;
