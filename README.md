@@ -1,6 +1,6 @@
 # Base project for React apps
 
-© gotoAndPlay 2018
+© gotoAndPlay 2019
 
 ## Global dependencies
 Project dependencies are installed and managed via [npm](https://npmjs.org/), the Node.js package manager. Make sure your [npm](https://npmjs.org/) is up-to-date by running `npm update -g npm` (this might require `sudo` on certain systems).
@@ -25,4 +25,3 @@ To create the ssl certificate for the webpack-dev-server go to `node_modules\web
 
 ### Building app
 Run `npm run build:app`. This will build a app to `app/build`.
- 
