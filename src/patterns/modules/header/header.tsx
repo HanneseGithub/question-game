@@ -13,17 +13,17 @@ export interface IHeaderProps {
     languages: ILanguagesProps;
 }
 
-export default class Header extends React.Component<IHeaderProps> {
-    render(): JSX.Element {
-        return (
-            <header className="header">
-                <Container>
-                    <div className="header__inner">
-                        <Navigation {...this.props.navigation} />
-                        <Languages {...this.props.languages} />
-                    </div>
-                </Container>
-            </header>
-        );
-    }
-}
+const Header: React.FC<IHeaderProps> = (props: IHeaderProps) => {
+    return (
+        <header className="header">
+            <Container>
+                <div className="header__inner">
+                    <Navigation {...props.navigation} />
+                    <Languages {...props.languages} />
+                </div>
+            </Container>
+        </header>
+    );
+};
+
+export default Header;

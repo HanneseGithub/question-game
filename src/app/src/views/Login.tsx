@@ -2,10 +2,10 @@ import React from 'react';
 
 import { RouteComponentProps } from '@reach/router';
 
-export default class Login extends React.Component<RouteComponentProps> {
-    render(): JSX.Element {
-        return (
-            <div>LOGIN</div>
-        );
-    }
-}
+const Login: React.FC<RouteComponentProps> = () => {
+    return (
+        <div>LOGIN</div>
+    );
+};
+
+export default Login;

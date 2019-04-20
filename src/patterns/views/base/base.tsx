@@ -4,28 +4,25 @@ import Header, { IHeaderProps } from '@m-header';
 import Main from '@main';
 
 export interface IViewBaseProps {
+    children: React.ReactNode;
     header?: IHeaderProps;
 }
 
-export default class ViewBase extends React.Component<IViewBaseProps> {
-    renderHeader(): JSX.Element | null {
-        if (!this.props.header) {
-            return null;
-        }
+const renderHeader: (header: IHeaderProps) => JSX.Element = (header: IHeaderProps): JSX.Element => {
+    return (
+        <Header {...header} />
+    );
+};
 
-        return (
-            <Header {...this.props.header} />
-        );
-    }
+const ViewBase: React.FC<IViewBaseProps> = (props: IViewBaseProps) => {
+    return (
+        <React.Fragment>
+            {props.header && renderHeader(props.header)}
+            <Main>
+                {props.children}
+            </Main>
+        </React.Fragment>
+    );
+};
 
-    render(): JSX.Element {
-        return (
-            <React.Fragment>
-                {this.props.header && this.renderHeader()}
-                <Main>
-                    {this.props.children}
-                </Main>
-            </React.Fragment>
-        );
-    }
-}
+export default ViewBase;

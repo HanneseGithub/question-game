@@ -7,12 +7,12 @@ export interface ITemplateLoginProps {
     button: IButtonProps;
 }
 
-export default class TemplateLogin extends React.Component<ITemplateLoginProps> {
-    render(): JSX.Element {
-        return (
-            <Container>
-                <Button {...this.props.button} />
-            </Container>
-        );
-    }
-}
+const TemplateLogin: React.FC<ITemplateLoginProps> = (props: ITemplateLoginProps) => {
+    return (
+        <Container>
+            <Button {...props.button} />
+        </Container>
+    );
+};
+
+export default TemplateLogin;
