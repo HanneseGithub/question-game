@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Button from '@button';
 import Modal from '@modal';
@@ -7,53 +7,43 @@ export interface IModalExampleState {
     isOpen: boolean;
 }
 
-export default class ModalExample extends React.Component<{}, IModalExampleState> {
-    constructor(props: {}) {
-        super(props);
+const ModalExample: React.FC = () => {
+    const [isOpen, setIsOpen] = useState(false);
 
-        this.state = {
-            isOpen: false,
-        };
-    }
+    const openModal: () => void = (): void => {
+        setIsOpen(true);
+    };
 
-    handleModalClose = (): void => {
-        this.closeModal();
-    }
+    const closeModal: () => void = (): void => {
+        setIsOpen(false);
+    };
 
-    handleButtonClick = (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>): void => {
+    const handleModalClose: () => void = (): void => {
+        closeModal();
+    };
+
+    const handleButtonClick: (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void = (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>): void => {
         event.preventDefault();
 
-        this.openModal();
-    }
+        openModal();
+    };
 
-    openModal(): void {
-        this.setState({
-            isOpen: true,
-        });
-    }
+    return (
+        <React.Fragment>
+            <Button
+                text="open modal"
+                url="#modal-example"
+                onClick={handleButtonClick}
+            />
+            <Modal
+                id="modal-example"
+                isOpen={isOpen}
+                onClose={handleModalClose}
+            >
+                hello world
+            </Modal>
+        </React.Fragment>
+    );
+};
 
-    closeModal(): void {
-        this.setState({
-            isOpen: false,
-        });
-    }
-
-    render(): JSX.Element {
-        return (
-            <React.Fragment>
-                <Button
-                    text="open modal"
-                    url="#modal-example"
-                    onClick={this.handleButtonClick}
-                />
-                <Modal
-                    id="modal-example"
-                    isOpen={this.state.isOpen}
-                    onClose={this.handleModalClose}
-                >
-                    hello world
-                </Modal>
-            </React.Fragment>
-        );
-    }
-}
+export default ModalExample;
