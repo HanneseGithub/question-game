@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -10,6 +10,7 @@ export interface ITextFieldProps {
     id: string;
     label: string;
     name: string;
+    defaultValue?: string;
     value?: string;
     type?: string;
     attributes?: React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>;
@@ -25,129 +26,103 @@ export interface ITextFieldProps {
     className?: string;
 }
 
-export interface ITextFieldState {
-    value: string;
-    prevValue: string;
-    focused: boolean;
-}
+const TextField: React.FC<ITextFieldProps> = (props: ITextFieldProps) => {
+    const [isFocused, setIsFocused] = useState(false);
+    const [value, setValue] = useState(props.defaultValue);
+    const className: string = classNames(
+        'textfield',
+        {
+            'is-dirty': typeof props.value !== 'undefined' ? props.value : value,
+            'is-focused': isFocused,
+            'is-invalid': props.invalid,
+            'is-disabled': props.disabled,
+        },
+        props.modifier,
+        props.className,
+    );
 
-export default class TextField extends React.Component<ITextFieldProps, ITextFieldState> {
-    static defaultProps: Partial<ITextFieldProps> = {
-        type: 'text',
+    const handleChange: (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => void = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+        const nextValue: string = event.currentTarget.value;
+
+        if (typeof props.value === 'undefined') {
+            setValue(nextValue);
+        }
+
+        if (props.onChange) {
+            props.onChange(nextValue);
+        }
     };
 
-    constructor(props: ITextFieldProps) {
-        super(props);
+    const handleFocus: () => void = (): void => {
+        setIsFocused(true);
+    };
 
-        this.state = {
-            value: props.value || '',
-            prevValue: props.value || '',
-            focused: false,
-        };
-    }
+    const handleBlur: () => void = (): void => {
+        setIsFocused(false);
+    };
 
-    handleChange = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-        this.setState({
-            value: event.currentTarget.value,
-        }, () => {
-            if (this.props.onChange) {
-                this.props.onChange(this.state.value);
-            }
-        });
-    }
-
-    handleFocus = (): void => {
-        this.setState({
-            focused: true,
-        });
-    }
-
-    handleBlur = (): void => {
-        this.setState({
-            focused: false,
-        });
-    }
-
-    renderError(): JSX.Element {
+    const renderError: () => JSX.Element = (): JSX.Element => {
         return (
             <div className="textfield__error">
-                {this.props.error}
+                {props.error}
             </div>
         );
-    }
+    };
 
-    renderDescription(): JSX.Element {
+    const renderDescription: () => JSX.Element = (): JSX.Element => {
         return (
             <div className="textfield__description">
-                {this.props.description}
+                {props.description}
             </div>
         );
-    }
+    };
 
-    renderLabel(): JSX.Element {
-        const className: string = classNames('textfield__label', this.props.labelClassName);
+    const renderLabel: () => JSX.Element = (): JSX.Element => {
+        const labelClassName: string = classNames('textfield__label', props.labelClassName);
 
         return (
-            <label className={className} htmlFor={this.props.id}>
-                {this.props.label}
+            <label className={labelClassName} htmlFor={props.id}>
+                {props.label}
             </label>
         );
-    }
+    };
 
-    renderInput(): JSX.Element {
-        const className: string = classNames('textfield__input', this.props.inputClassName);
-        const InputElement: 'input' | 'textarea' = this.props.element || 'input';
+    const renderInput: () => JSX.Element = (): JSX.Element => {
+        const inputClassName: string = classNames('textfield__input', props.inputClassName);
+        const InputElement: 'input' | 'textarea' = props.element || 'input';
 
         return (
             <InputElement
-                {...this.props.attributes}
-                className={className}
-                type={this.props.type}
-                id={this.props.id}
-                name={this.props.name}
-                value={this.state.value}
-                disabled={this.props.disabled}
-                onChange={this.handleChange}
-                onFocus={this.handleFocus}
-                onBlur={this.handleBlur}
+                {...props.attributes}
+                className={inputClassName}
+                type={props.type}
+                id={props.id}
+                name={props.name}
+                disabled={props.disabled}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                // use local state only when component is not controlled from parent
+                value={typeof props.value !== 'undefined' ? props.value : value}
+                onChange={handleChange}
             />
         );
-    }
+    };
 
-    render(): JSX.Element {
-        const className: string = classNames(
-            'textfield',
-            {
-                'is-dirty': this.state.value,
-                'is-focused': this.state.focused,
-                'is-invalid': this.props.invalid,
-                'is-disabled': this.props.disabled,
-            },
-            this.props.modifier,
-            this.props.className,
-        );
-
-        return (
-            <div className={className}>
-                <div className="textfield__inner">
-                    {this.renderInput()}
-                    {this.renderLabel()}
-                </div>
-                {this.props.error && this.renderError()}
-                {this.props.description && this.renderDescription()}
+    return (
+        <div className={className}>
+            <div className="textfield__inner">
+                {renderInput()}
+                {renderLabel()}
             </div>
-        );
-    }
+            {props.error && renderError()}
+            {props.description && renderDescription()}
+        </div>
+    );
+};
 
-    static getDerivedStateFromProps(props: ITextFieldProps, state: ITextFieldState): ITextFieldState | null {
-        if (typeof props.value !== 'undefined' && props.value !== state.prevValue) {
-            return {
-                value: props.value,
-                prevValue: props.value,
-                focused: state.focused,
-            };
-        }
+TextField.defaultProps = {
+    type: 'text',
+    defaultValue: '',
+};
 
-        return null;
-    }
-}
+export default TextField;

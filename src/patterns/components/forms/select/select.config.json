@@ -2,7 +2,7 @@
   "context": {
     "label": "Select label",
     "id": "select1",
-    "value": "2",
+    "defaultValue": "2",
     "options": [
       {
         "label": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis error velit quidem alias nihil mollitia temporibus, maxime dicta repellat. Perspiciatis veniam doloribus, quia corporis commodi sed omnis adipisci facilis nisi.",
@@ -30,7 +30,7 @@
       "name": "disabled",
       "context": {
         "disabled": true,
-        "value": "3"
+        "defaultValue": "3"
       }
     }
   ]

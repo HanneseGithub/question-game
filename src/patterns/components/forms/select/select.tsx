@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -18,6 +18,7 @@ export interface ISelectProps {
     label: string;
     name: string;
     options: ISelectOption[];
+    defaultValue?: string;
     value?: string;
     type?: string;
     attributes?: React.SelectHTMLAttributes<HTMLSelectElement>;
@@ -32,59 +33,60 @@ export interface ISelectProps {
     className?: string;
 }
 
-export interface ISelectState {
-    value: string;
-    prevValue: string;
-}
+const Select: React.FC<ISelectProps> = (props: ISelectProps) => {
+    const [value, setValue] = useState(props.defaultValue);
+    const className: string = classNames(
+        'select',
+        {
+            'is-dirty': typeof props.value !== 'undefined' ? props.value : value,
+            'is-invalid': props.invalid,
+            'is-disabled': props.disabled,
+        },
+        props.modifier,
+        props.className,
+    );
 
-export default class Select extends React.Component<ISelectProps, ISelectState> {
-    constructor(props: ISelectProps) {
-        super(props);
+    const handleChange: (event: React.FormEvent<HTMLSelectElement>) => void = (event: React.FormEvent<HTMLSelectElement>): void => {
+        const nextValue: string = event.currentTarget.value;
 
-        this.state = {
-            value: props.value || '',
-            prevValue: props.value || '',
-        };
-    }
+        // only set local state value if input is not controlled from parent
+        if (typeof props.value === 'undefined') {
+            setValue(nextValue);
+        }
 
-    handleChange = (event: React.FormEvent<HTMLSelectElement>): void => {
-        this.setState({
-            value: event.currentTarget.value,
-        }, () => {
-            if (this.props.onChange) {
-                this.props.onChange(this.state.value);
-            }
-        });
-    }
+        if (props.onChange) {
+            props.onChange(nextValue);
+        }
+    };
 
-    renderError(): JSX.Element {
+    const renderError: () => JSX.Element = (): JSX.Element => {
         return (
             <div className="select__error">
-                {this.props.error}
+                {props.error}
             </div>
         );
-    }
+    };
 
-    renderDescription(): JSX.Element {
+    const renderDescription: () => JSX.Element = (): JSX.Element => {
         return (
             <div className="select__description">
-                {this.props.description}
+                {props.description}
             </div>
         );
-    }
+    };
 
-    renderLabel(): JSX.Element {
-        const className: string = classNames('select__label', this.props.labelClassName);
+    const renderLabel: () => JSX.Element = (): JSX.Element => {
+        const labelClassName: string = classNames('select__label', props.labelClassName);
 
         return (
-            <label className={className} htmlFor={this.props.id}>
-                {this.props.label}
+            <label className={labelClassName} htmlFor={props.id}>
+                {props.label}
             </label>
         );
-    }
+    };
 
-    renderOptions(): JSX.Element[] {
-        return this.props.options.map((option: ISelectOption) => {
+    const renderOptions: () => JSX.Element[] = (): JSX.Element[] => {
+        return props.options.map((option: ISelectOption) => {
             return (
                 <option
                     key={option.value}
@@ -94,59 +96,38 @@ export default class Select extends React.Component<ISelectProps, ISelectState> 
                 </option>
             );
         });
-    }
+    };
 
-    renderInput(): JSX.Element {
-        const className: string = classNames('select__input', this.props.inputClassName);
+    const renderInput: () => JSX.Element = (): JSX.Element => {
+        const inputClassName: string = classNames('select__input', props.inputClassName);
 
         return (
             <select
-                {...this.props.attributes}
-                className={className}
-                id={this.props.id}
-                name={this.props.name}
-                value={this.state.value}
-                disabled={this.props.disabled}
-                onChange={this.handleChange}
+                {...props.attributes}
+                className={inputClassName}
+                id={props.id}
+                name={props.name}
+                disabled={props.disabled}
+                // use local state only when component is not controlled from parent
+                value={typeof props.value !== 'undefined' ? props.value : value}
+                onChange={handleChange}
             >
-                {this.renderOptions()}
+                {renderOptions()}
             </select>
         );
-    }
+    };
 
-    render(): JSX.Element {
-        const className: string = classNames(
-            'select',
-            {
-                'is-dirty': this.state.value,
-                'is-invalid': this.props.invalid,
-                'is-disabled': this.props.disabled,
-            },
-            this.props.modifier,
-            this.props.className,
-        );
-
-        return (
-            <div className={className}>
-                <div className="select__inner">
-                    {this.renderInput()}
-                    <Icon name="arrow-down" className="select__icon" />
-                    {this.renderLabel()}
-                </div>
-                {this.props.error && this.renderError()}
-                {this.props.description && this.renderDescription()}
+    return (
+        <div className={className}>
+            <div className="select__inner">
+                {renderInput()}
+                <Icon name="arrow-down" className="select__icon" />
+                {renderLabel()}
             </div>
-        );
-    }
+            {props.error && renderError()}
+            {props.description && renderDescription()}
+        </div>
+    );
+};
 
-    static getDerivedStateFromProps(props: ISelectProps, state: ISelectState): ISelectState | null {
-        if (typeof props.value !== 'undefined' && props.value !== state.prevValue) {
-            return {
-                value: props.value,
-                prevValue: props.value,
-            };
-        }
-
-        return null;
-    }
-}
+export default Select;

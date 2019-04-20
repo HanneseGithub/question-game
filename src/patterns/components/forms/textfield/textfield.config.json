@@ -10,14 +10,14 @@
       "context": {
         "invalid": true,
         "error": "Please check your input",
-        "value": "info2play.ee"
+        "defaultValue": "info2play.ee"
       }
     },
     {
       "name": "disabled",
       "context": {
         "disabled": true,
-        "value": "Tere"
+        "defaultValue": "Tere"
       }
     }
   ]

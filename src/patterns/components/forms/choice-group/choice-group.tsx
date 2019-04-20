@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -15,6 +15,7 @@ export interface IChoiceGroupProps {
     type: 'radio' | 'check';
     choices: Array<IRadioProps | ICheckProps>;
     label: string;
+    defaultValue?: TChoiceGroupValue;
     value?: TChoiceGroupValue;
     onChange?: (value: TChoiceGroupValue) => void;
     error?: string;
@@ -24,127 +25,107 @@ export interface IChoiceGroupProps {
     className?: string;
 }
 
-export interface IChoiceGroupState {
-    value: TChoiceGroupValue;
-    prevValue: TChoiceGroupValue;
-}
-
-export default class ChoiceGroup extends React.Component<IChoiceGroupProps, IChoiceGroupState> {
-    constructor(props: IChoiceGroupProps) {
-        super(props);
-
-        this.state = {
-            value: this.getInitialValue(props.value),
-            prevValue: this.getInitialValue(props.value),
-        };
+const getInitialValue: (type: 'check' | 'radio', value?: TChoiceGroupValue) => TChoiceGroupValue = (type: 'check' | 'radio', value?: TChoiceGroupValue): TChoiceGroupValue => {
+    if (value) {
+        return value;
+    } else if (type === 'check') {
+        return [];
+    } else {
+        return '';
     }
+};
 
-    getInitialValue(value?: TChoiceGroupValue): TChoiceGroupValue {
-        if (value) {
-            return value;
-        } else if (this.props.type === 'check') {
-            return [];
+const ChoiceGroup: React.FC<IChoiceGroupProps> = (props: IChoiceGroupProps) => {
+    const [value, setValue] = useState(getInitialValue(props.type, props.defaultValue));
+    const className: string = classNames(
+        'choice-group',
+        {
+            'is-invalid': props.invalid,
+        },
+        props.modifier,
+        props.className,
+    );
+    const currentValue: TChoiceGroupValue = typeof props.value !== 'undefined' ? props.value : value;
+
+    const isChoiceChecked: (value: string) => boolean = (itemValue: string): boolean => {
+        if (props.type === 'check') {
+            return currentValue.indexOf(itemValue) !== -1;
         } else {
-            return '';
+            return currentValue === itemValue;
         }
-    }
+    };
 
-    isChoiceChecked(value: string): boolean {
-        if (this.props.type === 'check') {
-            return this.state.value.indexOf(value) !== -1;
-        } else {
-            return value === this.state.value;
+    const getNextValue: (itemValue: string, checked: boolean) => TChoiceGroupValue = (itemValue: string, checked: boolean): TChoiceGroupValue => {
+        if (Array.isArray(currentValue)) {
+            if (checked) {
+                return [
+                    ...currentValue,
+                    itemValue,
+                ];
+            }
+
+            return [...currentValue].filter((item: string) => item !== itemValue);
         }
-    }
 
-    handleChoiceChange = (value: string, checked: boolean): void => {
-        this.setState((prevState: IChoiceGroupState) => {
-            if (Array.isArray(prevState.value)) {
-                let newValue: string[] = prevState.value;
+        return itemValue;
+    };
 
-                if (checked) {
-                    newValue.push(value);
-                } else {
-                    newValue = newValue.filter((item: string) => item !== value);
-                }
+    const handleChange: (value: string, checked: boolean) => void = (itemValue: string, checked: boolean): void => {
+        const nextValue: TChoiceGroupValue = getNextValue(itemValue, checked);
 
-                return {
-                    value: newValue,
-                };
-            } else {
-                return {
-                    value,
-                };
-            }
-        }, () => {
-            if (this.props.onChange) {
-                this.props.onChange(this.state.value);
-            }
-        });
-    }
+        if (typeof props.value === 'undefined') {
+            setValue(nextValue);
+        }
 
-    renderChoices(): JSX.Element[] {
-        const ChoiceType: typeof Check | typeof Radio = this.props.type === 'check' ? Check : Radio;
+        if (props.onChange) {
+            props.onChange(nextValue);
+        }
+    };
 
-        return this.props.choices.map((item: IRadioProps | ICheckProps) => {
+    const renderError: () => JSX.Element = (): JSX.Element => {
+        return (
+            <div className="choice-group__error">
+                {props.error}
+            </div>
+        );
+    };
+
+    const renderDescription: () => JSX.Element = (): JSX.Element => {
+        return (
+            <div className="choice-group__description">
+                {props.description}
+            </div>
+        );
+    };
+
+    const renderChoices: () => JSX.Element[] = (): JSX.Element[] => {
+        const ChoiceType: typeof Check | typeof Radio = props.type === 'check' ? Check : Radio;
+
+        return props.choices.map((item: IRadioProps | ICheckProps) => {
+            const handleChangeWrapper: (checked: boolean) => void = (checked: boolean) => handleChange(item.value, checked);
+
             return (
                 <ChoiceType
                     {...item}
                     key={item.id}
-                    checked={this.isChoiceChecked(item.value)}
-                    onChange={this.handleChoiceChange.bind(null, item.value)}
+                    checked={isChoiceChecked(item.value)}
+                    onChange={handleChangeWrapper}
                     className="choice-group__item"
                 />
             );
         });
-    }
+    };
 
-    renderError(): JSX.Element {
-        return (
-            <div className="choice-group__error">
-                {this.props.error}
+    return (
+        <fieldset className={className}>
+            <legend className="choice-group__label">{props.label}</legend>
+            <div className="choice-group__inner">
+                {renderChoices()}
             </div>
-        );
-    }
+            {props.error && renderError()}
+            {props.description && renderDescription()}
+        </fieldset>
+    );
+};
 
-    renderDescription(): JSX.Element {
-        return (
-            <div className="choice-group__description">
-                {this.props.description}
-            </div>
-        );
-    }
-
-    render(): JSX.Element {
-        const className: string = classNames(
-            'choice-group',
-            {
-                'is-invalid': this.props.invalid,
-            },
-            this.props.modifier,
-            this.props.className,
-        );
-
-        return (
-            <fieldset className={className}>
-                <legend className="choice-group__label">{this.props.label}</legend>
-                <div className="choice-group__inner">
-                    {this.renderChoices()}
-                </div>
-                {this.props.error && this.renderError()}
-                {this.props.description && this.renderDescription()}
-            </fieldset>
-        );
-    }
-
-    static getDerivedStateFromProps(props: IChoiceGroupProps, state: IChoiceGroupState): IChoiceGroupState | null {
-        if (typeof props.value !== 'undefined' && props.value !== state.prevValue) {
-            return {
-                value: props.value,
-                prevValue: props.value,
-            };
-        }
-
-        return null;
-    }
-}
+export default ChoiceGroup;
