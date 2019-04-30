@@ -1,0 +1,25 @@
+.accordion__item {
+    + .accordion__item {
+        margin-top: 2px;
+    }
+}
+
+.accordion__header {
+    position: relative;
+    display: block;
+    padding: 10px 20px 10px;
+    background: transparent;
+}
+
+.accordion__content {
+    display: none;
+
+    html.no-js &,
+    .accordion__item.is-open > & {
+        display: block;
+    }
+}
+
+.accordion__inner {
+    padding: 10px 20px 30px;
+}

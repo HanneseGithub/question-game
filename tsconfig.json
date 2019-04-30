@@ -25,6 +25,12 @@
     ],
     "baseUrl": "./src/patterns",
     "paths": {
+      "@accordion": [
+        "components/accordion/accordion"
+      ],
+      "@accordion--example": [
+        "components/accordion/accordion--example"
+      ],
       "@button": [
         "components/button/button"
       ],
