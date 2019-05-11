@@ -22,6 +22,8 @@ export { default as Check } from '@check';
 export { default as ChoiceGroup } from '@choice-group';
 export { default as Container } from '@container';
 
+export { default as Grid, GridColumn } from '@grid';
+
 export { default as Helpers } from '@helpers';
 
 export { default as Icon } from '@icon';

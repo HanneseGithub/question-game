@@ -1,0 +1,185 @@
+{
+  "preview": "@preview-container",
+  "variants": [
+    {
+      "name": "default",
+      "hidden": true
+    },
+    {
+      "name": "example",
+      "notes": "Start by adding an element with element of `<Grid>`. This will create a horizontal block to contain vertical columns. Then add `<GridColumn>` elements within that row. Specify the widths of each column with `width={['xs-#', 'sm-#', 'md-#', 'lg-#']}` classes. Responsive modifiers enable specifying different column sizes, offsets, alignment and distribution at xs, sm, md & lg viewport widths. Bare in mind that **the layout is mobile-first**. You can stack modifiers if you want to achieve different alignment depending on screen size.",
+      "context": {
+        "columns": [
+          {
+            "width": ["sm-6"],
+            "children": "1/2 sm"
+          },
+          {
+            "width": ["sm-6"],
+            "children": "1/2 sm"
+          },
+          {
+            "width": ["sm-4"],
+            "children": "1/3 sm"
+          },
+          {
+            "width": ["sm-4"],
+            "children": "1/3 sm"
+          },
+          {
+            "width": ["sm-4"],
+            "children": "1/3 sm"
+          },
+          {
+            "width": ["sm-6", "md-3"],
+            "children": "1/2 sm, 1/4 md"
+          },
+          {
+            "width": ["sm-6", "md-3"],
+            "children": "1/2 sm, 1/4 md"
+          },
+          {
+            "width": ["sm-6", "md-3"],
+            "children": "1/2 sm, 1/4 md"
+          },
+          {
+            "width": ["sm-6", "md-3"],
+            "children": "1/2 sm, 1/4 md"
+          }
+        ]
+      }
+    },
+    {
+      "name": "vertical-align",
+      "notes": "Vertical alignment can be either adjusted separately column by column using `align={['top-#', 'middle-#', 'bottom-#']}` (example below) or by whole group of columns by using grid modifier `align={['top-#', 'middle-#', 'bottom-#']}`.",
+      "context": {
+        "className": "sg-grid",
+        "columns": [
+          {
+            "width": ["sm-4"],
+            "align": ["top-sm"],
+            "children": "top"
+          },
+          {
+            "width": ["sm-4"],
+            "align": ["middle-sm"],
+            "children": "middle"
+          },
+          {
+            "width": ["sm-4"],
+            "align": ["bottom-sm"],
+            "children": "bottom"
+          }
+        ]
+      }
+    },
+    {
+      "name": "horizontal-align",
+      "notes": "Horizontal alignment can be adjusted by whole group of columns using grid modifier `justify={['start-#', 'center-#', 'end-#', 'between-#', 'around-#']}`.",
+      "context": {
+        "justify": ["center-sm"],
+        "columns": [
+          {
+            "width": ["sm-2"],
+            "children": "center"
+          },
+          {
+            "width": ["sm-2"],
+            "children": "center"
+          },
+          {
+            "width": ["sm-2"],
+            "children": "center"
+          },
+          {
+            "width": ["sm-2"],
+            "children": "center"
+          }
+        ]
+      }
+    },
+    {
+      "name": "equalheight",
+      "notes": "Make grid colums with equal height by using grid modifier `equalHeight={true}`.",
+      "context": {
+        "equalHeight": true,
+        "columns": [
+          {
+            "width": ["sm-6"],
+            "children": "short column"
+          },
+          {
+            "width": ["sm-6"],
+            "children": "long column lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis deleniti fuga nostrum soluta totam sit magnam esse aliquid nisi, corrupti itaque, officiis minus aperiam eos iste, recusandae, rerum necessitatibus adipisci. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis deleniti fuga nostrum soluta totam sit magnam esse aliquid nisi, corrupti itaque, officiis minus aperiam eos iste, recusandae, rerum necessitatibus adipisci."
+          }
+        ]
+      }
+    },
+    {
+      "name": "gutter",
+      "notes": "Use columns without gutter by using grid modifier `gutter=\"none\"`.",
+      "context": {
+        "gutter": "none",
+        "columns": [
+          {
+            "width": ["sm-6"],
+            "children": "first column"
+          },
+          {
+            "width": ["sm-6"],
+            "children": "second column"
+          }
+        ]
+      }
+    },
+    {
+      "name": "offset",
+      "notes": "Move columns to the right using `offset={['sm-#']}` classes. These classes increase the left margin of a column by # columns.",
+      "context": {
+        "columns": [
+          {
+            "width": ["sm-1"],
+            "offset": ["sm-11"]
+          },
+          {
+            "width": ["sm-2"],
+            "offset": ["sm-10"]
+          },
+          {
+            "width": ["sm-3"],
+            "offset": ["sm-9"]
+          },
+          {
+            "width": ["sm-4"],
+            "offset": ["sm-8"]
+          },
+          {
+            "width": ["sm-5"],
+            "offset": ["sm-7"]
+          },
+          {
+            "width": ["sm-6"],
+            "offset": ["sm-6"]
+          }
+        ]
+      }
+    },
+    {
+      "name": "order",
+      "notes": "You can reverse order by using `reverse={['#']}` modifier or control column directly via `order={['first-#', 'last-#', 'original-#']}`.",
+      "context": {
+        "columns": [
+          {
+            "width": ["sm-6"],
+            "children": "first in DOM, but second from md screen size"
+          },
+          {
+            "width": ["sm-6"],
+            "order": ["first-md"],
+            "children": "second in DOM, but first from md screen size"
+          }
+        ]
+      }
+    }
+  ]
+}
