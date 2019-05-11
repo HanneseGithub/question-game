@@ -30,6 +30,7 @@ export { default as Icon } from '@icon';
 export { default as Image } from '@image';
 
 export { default as Languages } from '@languages';
+export { default as Logo } from '@logo';
 
 export { default as Main } from '@main';
 export { default as Modal } from '@modal';
