@@ -103,6 +103,30 @@
       "@textfield--disabled": [
         "components/forms/textfield/textfield"
       ],
+      "@grid": [
+        "components/grid/grid"
+      ],
+      "@grid--example": [
+        "components/grid/grid--example"
+      ],
+      "@grid--vertical-align": [
+        "components/grid/grid--vertical-align"
+      ],
+      "@grid--horizontal-align": [
+        "components/grid/grid--horizontal-align"
+      ],
+      "@grid--equalheight": [
+        "components/grid/grid--equalheight"
+      ],
+      "@grid--gutter": [
+        "components/grid/grid--gutter"
+      ],
+      "@grid--offset": [
+        "components/grid/grid--offset"
+      ],
+      "@grid--order": [
+        "components/grid/grid--order"
+      ],
       "@helpers": [
         "components/helpers/helpers"
       ],
@@ -130,6 +154,9 @@
       "@languages": [
         "components/languages/languages"
       ],
+      "@logo": [
+        "components/logo/logo"
+      ],
       "@main": [
         "components/main/main"
       ],
@@ -153,6 +180,9 @@
       ],
       "@preview": [
         "core/preview/preview"
+      ],
+      "@preview-container": [
+        "core/preview-container/preview-container"
       ],
       "@m-header": [
         "modules/header/header"

@@ -60,6 +60,12 @@ export default class Preview extends React.Component<IPreviewProps, {}> {
         );
     }
 
+    renderRoot(): JSX.Element {
+        return (
+            <div id="root" dangerouslySetInnerHTML={{ __html: this.props.yield }} />
+        );
+    }
+
     render(): JSX.Element {
         return (
             <html>
@@ -72,7 +78,7 @@ export default class Preview extends React.Component<IPreviewProps, {}> {
                 </head>
                 <body style={this.props._target.meta && this.props._target.meta.previewDisplay}>
                     <div id="page">
-                        <div id="root" dangerouslySetInnerHTML={{ __html: this.props.yield }} />
+                        {this.props.children ? this.props.children : this.renderRoot()}
                     </div>
                     {this.getScripts()}
                     {this.getHydrateScript()}
