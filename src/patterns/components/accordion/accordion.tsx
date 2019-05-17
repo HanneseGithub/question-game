@@ -22,18 +22,18 @@ export interface IAccordionItemProps {
     children: React.ReactNode;
 }
 
-export interface IAccordionState {
+export interface IAccordionContext {
     value: TAccordionValue;
     setValue: (value: TAccordionValue) => void;
 }
 
-const AccordionContext: React.Context<IAccordionState> = React.createContext<IAccordionState>({
+const AccordionContext: React.Context<IAccordionContext> = React.createContext<IAccordionContext>({
     value: null,
     setValue: () => null,
 });
 
 export const AccordionItem: React.FC<IAccordionItemProps> = (props: IAccordionItemProps) => {
-    const context: IAccordionState = useContext(AccordionContext);
+    const context: IAccordionContext = useContext(AccordionContext);
     const className: string = classNames(
         'accordion__item',
          {
