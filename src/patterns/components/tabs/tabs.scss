@@ -1,0 +1,30 @@
+.tabs__nav {
+    padding: 20px 10px 0;
+    display: flex;
+}
+
+.tabs__nav-item {
+    display: inline-block;
+    padding: 0 10px;
+}
+
+.tabs__nav-link {
+    text-decoration: none;
+
+    .tabs__nav-item.is-current & {
+        text-decoration: underline;
+    }
+}
+
+.tabs__content-item {
+    display: none;
+
+    html.no-js &,
+    &.is-open {
+        display: block;
+    }
+}
+
+.tabs__content-inner {
+    padding: 20px;
+}

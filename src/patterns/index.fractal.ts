@@ -9,6 +9,7 @@ export { default as AccordionExample } from '@accordion--example';
 
 export { default as GridExample } from '@grid--example';
 
+export { default as TabsExample } from '@tabs--example';
 export { default as TypographyExample } from '@typography--example';
 
 export { default as ModalExample } from '@modal--example';

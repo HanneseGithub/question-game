@@ -172,6 +172,12 @@
       "@reset": [
         "components/reset/reset"
       ],
+      "@tabs": [
+        "components/tabs/tabs"
+      ],
+      "@tabs--example": [
+        "components/tabs/tabs--example"
+      ],
       "@typography": [
         "components/typography/typography"
       ],
