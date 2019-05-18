@@ -1,0 +1,6 @@
+{
+  "context": {
+    "header": "@m-header",
+    "template": "@t-404"
+  }
+}

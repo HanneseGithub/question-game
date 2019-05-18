@@ -196,8 +196,14 @@
       "@m-header": [
         "modules/header/header"
       ],
+      "@t-404": [
+        "templates/404/404"
+      ],
       "@t-login": [
         "templates/login/login"
+      ],
+      "@v-404": [
+        "views/404/404"
       ],
       "@v-base": [
         "views/base/base"

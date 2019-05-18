@@ -56,4 +56,6 @@ export { default as Header } from '@m-header';
 /**
  * Templates
  */
+export { default as Template404 } from '@t-404';
+
 export { default as TemplateLogin } from '@t-login';
