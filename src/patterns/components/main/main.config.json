@@ -1,5 +1,10 @@
 {
+  "meta": {
+    "parseJsxFrom": [
+      "children"
+    ]
+  },
   "context": {
-    "children": "any content"
+    "children": "<div>this text is in a div <Button text={'button text'} /></div>"
   }
 }

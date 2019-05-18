@@ -7,6 +7,7 @@ export interface IPreviewEnv {
 
 export interface IPreviewTargetMeta {
     previewDisplay?: React.StyleHTMLAttributes<HTMLBodyElement>;
+    parseJsxFrom?: string[];
 }
 
 export interface IPreviewTarget {
@@ -53,7 +54,13 @@ export default class Preview extends React.Component<IPreviewProps, {}> {
     }
 
     getHydrateScript(): JSX.Element {
-        const contents: string = 'ReactDOM.hydrate( React.createElement(global.' + this.props._env.reactClass + ', ' + JSON.stringify(this.props._target.context) + '), document.getElementById("root") );';
+        const componentSettings: object = {
+            className: this.props._env.reactClass,
+            context: this.props._target.context,
+            parseJsxFrom: this.props._target.meta && this.props._target.meta.parseJsxFrom ? this.props._target.meta.parseJsxFrom : undefined,
+        };
+
+        const contents: string = 'window.componentSettings = ' + JSON.stringify(componentSettings) + ';';
 
         return (
             <script dangerouslySetInnerHTML={{ __html: contents }} />
@@ -80,8 +87,8 @@ export default class Preview extends React.Component<IPreviewProps, {}> {
                     <div id="page">
                         {this.props.children ? this.props.children : this.renderRoot()}
                     </div>
-                    {this.getScripts()}
                     {this.getHydrateScript()}
+                    {this.getScripts()}
                 </body>
             </html>
         );

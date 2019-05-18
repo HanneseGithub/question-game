@@ -130,8 +130,8 @@ class gotoAndReact {
                     filename: 'js/[name].js',
                     path: path.resolve(__dirname, 'app/styleguide/public/inc'),
                     publicPath: this.options.production ? '../../inc/' : '/inc/',
-                    library: '[name]',
-                    libraryTarget: 'window'
+                    library: 'components',
+                    libraryTarget: 'var'
                 };
                 break;
 

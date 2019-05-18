@@ -18,3 +18,5 @@ export { default as ModalExample } from '@modal--example';
  */
 export { default as ViewBase } from '@v-base';
 export { default as ViewLogin } from '@v-login';
+
+import './hydrate.ts';
