@@ -190,6 +190,9 @@
       "@preview-container": [
         "core/preview-container/preview-container"
       ],
+      "@m-footer": [
+        "modules/footer/footer"
+      ],
       "@m-header": [
         "modules/header/header"
       ],

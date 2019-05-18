@@ -49,6 +49,8 @@ export { default as Typography } from '@typography';
 /**
  * Modules
  */
+export { default as Footer } from '@m-footer';
+
 export { default as Header } from '@m-header';
 
 /**

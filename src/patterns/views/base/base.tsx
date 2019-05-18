@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Footer from '@m-footer';
 import Header, { IHeaderProps } from '@m-header';
 import Main from '@main';
 
@@ -21,6 +22,7 @@ const ViewBase: React.FC<IViewBaseProps> = (props: IViewBaseProps) => {
             <Main>
                 {props.children}
             </Main>
+            <Footer />
         </React.Fragment>
     );
 };
