@@ -2,6 +2,7 @@ import React from 'react';
 
 import Container from '@container';
 import Languages, { ILanguagesProps } from '@languages';
+import Logo, { ILogoProps } from '@logo';
 import Navigation, { INavigationProps } from '@navigation';
 
 if (process.env.webpack) {
@@ -9,6 +10,7 @@ if (process.env.webpack) {
 }
 
 export interface IHeaderProps {
+    logo: ILogoProps;
     navigation: INavigationProps;
     languages: ILanguagesProps;
 }
@@ -18,8 +20,11 @@ const Header: React.FC<IHeaderProps> = (props: IHeaderProps) => {
         <header className="header">
             <Container>
                 <div className="header__inner">
-                    <Navigation {...props.navigation} />
-                    <Languages {...props.languages} />
+                    <Logo {...props.logo} className="header__logo" />
+                    <div className="header__main">
+                        <Navigation {...props.navigation} />
+                        <Languages {...props.languages} />
+                    </div>
                 </div>
             </Container>
         </header>

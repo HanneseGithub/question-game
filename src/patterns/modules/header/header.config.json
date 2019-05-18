@@ -1,5 +1,6 @@
 {
   "context": {
+    "logo": "@logo",
     "navigation": "@navigation",
     "languages": "@languages"
   }
