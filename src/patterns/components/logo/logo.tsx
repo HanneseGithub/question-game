@@ -2,6 +2,10 @@ import React from 'react';
 
 import classNames from 'classnames';
 
+if (process.env.webpack) {
+    require('./logo.scss');
+}
+
 export interface ILogoProps {
     url: string;
     image: string;

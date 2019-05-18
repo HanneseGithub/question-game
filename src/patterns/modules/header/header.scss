@@ -7,5 +7,17 @@
 .header__inner {
     display: flex;
     flex-wrap: wrap;
+}
+
+.header__main {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
+    flex: 1 0 auto;
+    padding-left: 20px;
+}
+
+.header__logo {
+    width: 65px;
 }
