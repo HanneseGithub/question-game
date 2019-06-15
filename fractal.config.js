@@ -39,6 +39,7 @@ fractal.components.set('statuses', {
     }
 });
 fractal.components.set('default.status', null);
+fractal.components.set('default.context.language', 'en-US');
 fractal.components.set('ext', '.tsx');
 
 /**

@@ -1,5 +1,6 @@
 # Ignore compiled stuff
 /app
+/temp
 
 # Ignore node_modules in this directory
 node_modules/

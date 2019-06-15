@@ -95,7 +95,7 @@ const TextField: React.FC<ITextFieldProps> = (props: ITextFieldProps) => {
             <InputElement
                 {...props.attributes}
                 className={inputClassName}
-                type={props.type}
+                type={props.element === 'textarea' ? undefined : props.type}
                 id={props.id}
                 name={props.name}
                 disabled={props.disabled}

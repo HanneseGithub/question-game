@@ -8,6 +8,7 @@ export interface IPreviewEnv {
 export interface IPreviewTargetMeta {
     previewDisplay?: React.StyleHTMLAttributes<HTMLBodyElement>;
     parseJsxFrom?: string[];
+    language?: string;
 }
 
 export interface IPreviewTarget {
@@ -26,6 +27,7 @@ export interface IPreviewProps {
     _target: IPreviewTarget;
     _config: IPreviewConfig;
     yield: string;
+    language: string;
 }
 
 export default class Preview extends React.Component<IPreviewProps, {}> {
@@ -75,7 +77,7 @@ export default class Preview extends React.Component<IPreviewProps, {}> {
 
     render(): JSX.Element {
         return (
-            <html>
+            <html lang={this.props._target && this.props._target.meta && this.props._target.meta.language ? this.props._target.meta.language : this.props.language}>
                 <head>
                     <meta charSet="utf-8" />
                     <meta name="viewport" content="width=device-width, initial-scale=1" />

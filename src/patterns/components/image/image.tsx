@@ -40,6 +40,7 @@ const Image: React.FC<IImageProps> = (props: IImageProps) => {
             return (
                 <source
                     key={index}
+                    srcSet="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                     data-srcset={source.srcset}
                     media={source.media}
                 />

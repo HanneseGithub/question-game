@@ -3,6 +3,12 @@
     {
       "name": "default",
       "hidden": true
+    },
+    {
+      "name": "example",
+      "meta": {
+        "language": "zxx"
+      }
     }
   ]
 }
