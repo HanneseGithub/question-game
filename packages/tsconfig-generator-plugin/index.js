@@ -45,8 +45,8 @@ class TSConfigGenerator {
             }
         });
 
-        compiler.hooks.beforeCompile.tapAsync('TSConfigGenerator', (compiler, callback) => {
-            this.generate(callback);
+        compiler.hooks.entryOption.tap('TSConfigGenerator', (context, entry) => {
+            this.generate();
         });
     }
 
