@@ -77,12 +77,16 @@ export default class Preview extends React.Component<IPreviewProps, {}> {
 
     render(): JSX.Element {
         return (
-            <html lang={this.props._target && this.props._target.meta && this.props._target.meta.language ? this.props._target.meta.language : this.props.language}>
+            <html
+                className="no-js"
+                lang={this.props._target && this.props._target.meta && this.props._target.meta.language ? this.props._target.meta.language : this.props.language}
+            >
                 <head>
                     <meta charSet="utf-8" />
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
                     <meta httpEquiv="X-UA-Compatible" content="IE=Edge" />
                     <title>{this.props._target.label} | Preview Layout</title>
+                    <script dangerouslySetInnerHTML={{ __html: '(function(H){H.className=H.className.replace(/\\bno-js\\b/,\'js\')})(document.documentElement)' }} />
                     {this.getStyles()}
                 </head>
                 <body style={this.props._target.meta && this.props._target.meta.previewDisplay}>
