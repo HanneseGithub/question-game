@@ -2,11 +2,13 @@ import React, { useContext } from 'react';
 
 import classNames from 'classnames';
 
-import { ITabsContext, ITabsItemProps, TabsContext } from './tabs';
+import { ITabsContext, ITabsNavItem, TabsContext } from './tabs';
 
-export interface ITabsNavItemProps {
-    id: string;
-    label: string;
+export interface ITabsNavProps {
+    items: ITabsNavItem[];
+}
+
+export interface ITabsNavItemProps extends ITabsNavItem {
     url: string;
     current?: boolean;
     onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
@@ -33,13 +35,13 @@ export const TabsNavItem: React.FC<ITabsNavItemProps> = (props: ITabsNavItemProp
     );
 };
 
-export const TabsNav: React.FC = () => {
+export const TabsNav: React.FC<ITabsNavProps> = (props: ITabsNavProps) => {
     const context: ITabsContext = useContext(TabsContext);
 
     return (
         <div className="tabs__nav">
             <ul className="tabs__nav-list">
-                {context.items.slice().reverse().map((item: ITabsItemProps) => {
+                {props.items.map((item: ITabsNavItem) => {
                     const handleClick: (event: React.MouseEvent<HTMLAnchorElement>) => void = (event: React.MouseEvent<HTMLAnchorElement>) => {
                         event.preventDefault();
 

@@ -1,25 +1,37 @@
 import React from 'react';
 
-import Tabs, { TabsItem } from '@tabs';
+import Tabs, { ITabsNavItem, TabsItem } from '@tabs';
 
 const TabsExample: React.FC = () => {
+    const items: ITabsNavItem[] = [
+        {
+            id: 'tabs-item-1',
+            label: 'Tab 1',
+        },
+        {
+            id: 'tabs-item-2',
+            label: 'Tab 2',
+        },
+        {
+            id: 'tabs-item-3',
+            label: 'Tab 3',
+        },
+    ];
+
     return (
-        <Tabs defaultValue="tabs-item-1">
+        <Tabs defaultValue={items[0].id} items={items}>
             <TabsItem
-                id="tabs-item-1"
-                label="Tab 1"
+                {...items[0]}
             >
                 tabs item 1
             </TabsItem>
             <TabsItem
-                id="tabs-item-2"
-                label="Tab 2"
+                {...items[1]}
             >
                 tabs item 2
             </TabsItem>
             <TabsItem
-                id="tabs-item-3"
-                label="Tab 3"
+                {...items[2]}
             >
                 tabs item 3
             </TabsItem>

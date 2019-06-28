@@ -12,30 +12,30 @@ export type TTabsValue = string;
 
 export interface ITabsProps {
     children: React.ReactNode;
+    items: ITabsNavItem[];
     defaultValue?: TTabsValue;
     value?: TTabsValue;
     onChange?: (value: TTabsValue) => void;
     className?: string;
 }
 
-export interface ITabsItemProps {
+export interface ITabsItemProps extends ITabsNavItem {
+    children: React.ReactNode;
+}
+
+export interface ITabsNavItem {
     id: string;
     label: string;
-    children: React.ReactNode;
 }
 
 export interface ITabsContext {
     value: TTabsValue;
     setValue: (value: TTabsValue) => void;
-    items: ITabsItemProps[];
-    addItem: (item: ITabsItemProps) => void;
 }
 
 export const TabsContext: React.Context<ITabsContext> = React.createContext<ITabsContext>({
     value: '',
     setValue: () => null,
-    items: [],
-    addItem: () => null,
 });
 
 export const TabsItem: React.FC<ITabsItemProps> = (props: ITabsItemProps) => {
@@ -46,8 +46,6 @@ export const TabsItem: React.FC<ITabsItemProps> = (props: ITabsItemProps) => {
              'is-open': context.value === props.id,
          },
     );
-
-    context.addItem(props);
 
     return (
         <div className={className} id={props.id}>
@@ -61,7 +59,6 @@ export const TabsItem: React.FC<ITabsItemProps> = (props: ITabsItemProps) => {
 const Tabs: React.FC<ITabsProps> = (props: ITabsProps) => {
     const className: string = classNames('tabs', props.className);
     const [value, setValue] = useState(props.defaultValue || '');
-    const [items, setItems] = useState<ITabsItemProps[]>([]);
 
     return (
         <div className={className}>
@@ -75,15 +72,9 @@ const Tabs: React.FC<ITabsProps> = (props: ITabsProps) => {
                             props.onChange(nextValue);
                         }
                     },
-                    items,
-                    addItem: (item: ITabsItemProps) => {
-                        if (!items.includes(item)) {
-                            setItems([...items, item]);
-                        }
-                    },
                 }}
             >
-                <TabsNav />
+                <TabsNav items={props.items} />
                 <div className="tabs__content">
                     {props.children}
                 </div>
