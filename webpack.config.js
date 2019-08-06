@@ -66,7 +66,7 @@ class gotoAndReact {
                 plugins.push(new TSConfigGenerator({
                     fractal: fractal,
                     tsConfig: tsconfig,
-                    fileName: path.resolve(__dirname, path.join('tsconfig.json')),
+                    fileName: path.resolve(__dirname, path.join('tsconfig.paths.json')),
                 }));
                 plugins.push(new FractalPlugin({
                     fractal: fractal,

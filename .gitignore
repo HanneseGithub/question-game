@@ -1,6 +1,7 @@
 # Ignore compiled stuff
 /app
 /temp
+tsconfig.paths.json
 
 # Ignore node_modules in this directory
 node_modules/

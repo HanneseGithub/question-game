@@ -24,6 +24,7 @@ class TSConfigGenerator {
                 map[`@${handle}`] = [path.relative(__dirname, path.resolve(path.parse(item.viewPath).dir, path.parse(item.viewPath).name)).replace(/\\/g, '/').replace('../../', '').replace(baseUrl, '')];
             });
 
+            this.tsconfig.extends = undefined;
             this.tsconfig.compilerOptions.paths = map;
 
             fs.writeFile(this.fileName, JSON.stringify(this.tsconfig, null, 2) + '\n', (err) => {
