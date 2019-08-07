@@ -39,14 +39,23 @@ class TSConfigGenerator {
                 if (typeof callback === 'function') {
                     callback();
                 }
+
+                this.fractal.components.emit('updated');
             });
         });
     }
 
     apply(compiler) {
         this.fractal.components.on('updated', (event) => {
-            if (event.isTemplate && ['add', 'unlink'].includes(event.event)) {
+            if (event && event.isTemplate && ['add', 'unlink'].includes(event.event)) {
                 this.generate();
+            }
+        });
+
+        // write initial file so that initial tsconfig resolution would not fail
+        fs.writeFile(this.fileName, JSON.stringify({}, null, 2) + '\n', (err) => {
+            if (err) {
+                return console.log(err);
             }
         });
 
