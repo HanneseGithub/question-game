@@ -20,8 +20,12 @@ class TSConfigGenerator {
         this.fractal.components.load().then((components) => {
             let map = {};
             components.flattenDeep().each((item) => {
-                const handle      = item.handle.replace('--default', '');
-                map[`@${handle}`] = [path.relative(__dirname, path.resolve(path.parse(item.viewPath).dir, path.parse(item.viewPath).name)).replace(/\\/g, '/').replace('../../', '').replace(baseUrl, '')];
+                const handle   = item.handle.replace('--default', '');
+                const basePath = path.relative(__dirname, path.resolve(path.parse(item.viewPath).dir, path.parse(item.viewPath).name)).replace(/\\/g, '/').replace('../../', '').replace(baseUrl, '');
+
+                if (handle.endsWith(path.parse(item.view).name)) {
+                    map[`@${handle}`] = [basePath];
+                }
             });
 
             this.tsconfig.compilerOptions.paths = map;
