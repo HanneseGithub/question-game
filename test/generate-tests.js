@@ -1,33 +1,50 @@
 const path = require('path');
 const fs   = require('fs');
-
 const fractal = require('../fractal.config.js');
+const tsconfig = require('../tsconfig.json');
+const TsConfigGenerator = require('../packages/tsconfig-generator-plugin');
 
-fractal.components.load().then((components) => {
-    const arr = [];
+TsConfigGenerator.generate(tsconfig, fractal, './tsconfig.paths.json', () => {
+    const baseUrl = tsconfig.compilerOptions.baseUrl.replace('./', '') + '/';
 
-    components.flattenDeep().each((item) => {
-        const handle = item.handle.replace('--default', '');
-        arr.push(`@${handle}`);
-    });
+    fractal.components.load().then((components) => {
+        const arr = [];
+        const map = {};
 
-    const obj = {
-        components: arr,
-    };
+        components.flattenDeep().each((item) => {
+            const handle = item.handle.replace('--default', '');
+            arr.push(`@${handle}`);
 
-    fs.mkdir('./temp', { recursive: true }, (err) => {
-        if (err) {
-            return console.error(err);
-        }
+            const basePath = path.relative(__dirname, path.resolve(path.parse(item.viewPath).dir, path.parse(item.viewPath).name)).replace(/\\/g, '/').replace('../../', '').replace(baseUrl, '');
 
-        fs.writeFile('./temp/components.json', JSON.stringify(obj, null, 2) + '\n', (err) => {
+            if (handle.endsWith(path.parse(item.view).name)) {
+                map[`@${handle}`] = '<rootDir>/' + baseUrl + basePath.replace('../', '');
+            }
+        });
+
+        const componentsObject = {
+            components: arr,
+        };
+        const pathsObject = {
+            paths: map,
+        };
+
+        fs.mkdir('./temp', { recursive: true }, (err) => {
             if (err) {
                 return console.error(err);
             }
 
-            if (typeof callback === 'function') {
-                callback();
-            }
+            fs.writeFile('./temp/components.json', JSON.stringify(componentsObject, null, 2) + '\n', (err) => {
+                if (err) {
+                    return console.error(err);
+                }
+            });
+
+            fs.writeFile('./temp/paths.json', JSON.stringify(pathsObject, null, 2) + '\n', (err) => {
+                if (err) {
+                    return console.error(err);
+                }
+            });
         });
     });
 });

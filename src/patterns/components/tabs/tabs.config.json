@@ -1,4 +1,7 @@
 {
+  "context": {
+    "items": []
+  },
   "variants": [
     {
       "name": "default",

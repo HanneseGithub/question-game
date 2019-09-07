@@ -14,35 +14,8 @@ class TSConfigGenerator {
         this.fileName = options.fileName;
     }
 
-    generate(callback = null) {
-        const baseUrl = this.tsconfig.compilerOptions.baseUrl.replace('./', '') + '/';
-
-        this.fractal.components.load().then((components) => {
-            let map = {};
-            components.flattenDeep().each((item) => {
-                const handle   = item.handle.replace('--default', '');
-                const basePath = path.relative(__dirname, path.resolve(path.parse(item.viewPath).dir, path.parse(item.viewPath).name)).replace(/\\/g, '/').replace('../../', '').replace(baseUrl, '');
-
-                if (handle.endsWith(path.parse(item.view).name)) {
-                    map[`@${handle}`] = [basePath];
-                }
-            });
-
-            this.tsconfig.extends = undefined;
-            this.tsconfig.compilerOptions.paths = map;
-
-            fs.writeFile(this.fileName, JSON.stringify(this.tsconfig, null, 2) + '\n', (err) => {
-                if (err) {
-                    return console.log(err);
-                }
-
-                if (typeof callback === 'function') {
-                    callback();
-                }
-
-                this.fractal.components.emit('updated');
-            });
-        });
+    generate() {
+        TSConfigGenerator.generate(this.tsconfig, this.fractal, this.fileName);
     }
 
     apply(compiler) {
@@ -61,6 +34,37 @@ class TSConfigGenerator {
 
         compiler.hooks.entryOption.tap('TSConfigGenerator', (context, entry) => {
             this.generate();
+        });
+    }
+
+    static generate(tsconfig, fractal, fileName, callback = null) {
+        const baseUrl = tsconfig.compilerOptions.baseUrl.replace('./', '') + '/';
+
+        fractal.components.load().then((components) => {
+            let map = {};
+            components.flattenDeep().each((item) => {
+                const handle   = item.handle.replace('--default', '');
+                const basePath = path.relative(__dirname, path.resolve(path.parse(item.viewPath).dir, path.parse(item.viewPath).name)).replace(/\\/g, '/').replace('../../', '').replace(baseUrl, '');
+
+                if (handle.endsWith(path.parse(item.view).name)) {
+                    map[`@${handle}`] = [basePath];
+                }
+            });
+
+            tsconfig.extends = undefined;
+            tsconfig.compilerOptions.paths = map;
+
+            fs.writeFile(fileName, JSON.stringify(tsconfig, null, 2) + '\n', (err) => {
+                if (err) {
+                    return console.log(err);
+                }
+
+                if (typeof callback === 'function') {
+                    callback();
+                }
+
+                fractal.components.emit('updated');
+            });
         });
     }
 

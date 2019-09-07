@@ -1,6 +1,4 @@
-const tsconfig = require('./tsconfig.json');
-const baseUrl  = tsconfig.compilerOptions.baseUrl;
-const paths    = tsconfig.compilerOptions.paths;
+const paths = require('./temp/paths.json').paths;
 
 const reporters = [
     'default',
@@ -14,10 +12,6 @@ if (process.env.CI) {
         },
     ]);
 }
-
-Object.keys(paths).map(function(key, index) {
-   paths[key] = '<rootDir>' + baseUrl.replace('./', '/') + '/' + paths[key][0];
-});
 
 module.exports = {
     reporters: reporters,
