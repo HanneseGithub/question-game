@@ -18,7 +18,7 @@ TsConfigGenerator.generate(tsconfig, fractal, './tsconfig.paths.json', () => {
             const basePath = path.relative(__dirname, path.resolve(path.parse(item.viewPath).dir, path.parse(item.viewPath).name)).replace(/\\/g, '/').replace('../../', '').replace(baseUrl, '');
 
             if (handle.endsWith(path.parse(item.view).name)) {
-                map[`@${handle}`] = '<rootDir>/' + baseUrl + basePath.replace('../', '');
+                map[`^@${handle}$`] = '<rootDir>/' + baseUrl + basePath.replace('../', '');
             }
         });
 
