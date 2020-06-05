@@ -1,11 +1,8 @@
-# Base project for React apps
-
-© gotoAndPlay 2019
+# react-base
+This is our base project for React projects.
 
 ## Global dependencies
-Project dependencies are installed and managed via [npm](https://npmjs.org/), the Node.js package manager. Make sure your [npm](https://npmjs.org/) is up-to-date by running `npm update -g npm` (this might require `sudo` on certain systems).
-
-**Fractal** is a tool to help you build, document and integrate component/pattern libraries into your web projects. Read more on [GitHub](https://github.com/frctl/fractal). Fractal makes use of a number of ES6 features that mean it currently requires Node.js v4.0+ to run.
+- [Node.js](https://nodejs.org/) (including [npm](https://www.npmjs.com/), currently v6) - use LTS, currently v12
 
 ## Styleguide
 ### Developing front-end styleguide
@@ -25,3 +22,6 @@ To create the ssl certificate for the webpack-dev-server go to `node_modules\web
 
 ### Building app
 Run `npm run build:app`. This will build a app to `app/build`.
+
+## Copyright
+© gotoAndPlay 2020
