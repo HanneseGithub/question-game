@@ -13,7 +13,7 @@ export type TChoiceGroupValue = string | string[];
 
 export interface IChoiceGroupProps {
     type: 'radio' | 'check';
-    choices: Array<IRadioProps | ICheckProps>;
+    choices: (IRadioProps | ICheckProps)[];
     label: string;
     defaultValue?: TChoiceGroupValue;
     value?: TChoiceGroupValue;
