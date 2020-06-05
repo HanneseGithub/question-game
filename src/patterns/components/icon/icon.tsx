@@ -39,7 +39,7 @@ const Icon: React.FC<IIconProps> = (props: IIconProps) => {
     };
 
     return (
-        <svg className={className}>
+        <svg className={className} focusable="false">
             <use xlinkHref={getHref()} />
         </svg>
     );

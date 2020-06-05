@@ -31,4 +31,8 @@ const Button: React.FC<IButtonProps> = (props: IButtonProps) => {
     );
 };
 
+Button.defaultProps = {
+    type: 'button',
+};
+
 export default Button;

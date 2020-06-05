@@ -1,37 +1,33 @@
-const validator = require('html-validator');
+const HtmlValidate = require('html-validate').HtmlValidate;
+const format = require('html-validate/build/formatters/stylish').default;
 
 const fractal    = require('../fractal.config.js');
-const components = require('../temp/components.json');
+const { components } = require('../temp/components.json');
+const validationConfig = require('../.htmlvalidate.json');
+
+const htmlvalidate = new HtmlValidate(validationConfig);
 
 describe('validate html', () => {
-    components.components.forEach((component) => {
-        if (component.startsWith('@preview')) {
+    components.forEach((handle) => {
+        if (handle.startsWith('@preview')) {
             return;
         }
 
-        test('validate ' + component, (done) => {
-            fractal.components.load().then((comps) => {
-                const comp = comps.find(component);
+        test('validate ' + handle, async (done) => {
+            const fractalComponents = await fractal.components.load();
+            const component = fractalComponents.find(handle);
 
-                comp.render(null, null, {
+            if (component) {
+                const html = await component.render(null, null, {
                     preview: true,
-                }).then(async (html) => {
-                    const options = {
-                        data: html,
-                        format: 'text'
-                    };
-
-                    try {
-                        const result = await validator(options);
-
-                        expect(result).toBe('The document validates according to the specified schema(s).\n');
-                        done();
-                    } catch (error) {
-                        expect(error).toBe('The document validates according to the specified schema(s).\n');
-                        done();
-                    }
                 });
-            })
+                const report = htmlvalidate.validateString(html);
+
+                expect(report.valid, format(report.results)).toBe(true);
+                done();
+            } else {
+                console.error('component missing:' + handle);
+            }
         }, 10000);
     });
 });

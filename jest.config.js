@@ -25,5 +25,6 @@ module.exports = {
     },
     moduleNameMapper: {
         ...paths,
-    }
+    },
+    setupFilesAfterEnv: ['jest-expect-message'],
 };
