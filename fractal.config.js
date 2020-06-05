@@ -49,7 +49,7 @@ fractal.web.set('server.sync', true);
 fractal.web.set('server.syncOptions', {
     open: true
 });
-fractal.web.set('static.path', 'app/styleguide/public');
-fractal.web.set('builder.dest', 'app/styleguide/build');
+fractal.web.set('static.path', 'temp/public');
+fractal.web.set('builder.dest', 'build/styleguide');
 
 fractal.web.theme(nighthawkTheme());

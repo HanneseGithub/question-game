@@ -1,5 +1,5 @@
 # Ignore compiled stuff
-/app
+/build
 /temp
 tsconfig.paths.json
 

@@ -128,7 +128,7 @@ class gotoAndReact {
             case 'styleguide':
                 output = {
                     filename: 'js/[name].js',
-                    path: path.resolve(__dirname, 'app/styleguide/public/inc'),
+                    path: path.resolve(__dirname, 'temp/public/inc'),
                     publicPath: this.options.production ? '../../inc/' : '/inc/',
                     library: 'components',
                     libraryTarget: 'var'
@@ -138,7 +138,7 @@ class gotoAndReact {
             case 'app':
                 output = {
                     filename: this.options.production ? 'js/[name].[chunkhash].js' : 'js/[name].js',
-                    path: path.resolve(__dirname, './app/build/'),
+                    path: path.resolve(__dirname, './build/app/'),
                     publicPath: this.options.path,
                 };
                 break;
