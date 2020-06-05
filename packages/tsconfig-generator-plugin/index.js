@@ -41,7 +41,7 @@ class TSConfigGenerator {
         const baseUrl = tsconfig.compilerOptions.baseUrl.replace('./', '') + '/';
 
         fractal.components.load().then((components) => {
-            let map = {};
+            const map = {};
             components.flattenDeep().each((item) => {
                 const handle   = item.handle.replace('--default', '');
                 const basePath = path.relative(__dirname, path.resolve(path.parse(item.viewPath).dir, path.parse(item.viewPath).name)).replace(/\\/g, '/').replace('../../', '').replace(baseUrl, '');
@@ -51,10 +51,9 @@ class TSConfigGenerator {
                 }
             });
 
-            tsconfig.extends = undefined;
-            tsconfig.compilerOptions.paths = map;
+            const pathsConfig = { compilerOptions: { paths: map } };
 
-            fs.writeFile(fileName, JSON.stringify(tsconfig, null, 2) + '\n', (err) => {
+            fs.writeFile(fileName, JSON.stringify(pathsConfig, null, 2) + '\n', (err) => {
                 if (err) {
                     return console.log(err);
                 }
