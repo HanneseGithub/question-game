@@ -1,6 +1,12 @@
+if (process.env.webpack) {
+    require('./grid.scss');
+}
+
 export {
-    default as Grid,
+    Grid,
     IGridProps,
+} from './src/grid';
+export {
     GridColumn,
     IGridColumnProps,
-} from './grid';
+} from './src/grid-column';

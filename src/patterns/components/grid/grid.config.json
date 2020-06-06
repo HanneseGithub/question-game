@@ -1,58 +1,50 @@
 {
   "preview": "@preview-container",
-  "variants": [
-    {
-      "name": "default",
-      "hidden": true
-    },
-    {
-      "name": "example",
-      "notes": "Start by adding an element with element of `<Grid>`. This will create a horizontal block to contain vertical columns. Then add `<GridColumn>` elements within that row. Specify the widths of each column with `width={['xs-#', 'sm-#', 'md-#', 'lg-#']}` classes. Responsive modifiers enable specifying different column sizes, offsets, alignment and distribution at xs, sm, md & lg viewport widths. Bare in mind that **the layout is mobile-first**. You can stack modifiers if you want to achieve different alignment depending on screen size.",
-      "context": {
-        "columns": [
-          {
-            "width": ["sm-6"],
-            "children": "1/2 sm"
-          },
-          {
-            "width": ["sm-6"],
-            "children": "1/2 sm"
-          },
-          {
-            "width": ["sm-4"],
-            "children": "1/3 sm"
-          },
-          {
-            "width": ["sm-4"],
-            "children": "1/3 sm"
-          },
-          {
-            "width": ["sm-4"],
-            "children": "1/3 sm"
-          },
-          {
-            "width": ["sm-6", "md-3"],
-            "children": "1/2 sm, 1/4 md"
-          },
-          {
-            "width": ["sm-6", "md-3"],
-            "children": "1/2 sm, 1/4 md"
-          },
-          {
-            "width": ["sm-6", "md-3"],
-            "children": "1/2 sm, 1/4 md"
-          },
-          {
-            "width": ["sm-6", "md-3"],
-            "children": "1/2 sm, 1/4 md"
-          }
-        ]
+  "notes": "Start by adding an element with element of `<Grid>`. This will create a horizontal block to contain vertical columns. Then add `<GridColumn>` elements within that row. Specify the widths of each column with `width={['xs-#', 'sm-#', 'md-#', 'lg-#']}` classes. Responsive modifiers enable specifying different column sizes, offsets, alignment and distribution at xs, sm, md & lg viewport widths. Bare in mind that **the layout is mobile-first**. You can stack modifiers if you want to achieve different alignment depending on screen size.",
+  "context": {
+    "columns": [
+      {
+        "width": ["sm-6"],
+        "children": "1/2 sm"
+      },
+      {
+        "width": ["sm-6"],
+        "children": "1/2 sm"
+      },
+      {
+        "width": ["sm-4"],
+        "children": "1/3 sm"
+      },
+      {
+        "width": ["sm-4"],
+        "children": "1/3 sm"
+      },
+      {
+        "width": ["sm-4"],
+        "children": "1/3 sm"
+      },
+      {
+        "width": ["sm-6", "md-3"],
+        "children": "1/2 sm, 1/4 md"
+      },
+      {
+        "width": ["sm-6", "md-3"],
+        "children": "1/2 sm, 1/4 md"
+      },
+      {
+        "width": ["sm-6", "md-3"],
+        "children": "1/2 sm, 1/4 md"
+      },
+      {
+        "width": ["sm-6", "md-3"],
+        "children": "1/2 sm, 1/4 md"
       }
-    },
+    ]
+  },
+  "variants": [
     {
       "name": "vertical-align",
       "notes": "Vertical alignment can be either adjusted separately column by column using `align={['top-#', 'middle-#', 'bottom-#']}` (example below) or by whole group of columns by using grid modifier `align={['top-#', 'middle-#', 'bottom-#']}`.",
-      "view": "grid--example.tsx",
       "context": {
         "className": "sg-grid",
         "columns": [
@@ -77,7 +69,6 @@
     {
       "name": "horizontal-align",
       "notes": "Horizontal alignment can be adjusted by whole group of columns using grid modifier `justify={['start-#', 'center-#', 'end-#', 'between-#', 'around-#']}`.",
-      "view": "grid--example.tsx",
       "context": {
         "justify": ["center-sm"],
         "columns": [
@@ -103,7 +94,6 @@
     {
       "name": "equalheight",
       "notes": "Make grid colums with equal height by using grid modifier `equalHeight={true}`.",
-      "view": "grid--example.tsx",
       "context": {
         "equalHeight": true,
         "columns": [
@@ -121,7 +111,6 @@
     {
       "name": "gutter",
       "notes": "Use columns without gutter by using grid modifier `gutter=\"none\"`.",
-      "view": "grid--example.tsx",
       "context": {
         "gutter": "none",
         "columns": [
@@ -139,7 +128,6 @@
     {
       "name": "offset",
       "notes": "Move columns to the right using `offset={['sm-#']}` classes. These classes increase the left margin of a column by # columns.",
-      "view": "grid--example.tsx",
       "context": {
         "columns": [
           {
@@ -172,7 +160,6 @@
     {
       "name": "order",
       "notes": "You can reverse order by using `reverse={['#']}` modifier or control column directly via `order={['first-#', 'last-#', 'original-#']}`.",
-      "view": "grid--example.tsx",
       "context": {
         "columns": [
           {
