@@ -1,0 +1,156 @@
+module.exports = {
+    env: {
+        node: true,
+    },
+    extends: [
+        'eslint:recommended',
+        'plugin:compat/recommended',
+        'plugin:jsdoc/recommended',
+        'plugin:react/recommended',
+    ],
+    overrides: [
+        {
+            env: {
+                jest: true,
+            },
+            files: ['*.test.js'],
+        },
+        {
+            extends: [
+                'plugin:@typescript-eslint/eslint-recommended',
+                'plugin:@typescript-eslint/recommended',
+            ],
+            files: ['*.ts', '*.tsx'],
+            parser: '@typescript-eslint/parser',
+            parserOptions: {
+                project: 'tsconfig.json',
+                sourceType: 'module',
+            },
+            rules: {
+                '@typescript-eslint/array-type': 'error',
+                '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
+                '@typescript-eslint/explicit-function-return-type': 'error',
+                '@typescript-eslint/explicit-member-accessibility': [
+                    'off',
+                    {
+                        overrides: {
+                            constructors: 'off',
+                        },
+                    },
+                ],
+                '@typescript-eslint/indent': 'error',
+                '@typescript-eslint/member-ordering': 'error',
+                '@typescript-eslint/no-explicit-any': 'error',
+                '@typescript-eslint/no-inferrable-types': 'off',
+                '@typescript-eslint/no-non-null-assertion': 'error',
+                '@typescript-eslint/no-parameter-properties': 'off',
+                '@typescript-eslint/no-use-before-declare': 'off',
+                '@typescript-eslint/prefer-for-of': 'error',
+                '@typescript-eslint/prefer-function-type': 'error',
+                '@typescript-eslint/semi': 'error',
+                '@typescript-eslint/unified-signatures': 'error',
+                'no-console': [
+                    'warn',
+                    {
+                        allow: [
+                            'warn',
+                            'error',
+                        ],
+                    },
+                ],
+            },
+        },
+    ],
+    parserOptions: {
+        ecmaVersion: 9,
+        sourceType: 'module',
+    },
+    plugins: [
+        'compat',
+        'jsdoc',
+        'prefer-arrow',
+        '@typescript-eslint',
+    ],
+    rules: {
+        'arrow-body-style': 'error',
+        'arrow-parens': [
+            'error',
+            'always',
+        ],
+        'brace-style': 'error',
+        'comma-dangle': ['error', 'always-multiline'],
+        'complexity': 'off',
+        'curly': 'error',
+        'default-case': 'off',
+        'dot-notation': 'error',
+        'eol-last': 'error',
+        'eqeqeq': 'error',
+        'guard-for-in': 'error',
+        'jsdoc/require-jsdoc': 'off',
+        'key-spacing': 'error',
+        'keyword-spacing': 'error',
+        'max-classes-per-file': 'off',
+        'new-parens': 'error',
+        'no-bitwise': 'off',
+        'no-caller': 'error',
+        'no-eval': 'error',
+        'no-fallthrough': 'off',
+        'no-invalid-this': 'off',
+        'no-multi-spaces': 'error',
+        'no-multiple-empty-lines': 'error',
+        'no-new-wrappers': 'error',
+        'no-param-reassign': 'error',
+        'no-sequences': 'error',
+        'no-shadow': 'error',
+        'no-throw-literal': 'error',
+        'no-trailing-spaces': 'error',
+        'no-undef-init': 'error',
+        'no-unused-expressions': 'error',
+        'no-var': 'error',
+        'object-shorthand': 'error',
+        'one-var': ['error', 'never'],
+        'padding-line-between-statements': [
+            'error',
+            {
+                blankLine: 'always',
+                next: 'return',
+                prev: '*',
+            },
+            {
+                blankLine: 'always',
+                next: '*',
+                prev: ['const', 'let', 'var'],
+            },
+            {
+                blankLine: 'any',
+                next: ['const', 'let', 'var'],
+                prev: ['const', 'let', 'var'],
+            },
+        ],
+        'prefer-arrow/prefer-arrow-functions': 'error',
+        'prefer-const': 'error',
+        'prefer-object-spread': 'error',
+        'quote-props': [
+            'error',
+            'consistent-as-needed',
+        ],
+        'quotes': ['error', 'single', { allowTemplateLiterals: true }],
+        'radix': 'off',
+        'sort-keys': 'error',
+        'space-before-function-paren': [
+            'error',
+            {
+                anonymous: 'never',
+                asyncArrow: 'always',
+                named: 'never',
+            },
+        ],
+        'space-in-parens': 'error',
+        'spaced-comment': ['error', 'always'],
+    },
+    settings: {
+        react: {
+            version: 'detect',
+        },
+    },
+};

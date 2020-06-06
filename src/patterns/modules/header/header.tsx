@@ -15,20 +15,18 @@ export interface IHeaderProps {
     languages: ILanguagesProps;
 }
 
-const Header: React.FC<IHeaderProps> = (props: IHeaderProps) => {
-    return (
-        <header className="header">
-            <Container>
-                <div className="header__inner">
-                    <Logo {...props.logo} className="header__logo" />
-                    <div className="header__main">
-                        <Navigation {...props.navigation} />
-                        <Languages {...props.languages} />
-                    </div>
+const Header: React.FC<IHeaderProps> = (props: IHeaderProps) => (
+    <header className="header">
+        <Container>
+            <div className="header__inner">
+                <Logo {...props.logo} className="header__logo" />
+                <div className="header__main">
+                    <Navigation {...props.navigation} />
+                    <Languages {...props.languages} />
                 </div>
-            </Container>
-        </header>
-    );
-};
+            </div>
+        </Container>
+    </header>
+);
 
 export default Header;

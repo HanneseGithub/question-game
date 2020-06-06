@@ -13,7 +13,7 @@ export interface IPreviewTargetMeta {
 
 export interface IPreviewTarget {
     label: string;
-    context: any; // tslint:disable-line no-any
+    context: IContext;
     meta?: IPreviewTargetMeta;
 }
 
@@ -30,17 +30,15 @@ export interface IPreviewProps {
     language: string;
 }
 
-export default class Preview extends React.Component<IPreviewProps, {}> {
+export default class Preview extends React.Component<IPreviewProps> {
     getStyles(): JSX.Element[] | null {
         if (!this.props._config.cssAssets) {
             return null;
         }
 
-        return this.props._config.cssAssets.map((item: string, index: number) => {
-            return (
-                <link media="all" rel="stylesheet" href={this.props._env.publicPath + 'inc/' + item} key={index} />
-            );
-        });
+        return this.props._config.cssAssets.map((item: string, index: number) => (
+            <link media="all" rel="stylesheet" href={this.props._env.publicPath + 'inc/' + item} key={index} />
+        ));
     }
 
     getScripts(): JSX.Element[] | null {
@@ -48,15 +46,13 @@ export default class Preview extends React.Component<IPreviewProps, {}> {
             return null;
         }
 
-        return this.props._config.jsAssets.map((item: string, index: number) => {
-            return (
-                <script src={this.props._env.publicPath + 'inc/' + item} key={index} />
-            );
-        });
+        return this.props._config.jsAssets.map((item: string, index: number) => (
+            <script src={this.props._env.publicPath + 'inc/' + item} key={index} />
+        ));
     }
 
     getHydrateScript(): JSX.Element {
-        const componentSettings: object = {
+        const componentSettings: IComponentSettings = {
             className: this.props._env.reactClass,
             context: this.props._target.context,
             parseJsxFrom: this.props._target.meta && this.props._target.meta.parseJsxFrom ? this.props._target.meta.parseJsxFrom : undefined,

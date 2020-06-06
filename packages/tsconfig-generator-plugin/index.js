@@ -1,38 +1,36 @@
 const path = require('path');
-const fs   = require('fs');
+const fs = require('fs');
 
 class TSConfigGenerator {
 
     constructor(options) {
-        options       = Object.assign({
+        this.options = {
+            fileName: null,
             fractal: null,
             tsConfig: null,
-            fileName: null
-        }, options);
-        this.fractal  = options.fractal;
-        this.tsconfig = options.tsConfig;
-        this.fileName = options.fileName;
+            ...options,
+        };
     }
 
     generate() {
-        TSConfigGenerator.generate(this.tsconfig, this.fractal, this.fileName);
+        TSConfigGenerator.generate(this.options.tsConfig, this.options.fractal, this.options.fileName);
     }
 
     apply(compiler) {
-        this.fractal.components.on('updated', (event) => {
+        this.options.fractal.components.on('updated', (event) => {
             if (event && event.isTemplate && ['add', 'unlink'].includes(event.event)) {
                 this.generate();
             }
         });
 
         // write initial file so that initial tsconfig resolution would not fail
-        fs.writeFile(this.fileName, JSON.stringify({}, null, 2) + '\n', (err) => {
+        fs.writeFile(this.options.fileName, JSON.stringify({}, null, 2) + '\n', (err) => {
             if (err) {
                 return console.log(err);
             }
         });
 
-        compiler.hooks.entryOption.tap('TSConfigGenerator', (context, entry) => {
+        compiler.hooks.entryOption.tap('TSConfigGenerator', () => {
             this.generate();
         });
     }
@@ -42,8 +40,9 @@ class TSConfigGenerator {
 
         fractal.components.load().then((components) => {
             const map = {};
+
             components.flattenDeep().each((item) => {
-                const handle   = item.handle.replace('--default', '');
+                const handle = item.handle.replace('--default', '');
                 const basePath = path.relative(__dirname, path.resolve(path.parse(item.viewPath).dir, path.parse(item.viewPath).name)).replace(/\\/g, '/').replace('../../', '').replace(baseUrl, '');
 
                 if (handle.endsWith(path.parse(item.view).name)) {

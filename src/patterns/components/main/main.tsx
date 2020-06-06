@@ -8,12 +8,10 @@ export interface IMainProps {
     children: React.ReactNode;
 }
 
-const Main: React.FC<IMainProps> = (props: IMainProps) => {
-    return (
-        <div className="main">
-            {props.children}
-        </div>
-    );
-};
+const Main: React.FC<IMainProps> = (props: IMainProps) => (
+    <div className="main">
+        {props.children}
+    </div>
+);
 
 export default Main;

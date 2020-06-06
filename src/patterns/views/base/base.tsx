@@ -9,22 +9,18 @@ export interface IViewBaseProps {
     header?: IHeaderProps;
 }
 
-const renderHeader: (header: IHeaderProps) => JSX.Element = (header: IHeaderProps): JSX.Element => {
-    return (
-        <Header {...header} />
-    );
-};
+const renderHeader: (header: IHeaderProps) => JSX.Element = (header: IHeaderProps): JSX.Element => (
+    <Header {...header} />
+);
 
-const ViewBase: React.FC<IViewBaseProps> = (props: IViewBaseProps) => {
-    return (
-        <React.Fragment>
-            {props.header && renderHeader(props.header)}
-            <Main>
-                {props.children}
-            </Main>
-            <Footer />
-        </React.Fragment>
-    );
-};
+const ViewBase: React.FC<IViewBaseProps> = (props: IViewBaseProps) => (
+    <React.Fragment>
+        {props.header && renderHeader(props.header)}
+        <Main>
+            {props.children}
+        </Main>
+        <Footer />
+    </React.Fragment>
+);
 
 export default ViewBase;

@@ -39,8 +39,8 @@ const Select: React.FC<ISelectProps> = (props: ISelectProps) => {
         'select',
         {
             'is-dirty': typeof props.value !== 'undefined' ? props.value : value,
-            'is-invalid': props.invalid,
             'is-disabled': props.disabled,
+            'is-invalid': props.invalid,
         },
         props.modifier,
         props.className,
@@ -59,73 +59,48 @@ const Select: React.FC<ISelectProps> = (props: ISelectProps) => {
         }
     };
 
-    const renderError: () => JSX.Element = (): JSX.Element => {
-        return (
-            <div className="select__error">
-                {props.error}
-            </div>
-        );
-    };
+    const renderOptions: () => JSX.Element[] = (): JSX.Element[] => props.options.map((option: ISelectOption) => (
+        <option
+            key={option.value}
+            value={option.value}
+        >
+            {option.label}
+        </option>
+    ));
 
-    const renderDescription: () => JSX.Element = (): JSX.Element => {
-        return (
-            <div className="select__description">
-                {props.description}
-            </div>
-        );
-    };
-
-    const renderLabel: () => JSX.Element = (): JSX.Element => {
-        const labelClassName: string = classNames('select__label', props.labelClassName);
-
-        return (
-            <label className={labelClassName} htmlFor={props.id}>
-                {props.label}
-            </label>
-        );
-    };
-
-    const renderOptions: () => JSX.Element[] = (): JSX.Element[] => {
-        return props.options.map((option: ISelectOption) => {
-            return (
-                <option
-                    key={option.value}
-                    value={option.value}
-                >
-                    {option.label}
-                </option>
-            );
-        });
-    };
-
-    const renderInput: () => JSX.Element = (): JSX.Element => {
-        const inputClassName: string = classNames('select__input', props.inputClassName);
-
-        return (
-            <select
-                {...props.attributes}
-                className={inputClassName}
-                id={props.id}
-                name={props.name}
-                disabled={props.disabled}
-                // use local state only when component is not controlled from parent
-                value={typeof props.value !== 'undefined' ? props.value : value}
-                onChange={handleChange}
-            >
-                {renderOptions()}
-            </select>
-        );
-    };
+    const inputClassName: string = classNames('select__input', props.inputClassName);
+    const labelClassName: string = classNames('select__label', props.labelClassName);
 
     return (
         <div className={className}>
             <div className="select__inner">
-                {renderInput()}
+                <select
+                    {...props.attributes}
+                    className={inputClassName}
+                    id={props.id}
+                    name={props.name}
+                    disabled={props.disabled}
+                    // use local state only when component is not controlled from parent
+                    value={typeof props.value !== 'undefined' ? props.value : value}
+                    onChange={handleChange}
+                >
+                    {renderOptions()}
+                </select>
                 <Icon name="arrow-down" className="select__icon" />
-                {renderLabel()}
+                <label className={labelClassName} htmlFor={props.id}>
+                    {props.label}
+                </label>
             </div>
-            {props.error && renderError()}
-            {props.description && renderDescription()}
+            {props.error && (
+                <div className="select__error">
+                    {props.error}
+                </div>
+            )}
+            {props.description && (
+                <div className="select__description">
+                    {props.description}
+                </div>
+            )}
         </div>
     );
 };

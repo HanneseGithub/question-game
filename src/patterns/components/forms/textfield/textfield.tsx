@@ -33,9 +33,9 @@ const TextField: React.FC<ITextFieldProps> = (props: ITextFieldProps) => {
         'textfield',
         {
             'is-dirty': typeof props.value !== 'undefined' ? props.value : value,
+            'is-disabled': props.disabled,
             'is-focused': isFocused,
             'is-invalid': props.invalid,
-            'is-disabled': props.disabled,
         },
         props.modifier,
         props.className,
@@ -53,76 +53,55 @@ const TextField: React.FC<ITextFieldProps> = (props: ITextFieldProps) => {
         }
     };
 
-    const handleFocus: () => void = (): void => {
+    const handleFocus = (): void => {
         setIsFocused(true);
     };
 
-    const handleBlur: () => void = (): void => {
+    const handleBlur = (): void => {
         setIsFocused(false);
     };
 
-    const renderError: () => JSX.Element = (): JSX.Element => {
-        return (
-            <div className="textfield__error">
-                {props.error}
-            </div>
-        );
-    };
-
-    const renderDescription: () => JSX.Element = (): JSX.Element => {
-        return (
-            <div className="textfield__description">
-                {props.description}
-            </div>
-        );
-    };
-
-    const renderLabel: () => JSX.Element = (): JSX.Element => {
-        const labelClassName: string = classNames('textfield__label', props.labelClassName);
-
-        return (
-            <label className={labelClassName} htmlFor={props.id}>
-                {props.label}
-            </label>
-        );
-    };
-
-    const renderInput: () => JSX.Element = (): JSX.Element => {
-        const inputClassName: string = classNames('textfield__input', props.inputClassName);
-        const InputElement: 'input' | 'textarea' = props.element || 'input';
-
-        return (
-            <InputElement
-                {...props.attributes}
-                className={inputClassName}
-                type={props.element === 'textarea' ? undefined : props.type}
-                id={props.id}
-                name={props.name}
-                disabled={props.disabled}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-                // use local state only when component is not controlled from parent
-                value={typeof props.value !== 'undefined' ? props.value : value}
-                onChange={handleChange}
-            />
-        );
-    };
+    const inputClassName: string = classNames('textfield__input', props.inputClassName);
+    const InputElement: 'input' | 'textarea' = props.element || 'input';
+    const labelClassName: string = classNames('textfield__label', props.labelClassName);
 
     return (
         <div className={className}>
             <div className="textfield__inner">
-                {renderInput()}
-                {renderLabel()}
+                <InputElement
+                    {...props.attributes}
+                    className={inputClassName}
+                    type={props.element === 'textarea' ? undefined : props.type}
+                    id={props.id}
+                    name={props.name}
+                    disabled={props.disabled}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    // use local state only when component is not controlled from parent
+                    value={typeof props.value !== 'undefined' ? props.value : value}
+                    onChange={handleChange}
+                />
+                <label className={labelClassName} htmlFor={props.id}>
+                    {props.label}
+                </label>
             </div>
-            {props.error && renderError()}
-            {props.description && renderDescription()}
+            {props.error && (
+                <div className="textfield__error">
+                    {props.error}
+                </div>
+            )}
+            {props.description && (
+                <div className="textfield__description">
+                    {props.description}
+                </div>
+            )}
         </div>
     );
 };
 
 TextField.defaultProps = {
-    type: 'text',
     defaultValue: '',
+    type: 'text',
 };
 
 export default TextField;

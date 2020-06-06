@@ -28,17 +28,17 @@ export interface IAccordionContext {
 }
 
 const AccordionContext: React.Context<IAccordionContext> = React.createContext<IAccordionContext>({
-    value: null,
     setValue: () => null,
+    value: null,
 });
 
 export const AccordionItem: React.FC<IAccordionItemProps> = (props: IAccordionItemProps) => {
     const context: IAccordionContext = useContext(AccordionContext);
     const className: string = classNames(
         'accordion__item',
-         {
-             'is-open': context.value === props.id,
-         },
+        {
+            'is-open': context.value === props.id,
+        },
     );
 
     const handleOnClick: (event: React.MouseEvent<HTMLAnchorElement>) => void = (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -73,14 +73,14 @@ const Accordion: React.FC<IAccordionProps> = (props: IAccordionProps) => {
         <div className={className}>
             <AccordionContext.Provider
                 value={{
-                    value: typeof props.value !== 'undefined' ? props.value : value,
-                    setValue: (nextValue: TAccordionValue) => {
+                    setValue: (nextValue: TAccordionValue): void => {
                         setValue(nextValue);
 
                         if (props.onChange) {
                             props.onChange(nextValue);
                         }
                     },
+                    value: typeof props.value !== 'undefined' ? props.value : value,
                 }}
             >
                 {props.children}

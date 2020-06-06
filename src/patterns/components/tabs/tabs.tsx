@@ -34,17 +34,17 @@ export interface ITabsContext {
 }
 
 export const TabsContext: React.Context<ITabsContext> = React.createContext<ITabsContext>({
-    value: '',
     setValue: () => null,
+    value: '',
 });
 
 export const TabsItem: React.FC<ITabsItemProps> = (props: ITabsItemProps) => {
     const context: ITabsContext = useContext(TabsContext);
     const className: string = classNames(
         'tabs__content-item',
-         {
-             'is-open': context.value === props.id,
-         },
+        {
+            'is-open': context.value === props.id,
+        },
     );
 
     return (
@@ -64,14 +64,14 @@ const Tabs: React.FC<ITabsProps> = (props: ITabsProps) => {
         <div className={className}>
             <TabsContext.Provider
                 value={{
-                    value: typeof props.value !== 'undefined' ? props.value : value,
-                    setValue: (nextValue: TTabsValue) => {
+                    setValue: (nextValue: TTabsValue): void => {
                         setValue(nextValue);
 
                         if (props.onChange) {
                             props.onChange(nextValue);
                         }
                     },
+                    value: typeof props.value !== 'undefined' ? props.value : value,
                 }}
             >
                 <TabsNav items={props.items} />

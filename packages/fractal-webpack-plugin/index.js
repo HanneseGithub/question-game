@@ -3,19 +3,17 @@ const path = require('path');
 class FractalPlugin {
 
     constructor(options) {
-        options            = Object.assign({
+        this.options = {
+            chunksOrder: [],
             fractal: null,
             isProduction: false,
-            chunksOrder: [],
-        }, options);
-        this.fractal       = options.fractal;
-        this.isProduction  = options.isProduction;
-        this.chunksOrder   = options.chunksOrder;
+            ...options,
+        };
         this.runningServer = false;
-        this.builder       = this.fractal.web.builder();
-        this.logger        = this.fractal.cli.console;
-        this.server        = this.fractal.web.server({
-            sync: true
+        this.builder = this.options.fractal.web.builder();
+        this.logger = this.options.fractal.cli.console;
+        this.server = this.options.fractal.web.server({
+            sync: true,
         });
     }
 
@@ -25,10 +23,10 @@ class FractalPlugin {
                 return;
             }
 
-            const assets    = stats.toJson().assets;
-            const jsAssets  = [];
+            const assets = stats.toJson().assets;
+            const jsAssets = [];
             const cssAssets = [];
-            let svgPath     = '';
+
             assets.forEach((asset) => {
                 if (path.extname(asset.name) === '.js' && asset.name.startsWith('js/')) {
                     jsAssets.push(asset);
@@ -39,14 +37,10 @@ class FractalPlugin {
             jsAssets.sort(this.sortAssets.bind(this));
             cssAssets.sort(this.sortAssets.bind(this));
 
-            this.fractal.set('jsAssets', jsAssets.map((asset) => {
-                return asset.name;
-            }));
-            this.fractal.set('cssAssets', cssAssets.map((asset) => {
-                return asset.name;
-            }));
+            this.options.fractal.set('jsAssets', jsAssets.map((asset) => asset.name));
+            this.options.fractal.set('cssAssets', cssAssets.map((asset) => asset.name));
 
-            if (this.isProduction) {
+            if (this.options.isProduction) {
                 this.builder.on('start', () => {
                     this.logger.success('Fractal build started...');
                 });
@@ -59,13 +53,11 @@ class FractalPlugin {
                     const e = data.errorCount;
 
                     this.logger.persist();
-                    this.logger[e ? 'warn' : 'success'](`Build finished with ${e === 0 ? 'no' : e} error${e == 1 ? '' : 's'}.`).unslog();
+                    this.logger[e ? 'warn' : 'success'](`Build finished with ${e === 0 ? 'no' : e} error${e === 1 ? '' : 's'}.`).unslog();
                 });
             } else {
                 if (!this.runningServer) {
-                    this.server.on('error', (err) => {
-                        return this.logger.error(err.message);
-                    });
+                    this.server.on('error', (err) => this.logger.error(err.message));
 
                     this.server.start().then(() => {
                         this.runningServer = true;
@@ -77,7 +69,7 @@ class FractalPlugin {
     }
 
     sortAssets(a, b) {
-        return this.chunksOrder.indexOf(a.chunkNames.length ? a.chunkNames[0] : '') - this.chunksOrder.indexOf(b.chunkNames.length ? b.chunkNames[0] : '');
+        return this.options.chunksOrder.indexOf(a.chunkNames.length ? a.chunkNames[0] : '') - this.options.chunksOrder.indexOf(b.chunkNames.length ? b.chunkNames[0] : '');
     }
 
 }

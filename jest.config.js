@@ -14,17 +14,17 @@ if (process.env.CI) {
 }
 
 module.exports = {
-    reporters: reporters,
+    moduleNameMapper: {
+        ...paths,
+    },
+    reporters,
+    setupFilesAfterEnv: ['jest-expect-message'],
     testPathIgnorePatterns: [
         '/node_modules/',
         '/vendor/',
         '/app/',
     ],
     transform: {
-        "^.+\\.tsx?$": "ts-jest"
+        '^.+\\.tsx?$': 'ts-jest',
     },
-    moduleNameMapper: {
-        ...paths,
-    },
-    setupFilesAfterEnv: ['jest-expect-message'],
 };

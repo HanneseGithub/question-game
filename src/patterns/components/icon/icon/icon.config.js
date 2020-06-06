@@ -3,8 +3,8 @@ const path = require('path');
 
 const variants = [
     {
-        name: 'default',
         hidden: true,
+        name: 'default',
     },
 ];
 
@@ -14,10 +14,10 @@ for (const file of files) {
     const iconName = path.basename(file, '.svg');
 
     variants.push({
-        name: iconName,
         context: {
             name: iconName,
         },
+        name: iconName,
     });
 }
 
@@ -26,5 +26,5 @@ module.exports = {
     meta: {
         cache: true,
     },
-    variants: variants,
+    variants,
 };

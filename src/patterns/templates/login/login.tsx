@@ -7,12 +7,10 @@ export interface ITemplateLoginProps {
     button: IButtonProps;
 }
 
-const TemplateLogin: React.FC<ITemplateLoginProps> = (props: ITemplateLoginProps) => {
-    return (
-        <Container>
-            <Button {...props.button} />
-        </Container>
-    );
-};
+const TemplateLogin: React.FC<ITemplateLoginProps> = (props: ITemplateLoginProps) => (
+    <Container>
+        <Button {...props.button} />
+    </Container>
+);
 
 export default TemplateLogin;

@@ -5,12 +5,14 @@ interface Window {
     componentSettings: IComponentSettings;
 }
 
+interface IContext {
+    [key: string]: React.ReactNode;
+}
+
 interface IComponentSettings {
     className: string;
-    context: {
-        [key: string]: React.ReactNode;
-    };
+    context: IContext;
     parseJsxFrom?: string[];
 }
 
-declare var window: Window;
+declare let window: Window;

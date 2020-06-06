@@ -36,16 +36,12 @@ export const NavigationItem: React.FC<INavigationItemProps> = (props: INavigatio
 const Navigation: React.FC<INavigationProps> = (props: INavigationProps) => {
     const className: string = classNames('navigation', props.className);
 
-    const renderItems: () => JSX.Element[] = (): JSX.Element[] => {
-        return props.items.map((item: INavigationItemProps, index: number) => {
-            return (
-                <NavigationItem
-                    key={index}
-                    {...item}
-                />
-            );
-        });
-    };
+    const renderItems: () => JSX.Element[] = (): JSX.Element[] => props.items.map((item: INavigationItemProps, index: number) => (
+        <NavigationItem
+            key={index}
+            {...item}
+        />
+    ));
 
     return (
         <nav className={className}>

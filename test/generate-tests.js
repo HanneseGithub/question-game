@@ -1,5 +1,5 @@
 const path = require('path');
-const fs   = require('fs');
+const fs = require('fs');
 const fractal = require('../fractal.config.js');
 const tsconfig = require('../tsconfig.json');
 const TsConfigGenerator = require('../packages/tsconfig-generator-plugin');
@@ -13,6 +13,7 @@ TsConfigGenerator.generate(tsconfig, fractal, './tsconfig.paths.json', () => {
 
         components.flattenDeep().each((item) => {
             const handle = item.handle.replace('--default', '');
+
             arr.push(`@${handle}`);
 
             const basePath = path.relative(__dirname, path.resolve(path.parse(item.viewPath).dir, path.parse(item.viewPath).name)).replace(/\\/g, '/').replace('../../', '').replace(baseUrl, '');
@@ -29,9 +30,9 @@ TsConfigGenerator.generate(tsconfig, fractal, './tsconfig.paths.json', () => {
             paths: map,
         };
 
-        fs.mkdir('./temp', { recursive: true }, (err) => {
-            if (err) {
-                return console.error(err);
+        fs.mkdir('./temp', { recursive: true }, (e) => {
+            if (e) {
+                return console.error(e);
             }
 
             fs.writeFile('./temp/components.json', JSON.stringify(componentsObject, null, 2) + '\n', (err) => {

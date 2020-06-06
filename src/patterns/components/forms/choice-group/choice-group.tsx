@@ -82,22 +82,6 @@ const ChoiceGroup: React.FC<IChoiceGroupProps> = (props: IChoiceGroupProps) => {
         }
     };
 
-    const renderError: () => JSX.Element = (): JSX.Element => {
-        return (
-            <div className="choice-group__error">
-                {props.error}
-            </div>
-        );
-    };
-
-    const renderDescription: () => JSX.Element = (): JSX.Element => {
-        return (
-            <div className="choice-group__description">
-                {props.description}
-            </div>
-        );
-    };
-
     const renderChoices: () => JSX.Element[] = (): JSX.Element[] => {
         const ChoiceType: typeof Check | typeof Radio = props.type === 'check' ? Check : Radio;
 
@@ -122,8 +106,16 @@ const ChoiceGroup: React.FC<IChoiceGroupProps> = (props: IChoiceGroupProps) => {
             <div className="choice-group__inner">
                 {renderChoices()}
             </div>
-            {props.error && renderError()}
-            {props.description && renderDescription()}
+            {props.error && (
+                <div className="choice-group__error">
+                    {props.error}
+                </div>
+            )}
+            {props.description && (
+                <div className="choice-group__description">
+                    {props.description}
+                </div>
+            )}
         </fieldset>
     );
 };

@@ -21,6 +21,7 @@ export interface IModalProps {
 
 export const ModalInner: React.FC<IModalProps> = (props: IModalProps) => {
     const element: React.MutableRefObject<null | HTMLDivElement> = useRef(null);
+    const { isOpen, modifier, className, children, id } = props;
 
     const handleBackdropClick: (event: React.MouseEvent<HTMLDivElement>) => void = (event: React.MouseEvent<HTMLDivElement>): void => {
         if (event.target === event.currentTarget && props.onClose) {
@@ -44,34 +45,34 @@ export const ModalInner: React.FC<IModalProps> = (props: IModalProps) => {
     };
 
     const renderModal: () => JSX.Element = (): JSX.Element => {
-        const className: string = classNames(
+        const classes: string = classNames(
             'modal',
-            props.modifier,
-            props.className,
+            modifier,
+            className,
         );
 
         return (
-            <div className={className}>
+            <div className={classes}>
                 <button className="modal__close" onClick={handleCloseClick}>
                     <Icon name="close" />
                 </button>
-                {props.children}
+                {children}
             </div>
         );
     };
 
-    const renderContainer: () => JSX.Element = (): JSX.Element => {
-        const className: string = classNames(
+    const renderContainer = (): JSX.Element => {
+        const classes: string = classNames(
             'modal-container',
             {
-                'is-open': props.isOpen,
+                'is-open': isOpen,
             },
         );
 
         return (
             <div
-                className={className}
-                id={props.id}
+                className={classes}
+                id={id}
                 onKeyUp={handleKeyUp}
                 tabIndex={-1}
                 ref={element}
@@ -94,7 +95,7 @@ export const ModalInner: React.FC<IModalProps> = (props: IModalProps) => {
             Helpers.enableScroll();
         }
 
-        return () => {
+        return (): void => {
             if (props.isOpen) {
                 Helpers.enableScroll();
             }
@@ -110,7 +111,7 @@ const Modal: React.FC<IModalProps> = (props: IModalProps) => {
     useEffect(() => {
         setIsMounted(true);
 
-        return () => {
+        return (): void => {
             setIsMounted(false);
         };
     }, []);

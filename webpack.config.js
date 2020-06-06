@@ -1,16 +1,16 @@
 const path = require('path');
 
-const webpack               = require('webpack');
-const StyleLintPlugin       = require('stylelint-webpack-plugin');
-const MiniCssExtractPlugin  = require('mini-css-extract-plugin');
-const SvgStorePlugin        = require('external-svg-sprite-loader');
+const webpack = require('webpack');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const SvgStorePlugin = require('external-svg-sprite-loader');
 const FractalModuleResolver = require('@gotoandplay/fractal-module-resolver-webpack-plugin');
-const HtmlWebpackPlugin     = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const fractal           = require('./fractal.config.js');
-const tsconfig          = require('./tsconfig.json');
-const pkg               = require('./package.json');
-const FractalPlugin     = require('./packages/fractal-webpack-plugin');
+const fractal = require('./fractal.config.js');
+const tsconfig = require('./tsconfig.json');
+const pkg = require('./package.json');
+const FractalPlugin = require('./packages/fractal-webpack-plugin');
 const TSConfigGenerator = require('./packages/tsconfig-generator-plugin');
 
 /**
@@ -18,18 +18,20 @@ const TSConfigGenerator = require('./packages/tsconfig-generator-plugin');
  */
 class gotoAndReact {
     constructor(env) {
-        this.options = Object.assign({}, {
-            production: false,
-            styleguide: false,
+        this.options = {
             app: false,
             path: '/',
-        }, env);
+            production: false,
+            styleguide: false,
+            ...env,
+        };
 
         return this.getCompilers();
     }
 
     getCompilers() {
         const compilers = [];
+
         if (this.options.styleguide) {
             compilers.push(this.getConfig('styleguide'));
         }
@@ -49,29 +51,29 @@ class gotoAndReact {
             new SvgStorePlugin(),
             new StyleLintPlugin(),
             new webpack.EnvironmentPlugin({
-                webpack: true
-            })
+                webpack: true,
+            }),
         ];
 
         switch (name) {
             case 'app':
                 plugins.push(new HtmlWebpackPlugin({
-                    title: pkg.title,
-                    template: './src/app/index.html',
                     hash: this.options.production,
+                    template: './src/app/index.html',
+                    title: pkg.title,
                 }));
                 break;
 
             case 'styleguide':
                 plugins.push(new TSConfigGenerator({
-                    fractal: fractal,
-                    tsConfig: tsconfig,
                     fileName: path.resolve(__dirname, path.join('tsconfig.paths.json')),
+                    fractal,
+                    tsConfig: tsconfig,
                 }));
                 plugins.push(new FractalPlugin({
-                    fractal: fractal,
-                    isProduction: this.options.production,
                     chunksOrder: ['vendor', 'global'],
+                    fractal,
+                    isProduction: this.options.production,
                 }));
                 break;
         }
@@ -81,20 +83,21 @@ class gotoAndReact {
 
     getDevServer(name) {
         let server = {};
+
         if (!this.options.production) {
             switch (name) {
                 case 'app':
                     server = {
-                        port: 9000,
-                        historyApiFallback: true,
                         contentBase: './src/app/',
-                        open: true,
-                        https: true,
                         headers: {
-                            'Access-Control-Allow-Origin': '*',
+                            'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
                             'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-                            'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
+                            'Access-Control-Allow-Origin': '*',
                         },
+                        historyApiFallback: true,
+                        https: true,
+                        open: true,
+                        port: 9000,
                     };
                     break;
             }
@@ -105,16 +108,17 @@ class gotoAndReact {
 
     getEntry(name) {
         let entry = {};
+
         switch (name) {
             case 'styleguide':
                 entry = {
-                    global: ['./src/patterns/index.fractal.ts']
+                    global: ['./src/patterns/index.fractal.ts'],
                 };
                 break;
 
             case 'app':
                 entry = {
-                    app: ['./src/app/index.tsx']
+                    app: ['./src/app/index.tsx'],
                 };
                 break;
         }
@@ -124,14 +128,15 @@ class gotoAndReact {
 
     getOutput(name) {
         let output = {};
+
         switch (name) {
             case 'styleguide':
                 output = {
                     filename: 'js/[name].js',
+                    library: 'components',
+                    libraryTarget: 'var',
                     path: path.resolve(__dirname, 'temp/public/inc'),
                     publicPath: this.options.production ? '../../inc/' : '/inc/',
-                    library: 'components',
-                    libraryTarget: 'var'
                 };
                 break;
 
@@ -149,63 +154,35 @@ class gotoAndReact {
 
     getConfig(name) {
         return {
-            watch: !this.options.production,
-            mode: this.options.production ? 'production' : 'development',
-            devtool: 'source-map',
             devServer: this.getDevServer(name),
+            devtool: 'source-map',
             entry: this.getEntry(name),
-            output: this.getOutput(name),
-            plugins: this.getPlugins(name),
-            resolve: {
-                plugins: [
-                    new FractalModuleResolver({
-                        fractal: fractal,
-                    }),
-                ],
-                extensions: ['.tsx', '.jsx', '.ts', '.js'],
-            },
-            optimization: {
-                splitChunks: {
-                    automaticNameDelimiter: '.',
-                    cacheGroups: {
-                        vendor: {
-                            test: /[\\/]node_modules[\\/]/,
-                            priority: -10,
-                            chunks: 'all',
-                        },
-                        default: {
-                            minChunks: 2,
-                            priority: -20,
-                            reuseExistingChunk: true
-                        }
-                    }
-                }
-            },
+            mode: this.options.production ? 'production' : 'development',
             module: {
                 rules: [
                     {
-                        test: /\.(ts|tsx)$/,
                         enforce: 'pre',
-                        loader: 'tslint-loader'
+                        loader: 'eslint-loader',
+                        test: /\.tsx?$/,
                     },
                     {
+                        exclude: /node_modules/,
                         test: /\.tsx?$/,
                         use: 'ts-loader',
-                        exclude: /node_modules/
                     },
                     {
                         test: require.resolve('react'),
                         use: [{
                             loader: 'expose-loader',
-                            options: 'React'
-                        }]
+                            options: 'React',
+                        }],
                     },
                     {
                         test: require.resolve('react-dom'),
                         use: [{
                             loader: 'expose-loader',
-                            options: 'ReactDOM'
-                        }]
+                            options: 'ReactDOM',
+                        }],
                     },
                     {
                         test: /\.(css|scss)$/,
@@ -216,95 +193,121 @@ class gotoAndReact {
                             {
                                 loader: 'css-loader',
                                 options: {
-                                    sourceMap: true
-                                }
+                                    sourceMap: true,
+                                },
                             },
                             {
                                 loader: 'postcss-loader',
                                 options: {
-                                    sourceMap: true,
                                     plugins: [
-                                        require('autoprefixer')()
-                                    ]
-                                }
+                                        require('autoprefixer')(),
+                                    ],
+                                    sourceMap: true,
+                                },
                             },
                             {
                                 loader: 'resolve-url-loader',
                                 options: {
-                                    sourceMap: true
-                                }
+                                    sourceMap: true,
+                                },
                             },
                             {
                                 loader: 'sass-loader',
                                 options: {
-                                    sourceMap: true
-                                }
+                                    sourceMap: true,
+                                },
                             },
                             {
                                 loader: 'sass-resources-loader',
                                 options: {
                                     resources: [
                                         './src/patterns/core/variables.scss',
-                                        './src/patterns/core/mixins.scss'
-                                    ]
-                                }
-                            }
+                                        './src/patterns/core/mixins.scss',
+                                    ],
+                                },
+                            },
                         ],
                     },
                     {
-                        test: /\.(svg)$/,
                         include: path.resolve(__dirname, 'src/patterns/components/icon/icon/import/svg/'),
-                        use: [{
-                            loader: SvgStorePlugin.loader,
-                            options: {
-                                name: 'svg/icons.svg',
-                                iconName: '[name]'
-                            }
-                        },
+                        test: /\.(svg)$/,
+                        use: [
+                            {
+                                loader: SvgStorePlugin.loader,
+                                options: {
+                                    iconName: '[name]',
+                                    name: 'svg/icons.svg',
+                                },
+                            },
                             {
                                 loader: 'svgo-loader',
                                 options: {
                                     plugins: [
                                         {
-                                            removeViewBox: false
-                                        }
-                                    ]
-                                }
-                            }]
+                                            removeViewBox: false,
+                                        },
+                                    ],
+                                },
+                            },
+                        ],
+
                     },
                     {
                         test: /\.(woff|woff2)$/,
                         use: [{
                             loader: 'file-loader',
                             options: {
-                                name: 'fonts/[name].[ext]'
-                            }
-                        }]
+                                name: 'fonts/[name].[ext]',
+                            },
+                        }],
                     },
                     {
-                        test: /\.(png|svg|jpg|gif)$/,
                         exclude: path.resolve(__dirname, 'src/patterns/components/icon/icon/import/svg/'),
+                        test: /\.(png|svg|jpg|gif)$/,
                         use: [{
                             loader: 'file-loader',
                             options: {
-                                name: 'img/[name].[ext]'
-                            }
-                        }]
+                                name: 'img/[name].[ext]',
+                            },
+                        }],
                     },
-                ]
+                ],
+            },
+            optimization: {
+                splitChunks: {
+                    automaticNameDelimiter: '.',
+                    cacheGroups: {
+                        default: {
+                            minChunks: 2,
+                            priority: -20,
+                            reuseExistingChunk: true,
+                        },
+                        vendor: {
+                            chunks: 'all',
+                            priority: -10,
+                            test: /[\\/]node_modules[\\/]/,
+                        },
+                    },
+                },
+            },
+            output: this.getOutput(name),
+            plugins: this.getPlugins(name),
+            resolve: {
+                extensions: ['.tsx', '.jsx', '.ts', '.js'],
+                plugins: [
+                    new FractalModuleResolver({
+                        fractal,
+                    }),
+                ],
             },
             stats: {
-                modules: false,
                 children: false,
+                modules: false,
             },
+            watch: !this.options.production,
         };
     }
 
 }
 
-/**
- * Export config
- */
-module.exports = (env) => {
-    return new gotoAndReact(env);
-};
+module.exports = (env) => new gotoAndReact(env);

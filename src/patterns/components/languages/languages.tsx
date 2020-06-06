@@ -47,16 +47,12 @@ const Languages: React.FC<ILanguagesProps> = (props: ILanguagesProps) => {
         props.className,
     );
 
-    const renderItems: () => JSX.Element[] = (): JSX.Element[] => {
-        return props.items.map((item: ILanguagesItemProps, index: number) => {
-            return (
-                <LanguagesItem
-                    key={index}
-                    {...item}
-                />
-            );
-        });
-    };
+    const renderItems: () => JSX.Element[] = (): JSX.Element[] => props.items.map((item: ILanguagesItemProps, index: number) => (
+        <LanguagesItem
+            key={index}
+            {...item}
+        />
+    ));
 
     return (
         <nav className={className}>

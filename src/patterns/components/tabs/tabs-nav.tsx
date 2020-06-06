@@ -17,9 +17,9 @@ export interface ITabsNavItemProps extends ITabsNavItem {
 export const TabsNavItem: React.FC<ITabsNavItemProps> = (props: ITabsNavItemProps) => {
     const className: string = classNames(
         'tabs__nav-item',
-         {
-             'is-current': props.current,
-         },
+        {
+            'is-current': props.current,
+        },
     );
 
     return (
