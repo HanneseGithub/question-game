@@ -5,15 +5,11 @@ import classNames from 'classnames';
 import { Check, ICheckProps } from '../check';
 import { Radio, IRadioProps } from '../radio';
 
-export type TChoiceGroupValue = string | string[];
+export type TCheckGroupValue = string[] | null;
+export type TRadioGroupValue = string | null;
 
-export interface IChoiceGroupProps {
-    type: 'radio' | 'check';
-    choices: (IRadioProps | ICheckProps)[];
+export interface IChoiceGroupBase {
     label: string;
-    defaultValue?: TChoiceGroupValue;
-    value?: TChoiceGroupValue;
-    onChange?: (value: TChoiceGroupValue) => void;
     error?: string;
     description?: string;
     invalid?: boolean;
@@ -21,18 +17,27 @@ export interface IChoiceGroupProps {
     className?: string;
 }
 
-const getInitialValue: (type: 'check' | 'radio', value?: TChoiceGroupValue) => TChoiceGroupValue = (type: 'check' | 'radio', value?: TChoiceGroupValue): TChoiceGroupValue => {
-    if (value) {
-        return value;
-    } else if (type === 'check') {
-        return [];
-    } else {
-        return '';
-    }
-};
+export interface ICheckGroupProps extends IChoiceGroupBase {
+    type: 'check';
+    choices: ICheckProps[];
+    defaultValue?: TCheckGroupValue;
+    value?: TCheckGroupValue;
+    onChange?: (value: TCheckGroupValue) => void;
+}
+
+export interface IRadioGroupProps extends IChoiceGroupBase {
+    type: 'radio';
+    choices: IRadioProps[];
+    defaultValue?: TRadioGroupValue;
+    value?: TRadioGroupValue;
+    onChange?: (value: TRadioGroupValue) => void;
+}
+
+export type IChoiceGroupProps = IRadioGroupProps | ICheckGroupProps;
 
 const ChoiceGroup: React.FC<IChoiceGroupProps> = (props: IChoiceGroupProps) => {
-    const [value, setValue] = useState(getInitialValue(props.type, props.defaultValue));
+    const [value, setValue] = useState(getValue(props.defaultValue));
+    const isControlled = typeof props.value !== 'undefined';
     const className: string = classNames(
         'choice-group',
         {
@@ -41,66 +46,43 @@ const ChoiceGroup: React.FC<IChoiceGroupProps> = (props: IChoiceGroupProps) => {
         props.modifier,
         props.className,
     );
-    const currentValue: TChoiceGroupValue = typeof props.value !== 'undefined' ? props.value : value;
+    const currentValue = getValue(isControlled ? props.value : value);
 
-    const isChoiceChecked: (value: string) => boolean = (itemValue: string): boolean => {
-        if (props.type === 'check') {
-            return currentValue.indexOf(itemValue) !== -1;
-        } else {
-            return currentValue === itemValue;
-        }
-    };
+    const handleChange = (itemValue: string): void => {
+        const nextValue = getNextValue(currentValue, itemValue, props.type === 'check');
 
-    const getNextValue: (itemValue: string, checked: boolean) => TChoiceGroupValue = (itemValue: string, checked: boolean): TChoiceGroupValue => {
-        if (Array.isArray(currentValue)) {
-            if (checked) {
-                return [
-                    ...currentValue,
-                    itemValue,
-                ];
-            }
-
-            return [...currentValue].filter((item: string) => item !== itemValue);
-        }
-
-        return itemValue;
-    };
-
-    const handleChange: (value: string, checked: boolean) => void = (itemValue: string, checked: boolean): void => {
-        const nextValue: TChoiceGroupValue = getNextValue(itemValue, checked);
-
-        if (typeof props.value === 'undefined') {
+        if (!isControlled) {
             setValue(nextValue);
         }
 
         if (props.onChange) {
-            props.onChange(nextValue);
+            if (props.type === 'check') {
+                props.onChange(nextValue);
+            } else {
+                props.onChange(nextValue.length ? nextValue[0] : null);
+            }
         }
     };
 
-    const renderChoices: () => JSX.Element[] = (): JSX.Element[] => {
-        const ChoiceType: typeof Check | typeof Radio = props.type === 'check' ? Check : Radio;
-
-        return props.choices.map((item: IRadioProps | ICheckProps) => {
-            const handleChangeWrapper: (checked: boolean) => void = (checked: boolean) => handleChange(item.value, checked);
-
-            return (
-                <ChoiceType
-                    {...item}
-                    key={item.id}
-                    checked={isChoiceChecked(item.value)}
-                    onChange={handleChangeWrapper}
-                    className="choice-group__item"
-                />
-            );
-        });
-    };
+    const ChoiceType = props.type === 'check' ? Check : Radio;
 
     return (
         <fieldset className={className}>
             <legend className="choice-group__label">{props.label}</legend>
             <div className="choice-group__inner">
-                {renderChoices()}
+                {props.choices.map((item: IRadioProps | ICheckProps) => {
+                    const handleChangeWrapper = (): void => handleChange(item.value);
+
+                    return (
+                        <ChoiceType
+                            {...item}
+                            key={item.id}
+                            checked={currentValue.includes(item.value)}
+                            onChange={handleChangeWrapper}
+                            className="choice-group__item"
+                        />
+                    );
+                })}
             </div>
             {props.error && (
                 <div className="choice-group__error">
@@ -117,3 +99,23 @@ const ChoiceGroup: React.FC<IChoiceGroupProps> = (props: IChoiceGroupProps) => {
 };
 
 export default ChoiceGroup;
+
+const getValue = (value?: TRadioGroupValue | TCheckGroupValue): string[] => {
+    if (!value) {
+        return [];
+    }
+    if (typeof value === 'string') {
+        return [value];
+    }
+
+    return value;
+};
+
+const getNextValue = (currentValue: string[], itemValue: string, multiple: boolean = false): string[] => {
+
+    if (multiple) {
+        return currentValue.includes(itemValue) ? currentValue.filter((i) => i !== itemValue) : [...currentValue, itemValue];
+    }
+
+    return currentValue.includes(itemValue) ? currentValue.filter((i) => i !== itemValue) : [itemValue];
+};
