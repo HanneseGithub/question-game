@@ -155,7 +155,7 @@ class gotoAndReact {
     getConfig(name) {
         return {
             devServer: this.getDevServer(name),
-            devtool: 'source-map',
+            devtool: this.options.production ? 'source-map' : 'cheap-module-source-map',
             entry: this.getEntry(name),
             mode: this.options.production ? 'production' : 'development',
             module: {
