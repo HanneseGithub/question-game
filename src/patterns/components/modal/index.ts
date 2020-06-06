@@ -1,4 +1,8 @@
+if (process.env.webpack) {
+    require('./modal.scss');
+}
+
 export {
-    default as Modal,
+    Modal,
     IModalProps,
-} from './modal';
+} from './src/modal';
