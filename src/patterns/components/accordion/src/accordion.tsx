@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 
 import classNames from 'classnames';
 
-import {
-    AccordionContext,
-    TAccordionSingleValue,
-    TAccordionMultipleValue,
-} from './accordion-context';
+import { AccordionContext } from './accordion-context';
+
+export type TAccordionSingleValue = string | null;
+export type TAccordionMultipleValue = string[] | null;
 
 export interface IAccordionBase {
     children: React.ReactNode;

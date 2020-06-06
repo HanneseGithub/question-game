@@ -1,8 +1,5 @@
 import React from 'react';
 
-export type TAccordionSingleValue = string | null;
-export type TAccordionMultipleValue = string[] | null;
-
 export interface IAccordionContext {
     value: string[];
     toggle: (id: string) => void;

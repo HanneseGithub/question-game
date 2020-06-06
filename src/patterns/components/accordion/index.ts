@@ -1,6 +1,10 @@
 export {
     Accordion,
     IAccordionProps,
+    IAccordionSingle,
+    IAccordionMultiple,
+    TAccordionSingleValue,
+    TAccordionMultipleValue,
 } from './src/accordion';
 export {
     AccordionItem,
@@ -9,6 +13,4 @@ export {
 export {
     AccordionContext,
     IAccordionContext,
-    TAccordionSingleValue,
-    TAccordionMultipleValue,
 } from './src/accordion-context';
