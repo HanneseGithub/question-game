@@ -5,10 +5,6 @@ import { Languages, ILanguagesProps } from '../../components/languages';
 import { Logo, ILogoProps } from '../../components/logo';
 import { Navigation, INavigationProps } from '../../components/navigation';
 
-if (process.env.webpack) {
-    require('./header.scss');
-}
-
 export interface IHeaderProps {
     logo: ILogoProps;
     navigation: INavigationProps;

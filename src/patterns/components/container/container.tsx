@@ -2,10 +2,6 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-if (process.env.webpack) {
-    require('./container.scss');
-}
-
 export interface IContainerProps {
     children: React.ReactNode;
     className?: string;

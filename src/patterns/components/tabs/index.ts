@@ -1,7 +1,3 @@
-if (process.env.webpack) {
-    require('./tabs.scss');
-}
-
 export {
     Tabs,
     ITabsProps,

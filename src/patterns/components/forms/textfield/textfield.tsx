@@ -2,10 +2,6 @@ import React, { useState } from 'react';
 
 import classNames from 'classnames';
 
-if (process.env.webpack) {
-    require('./textfield.scss');
-}
-
 export interface ITextFieldProps {
     id: string;
     label: string;

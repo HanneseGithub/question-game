@@ -4,10 +4,6 @@ import classNames from 'classnames';
 
 import { IconContext } from '../icon-provider/icon-context';
 
-if (process.env.webpack) {
-    require('./icon.scss');
-}
-
 export interface IIconProps {
     name: string;
     modifier?: string;

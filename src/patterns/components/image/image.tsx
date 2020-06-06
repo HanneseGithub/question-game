@@ -2,13 +2,6 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-if (process.env.webpack) {
-    require('lazysizes');
-    require('picturefill');
-
-    require('./image.scss');
-}
-
 export interface IImageSource {
     srcset: string;
     media: string;

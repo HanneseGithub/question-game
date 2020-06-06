@@ -4,10 +4,6 @@ import classNames from 'classnames';
 
 import { Icon } from '../../icon/icon';
 
-if (process.env.webpack) {
-    require('./select.scss');
-}
-
 export interface ISelectOption {
     label: string;
     value: string;

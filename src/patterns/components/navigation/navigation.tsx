@@ -2,10 +2,6 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-if (process.env.webpack) {
-    require('./navigation.scss');
-}
-
 export interface INavigationItemProps {
     url: string;
     label: string;

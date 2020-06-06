@@ -4,10 +4,6 @@ import classNames from 'classnames';
 
 import { Icon } from '../../icon/icon';
 
-if (process.env.webpack) {
-    require('./check.scss');
-}
-
 export interface ICheckProps {
     label: string;
     id: string;

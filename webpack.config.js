@@ -105,12 +105,14 @@ class gotoAndReact {
             case 'styleguide':
                 entry = {
                     global: ['./src/patterns/index.fractal.ts'],
+                    styles: ['./src/patterns/styles.fractal.scss'],
                 };
                 break;
 
             case 'app':
                 entry = {
                     app: ['./src/app/index.tsx'],
+                    styles: ['./src/patterns/styles.scss'],
                 };
                 break;
         }
@@ -207,15 +209,6 @@ class gotoAndReact {
                                 loader: 'sass-loader',
                                 options: {
                                     sourceMap: true,
-                                },
-                            },
-                            {
-                                loader: 'sass-resources-loader',
-                                options: {
-                                    resources: [
-                                        './src/patterns/core/variables.scss',
-                                        './src/patterns/core/mixins.scss',
-                                    ],
                                 },
                             },
                         ],

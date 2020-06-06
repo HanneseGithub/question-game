@@ -2,10 +2,6 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-if (process.env.webpack) {
-    require('./button.scss');
-}
-
 export interface IButtonProps {
     text: string;
     url?: string;

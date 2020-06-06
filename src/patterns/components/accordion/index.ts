@@ -1,7 +1,3 @@
-if (process.env.webpack) {
-    require('./accordion.scss');
-}
-
 export {
     Accordion,
     IAccordionProps,

@@ -2,10 +2,6 @@ import React, { useState } from 'react';
 
 import classNames from 'classnames';
 
-if (process.env.webpack) {
-    require('./radio.scss');
-}
-
 export interface IRadioProps {
     label: string;
     id: string;

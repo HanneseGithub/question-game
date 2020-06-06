@@ -1,7 +1,3 @@
-if (process.env.webpack) {
-    require('./helpers.scss');
-}
-
 export const isIE = (): boolean | number => {
     const ua: string = window.navigator.userAgent;
     const msie: number = ua.indexOf('MSIE ');

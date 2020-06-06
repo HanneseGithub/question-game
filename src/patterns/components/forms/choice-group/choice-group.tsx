@@ -5,10 +5,6 @@ import classNames from 'classnames';
 import { Check, ICheckProps } from '../check';
 import { Radio, IRadioProps } from '../radio';
 
-if (process.env.webpack) {
-    require('./choice-group.scss');
-}
-
 export type TChoiceGroupValue = string | string[];
 
 export interface IChoiceGroupProps {

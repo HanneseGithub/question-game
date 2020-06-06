@@ -1,9 +1,5 @@
 import React from 'react';
 
-if (process.env.webpack) {
-    require('./main.scss');
-}
-
 export interface IMainProps {
     children: React.ReactNode;
 }

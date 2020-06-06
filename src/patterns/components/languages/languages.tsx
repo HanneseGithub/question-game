@@ -2,10 +2,6 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-if (process.env.webpack) {
-    require('./languages.scss');
-}
-
 export interface ILanguagesItemProps {
     url: string;
     label: string;
