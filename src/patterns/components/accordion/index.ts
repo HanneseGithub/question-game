@@ -1,4 +1,17 @@
+if (process.env.webpack) {
+    require('./accordion.scss');
+}
+
 export {
-    default as Accordion,
+    Accordion,
+    IAccordionProps,
+} from './src/accordion';
+export {
     AccordionItem,
-} from './accordion';
+    IAccordionItemProps,
+} from './src/accordion-item';
+export {
+    AccordionContext,
+    IAccordionContext,
+    TAccordionValue,
+} from './src/accordion-context';

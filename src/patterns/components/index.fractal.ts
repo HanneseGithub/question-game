@@ -1,4 +1,4 @@
-export { default as AccordionExample } from './accordion/accordion--example';
+export { default as AccordionExample } from './accordion/accordion';
 
 export { default as GridExample } from './grid/grid--example';
 
