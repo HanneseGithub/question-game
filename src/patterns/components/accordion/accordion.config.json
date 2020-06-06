@@ -1,1 +1,10 @@
-{}
+{
+  "variants": [
+    {
+      "name": "multiple",
+      "context": {
+        "multiple": true
+      }
+    }
+  ]
+}

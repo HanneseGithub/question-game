@@ -11,18 +11,18 @@ export interface IAccordionItemProps {
 }
 
 export const AccordionItem: React.FC<IAccordionItemProps> = (props: IAccordionItemProps) => {
-    const { value, setValue } = useContext(AccordionContext);
+    const { value, toggle } = useContext(AccordionContext);
     const className: string = classNames(
         'accordion__item',
         {
-            'is-open': value === props.id,
+            'is-open': value.includes(props.id),
         },
     );
 
     const handleOnClick: (event: React.MouseEvent<HTMLAnchorElement>) => void = (event: React.MouseEvent<HTMLAnchorElement>) => {
         event.preventDefault();
 
-        setValue(props.id);
+        toggle(props.id);
     };
 
     return (

@@ -1,13 +1,14 @@
 import React from 'react';
 
-export type TAccordionValue = string | null;
+export type TAccordionSingleValue = string | null;
+export type TAccordionMultipleValue = string[] | null;
 
 export interface IAccordionContext {
-    value: TAccordionValue;
-    setValue: (value: TAccordionValue) => void;
+    value: string[];
+    toggle: (id: string) => void;
 }
 
 export const AccordionContext: React.Context<IAccordionContext> = React.createContext<IAccordionContext>({
-    setValue: () => null,
-    value: null,
+    toggle: () => null,
+    value: [],
 });

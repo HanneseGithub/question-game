@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Accordion } from './src/accordion';
+import { Accordion, IAccordionProps } from './src/accordion';
 import { AccordionItem } from './src/accordion-item';
 
-const AccordionExample: React.FC = () => (
-    <Accordion>
+const AccordionExample: React.FC<IAccordionProps> = (props: IAccordionProps) => (
+    <Accordion {...props}>
         <AccordionItem
             id="accordion-item-1"
             label="Accordion item 1"

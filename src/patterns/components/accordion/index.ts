@@ -9,5 +9,6 @@ export {
 export {
     AccordionContext,
     IAccordionContext,
-    TAccordionValue,
+    TAccordionSingleValue,
+    TAccordionMultipleValue,
 } from './src/accordion-context';
