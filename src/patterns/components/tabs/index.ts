@@ -1,6 +1,15 @@
+if (process.env.webpack) {
+    require('./tabs.scss');
+}
+
 export {
-    default as Tabs,
+    Tabs,
     ITabsProps,
+    TTabsValue,
+    ITabsContext,
+    TabsContext,
+} from './src/tabs';
+export {
     TabsItem,
     ITabsItemProps,
-} from './tabs';
+} from './src/tabs-item';

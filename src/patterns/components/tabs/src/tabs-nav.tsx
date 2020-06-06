@@ -2,10 +2,15 @@ import React, { useContext } from 'react';
 
 import classNames from 'classnames';
 
-import { ITabsContext, ITabsNavItem, TabsContext } from './tabs';
+import { TabsContext } from './tabs';
 
 export interface ITabsNavProps {
     items: ITabsNavItem[];
+}
+
+export interface ITabsNavItem {
+    id: string;
+    label: string;
 }
 
 export interface ITabsNavItemProps extends ITabsNavItem {
@@ -36,7 +41,7 @@ export const TabsNavItem: React.FC<ITabsNavItemProps> = (props: ITabsNavItemProp
 };
 
 export const TabsNav: React.FC<ITabsNavProps> = (props: ITabsNavProps) => {
-    const context: ITabsContext = useContext(TabsContext);
+    const { value, setValue } = useContext(TabsContext);
 
     return (
         <div className="tabs__nav">
@@ -45,7 +50,7 @@ export const TabsNav: React.FC<ITabsNavProps> = (props: ITabsNavProps) => {
                     const handleClick: (event: React.MouseEvent<HTMLAnchorElement>) => void = (event: React.MouseEvent<HTMLAnchorElement>) => {
                         event.preventDefault();
 
-                        context.setValue(item.id);
+                        setValue(item.id);
                     };
 
                     return (
@@ -54,7 +59,7 @@ export const TabsNav: React.FC<ITabsNavProps> = (props: ITabsNavProps) => {
                             id={item.id}
                             url={'#' + item.id}
                             label={item.label}
-                            current={context.value === item.id}
+                            current={value === item.id}
                             onClick={handleClick}
                         />
                     );

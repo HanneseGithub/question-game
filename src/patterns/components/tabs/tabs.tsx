@@ -1,86 +1,44 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 
-import classNames from 'classnames';
+import { Tabs } from './src/tabs';
+import { TabsItem } from './src/tabs-item';
+import { ITabsNavItem } from './src/tabs-nav';
 
-import { TabsNav } from './tabs-nav';
-
-if (process.env.webpack) {
-    require('./tabs.scss');
-}
-
-export type TTabsValue = string;
-
-export interface ITabsProps {
-    children: React.ReactNode;
-    items: ITabsNavItem[];
-    defaultValue?: TTabsValue;
-    value?: TTabsValue;
-    onChange?: (value: TTabsValue) => void;
-    className?: string;
-}
-
-export interface ITabsItemProps extends ITabsNavItem {
-    children: React.ReactNode;
-}
-
-export interface ITabsNavItem {
-    id: string;
-    label: string;
-}
-
-export interface ITabsContext {
-    value: TTabsValue;
-    setValue: (value: TTabsValue) => void;
-}
-
-export const TabsContext: React.Context<ITabsContext> = React.createContext<ITabsContext>({
-    setValue: () => null,
-    value: '',
-});
-
-export const TabsItem: React.FC<ITabsItemProps> = (props: ITabsItemProps) => {
-    const context: ITabsContext = useContext(TabsContext);
-    const className: string = classNames(
-        'tabs__content-item',
+const TabsExample: React.FC = () => {
+    const items: ITabsNavItem[] = [
         {
-            'is-open': context.value === props.id,
+            id: 'tabs-item-1',
+            label: 'Tab 1',
         },
-    );
+        {
+            id: 'tabs-item-2',
+            label: 'Tab 2',
+        },
+        {
+            id: 'tabs-item-3',
+            label: 'Tab 3',
+        },
+    ];
 
     return (
-        <div className={className} id={props.id}>
-            <div className="tabs__content-inner">
-                {props.children}
-            </div>
-        </div>
-    );
-};
-
-const Tabs: React.FC<ITabsProps> = (props: ITabsProps) => {
-    const className: string = classNames('tabs', props.className);
-    const [value, setValue] = useState(props.defaultValue || '');
-
-    return (
-        <div className={className}>
-            <TabsContext.Provider
-                value={{
-                    setValue: (nextValue: TTabsValue): void => {
-                        setValue(nextValue);
-
-                        if (props.onChange) {
-                            props.onChange(nextValue);
-                        }
-                    },
-                    value: typeof props.value !== 'undefined' ? props.value : value,
-                }}
+        <Tabs defaultValue={items[0].id} items={items}>
+            <TabsItem
+                {...items[0]}
             >
-                <TabsNav items={props.items} />
-                <div className="tabs__content">
-                    {props.children}
-                </div>
-            </TabsContext.Provider>
-        </div>
+                tabs item 1
+            </TabsItem>
+            <TabsItem
+                {...items[1]}
+            >
+                tabs item 2
+            </TabsItem>
+            <TabsItem
+                {...items[2]}
+            >
+                tabs item 3
+            </TabsItem>
+        </Tabs>
     );
 };
 
-export default Tabs;
+export default TabsExample;
