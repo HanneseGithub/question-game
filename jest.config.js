@@ -1,5 +1,3 @@
-const paths = require('./temp/paths.json').paths;
-
 const reporters = [
     'default',
 ];
@@ -14,9 +12,6 @@ if (process.env.CI) {
 }
 
 module.exports = {
-    moduleNameMapper: {
-        ...paths,
-    },
     reporters,
     setupFilesAfterEnv: ['jest-expect-message'],
     testPathIgnorePatterns: [
