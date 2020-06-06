@@ -27,6 +27,7 @@ export { default as Grid, GridColumn } from '@grid';
 export { default as Helpers } from '@helpers';
 
 export { default as Icon } from '@icon';
+export { default as IconProvider } from '@icon-provider';
 export { default as Image } from '@image';
 
 export { default as Languages } from '@languages';

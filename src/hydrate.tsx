@@ -3,19 +3,25 @@ import ReactDOM from 'react-dom';
 
 import JsxParser from 'react-jsx-parser';
 
+import IconProvider from './patterns/components/icon/icon-provider/icon-provider';
+import icons from './patterns/components/icon/icon/icons';
+
 interface IComponentContext {
     // tslint:disable-next-line no-any
     [key: string]: any;
 }
 
+interface IIconObject {
+    symbol: string;
+}
+
 const wrapChildren: (children: string) => JSX.Element = (children: string) => {
-    return React.createElement(
-        JsxParser,
-        {
-            jsx: children,
-            components: window.components,
-            renderInWrapper: false,
-        },
+    return (
+        <JsxParser
+            jsx={children}
+            components={window.components}
+            renderInWrapper={false}
+        />
     );
 };
 
@@ -52,10 +58,23 @@ const getContext: (context: IComponentContext) => IComponentContext = (context: 
 };
 
 window.setTimeout(() => {
+    const Component: string = window.components[window.componentSettings.className];
+    const props: IComponentContext = getContext(window.componentSettings.context);
+    const getIconPath: (name: string) => string = (name: string) => {
+        const iconObject: IIconObject = icons[name] as unknown as IIconObject;
+
+        if (iconObject) {
+            return iconObject.symbol;
+        }
+
+        return icons + '#' + name;
+    };
+
     ReactDOM.hydrate(
-        React.createElement(
-            window.components[window.componentSettings.className],
-            getContext(window.componentSettings.context),
+        (
+            <IconProvider getPath={getIconPath}>
+                <Component {...props} />
+            </IconProvider>
         ),
         document.getElementById('root'),
     );

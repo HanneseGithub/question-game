@@ -21,7 +21,7 @@
   "devDependencies": {
     "@frctl/fractal": "^1.3.0",
     "@gotoandplay/fractal-module-resolver-webpack-plugin": "^0.2.0",
-    "@gotoandplay/fractal-tsx-adapter": "^0.10.1",
+    "@gotoandplay/fractal-tsx-adapter": "^0.11.0",
     "@gotoandplay/nighthawk": "^1.5.0",
     "autoprefixer": "^9.8.0",
     "css-loader": "^3.5.3",

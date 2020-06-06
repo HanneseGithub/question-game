@@ -253,7 +253,7 @@ class gotoAndReact {
                     },
                     {
                         test: /\.(svg)$/,
-                        include: path.resolve(__dirname, 'src/patterns/components/icon/import/svg/'),
+                        include: path.resolve(__dirname, 'src/patterns/components/icon/icon/import/svg/'),
                         use: [{
                             loader: SvgStorePlugin.loader,
                             options: {
@@ -283,7 +283,7 @@ class gotoAndReact {
                     },
                     {
                         test: /\.(png|svg|jpg|gif)$/,
-                        exclude: path.resolve(__dirname, 'src/patterns/components/icon/import/svg/'),
+                        exclude: path.resolve(__dirname, 'src/patterns/components/icon/icon/import/svg/'),
                         use: [{
                             loader: 'file-loader',
                             options: {

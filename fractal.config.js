@@ -1,12 +1,28 @@
 'use strict';
 
+/* To prevent error in detailed preview tabs otherwise app.publicFolder is defined on preview render */
+global.app = {
+    publicFolder: '/'
+};
+
 /**
  * Require the Fractal module
  */
 let fractal = module.exports = require('@frctl/fractal').create();
 let pkg            = require('./package.json');
 let nighthawkTheme = require('@gotoandplay/nighthawk');
-let tsxAdapter     = require('@gotoandplay/fractal-tsx-adapter');
+let tsxAdapter     = require('@gotoandplay/fractal-tsx-adapter')({
+    wrapperElements: [
+        {
+            component: '@icon-provider',
+            props: {
+                getPath: (name) => {
+                    return app.publicFolder + 'inc/svg/icons.svg#' + name;
+                },
+            },
+        },
+    ],
+});
 
 /**
  * Give your project a title.

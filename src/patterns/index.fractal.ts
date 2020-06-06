@@ -21,4 +21,4 @@ export { default as View404 } from '@v-404';
 export { default as ViewBase } from '@v-base';
 export { default as ViewLogin } from '@v-login';
 
-import './hydrate.ts';
+import '../hydrate.tsx';
