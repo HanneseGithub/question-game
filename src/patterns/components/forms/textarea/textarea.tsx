@@ -2,7 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import TextField, { ITextFieldProps } from '@textfield';
+import { TextField, ITextFieldProps } from '../textfield';
 
 if (process.env.webpack) {
     require('./textarea.scss');

@@ -5,6 +5,7 @@ module.exports = {
     extends: [
         'eslint:recommended',
         'plugin:compat/recommended',
+        'plugin:import/recommended',
         'plugin:jsdoc/recommended',
         'plugin:react/recommended',
     ],
@@ -17,6 +18,7 @@ module.exports = {
         },
         {
             extends: [
+                'plugin:import/typescript',
                 'plugin:@typescript-eslint/eslint-recommended',
                 'plugin:@typescript-eslint/recommended',
             ],
@@ -67,6 +69,7 @@ module.exports = {
     },
     plugins: [
         'compat',
+        'import',
         'jsdoc',
         'prefer-arrow',
         '@typescript-eslint',

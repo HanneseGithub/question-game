@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import classNames from 'classnames';
 
-import Icon from '@icon';
+import { Icon } from '../../icon/icon';
 
 if (process.env.webpack) {
     require('./check.scss');

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 import classNames from 'classnames';
 
-import Check, { ICheckProps } from '@check';
-import Radio, { IRadioProps } from '@radio';
+import { Check, ICheckProps } from '../check';
+import { Radio, IRadioProps } from '../radio';
 
 if (process.env.webpack) {
     require('./choice-group.scss');

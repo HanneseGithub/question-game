@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Footer from '@m-footer';
-import Header, { IHeaderProps } from '@m-header';
-import Main from '@main';
+import { Footer } from '../../modules/footer';
+import { Header, IHeaderProps } from '../../modules/header';
+import { Main } from '../../components/main';
 
 export interface IViewBaseProps {
     children: React.ReactNode;

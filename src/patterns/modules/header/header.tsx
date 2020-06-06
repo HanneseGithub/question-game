@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Container from '@container';
-import Languages, { ILanguagesProps } from '@languages';
-import Logo, { ILogoProps } from '@logo';
-import Navigation, { INavigationProps } from '@navigation';
+import { Container } from '../../components/container';
+import { Languages, ILanguagesProps } from '../../components/languages';
+import { Logo, ILogoProps } from '../../components/logo';
+import { Navigation, INavigationProps } from '../../components/navigation';
 
 if (process.env.webpack) {
     require('./header.scss');

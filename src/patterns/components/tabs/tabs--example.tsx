@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Tabs, { ITabsNavItem, TabsItem } from '@tabs';
+import Tabs, { ITabsNavItem, TabsItem } from './tabs';
 
 const TabsExample: React.FC = () => {
     const items: ITabsNavItem[] = [

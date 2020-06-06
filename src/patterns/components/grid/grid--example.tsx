@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Grid, { GridColumn, IGridColumnProps, IGridProps } from '@grid';
+import { Grid, GridColumn, IGridColumnProps, IGridProps } from '../index';
 
 interface IGridExampleProps extends IGridProps {
     columns: IGridColumnProps[];

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
-import Button from '@button';
-import Modal from '@modal';
+import { Button } from '../button';
+
+import { Modal } from './';
 
 export interface IModalExampleState {
     isOpen: boolean;

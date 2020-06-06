@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Container from '@container';
-import Preview from '@preview';
+import { Container } from '../../components/container';
+import Preview from '../preview/preview';
 
 export default class PreviewContainer extends Preview {
     render(): JSX.Element {

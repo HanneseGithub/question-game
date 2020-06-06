@@ -1,7 +1,7 @@
 import React from 'react';
 
-import TemplateLogin, { ITemplateLoginProps } from '@t-login';
-import ViewBase, { IViewBaseProps } from '@v-base';
+import { TemplateLogin, ITemplateLoginProps } from '../../templates/login';
+import { ViewBase, IViewBaseProps } from '../base';
 
 export interface IViewLoginProps extends IViewBaseProps {
     login: ITemplateLoginProps;

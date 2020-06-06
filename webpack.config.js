@@ -4,14 +4,11 @@ const webpack = require('webpack');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const SvgStorePlugin = require('external-svg-sprite-loader');
-const FractalModuleResolver = require('@gotoandplay/fractal-module-resolver-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const fractal = require('./fractal.config.js');
-const tsconfig = require('./tsconfig.json');
 const pkg = require('./package.json');
 const FractalPlugin = require('./packages/fractal-webpack-plugin');
-const TSConfigGenerator = require('./packages/tsconfig-generator-plugin');
 
 /**
  * gotoAndReact class
@@ -65,11 +62,6 @@ class gotoAndReact {
                 break;
 
             case 'styleguide':
-                plugins.push(new TSConfigGenerator({
-                    fileName: path.resolve(__dirname, path.join('tsconfig.paths.json')),
-                    fractal,
-                    tsConfig: tsconfig,
-                }));
                 plugins.push(new FractalPlugin({
                     chunksOrder: ['vendor', 'global'],
                     fractal,
@@ -293,12 +285,7 @@ class gotoAndReact {
             output: this.getOutput(name),
             plugins: this.getPlugins(name),
             resolve: {
-                extensions: ['.tsx', '.jsx', '.ts', '.js'],
-                plugins: [
-                    new FractalModuleResolver({
-                        fractal,
-                    }),
-                ],
+                extensions: ['.tsx', '.ts', '.js'],
             },
             stats: {
                 children: false,

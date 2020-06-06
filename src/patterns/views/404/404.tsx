@@ -1,13 +1,13 @@
 import React from 'react';
 
-import Template404, { ITemplate404Props } from '@t-404';
-import ViewBase, { IViewBaseProps } from '@v-base';
+import { Template404, ITemplate404Props } from '../../templates/404';
+import { ViewBase, IViewBaseProps } from '../base';
 
-export interface IViewLoginProps extends IViewBaseProps {
+export interface IView404Props extends IViewBaseProps {
     template: ITemplate404Props;
 }
 
-const View404: React.FC<IViewLoginProps> = (props: IViewLoginProps) => {
+const View404: React.FC<IView404Props> = (props: IView404Props) => {
     const { template, ...viewBaseProps } = props;
 
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Button, { IButtonProps } from '@button';
-import Container from '@container';
+import { Button, IButtonProps } from '../../components/button';
+import { Container } from '../../components/container';
 
 export interface ITemplateLoginProps {
     button: IButtonProps;

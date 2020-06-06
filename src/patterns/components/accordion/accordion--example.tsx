@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Accordion, { AccordionItem } from '@accordion';
+import Accordion, { AccordionItem } from './accordion';
 
 const AccordionExample: React.FC = () => (
     <Accordion>

@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 
 import classNames from 'classnames';
 
-import Helpers from '@helpers';
-import Icon from '@icon';
+import { disableScroll, enableScroll } from '../helpers';
+import { Icon } from '../icon/icon';
 
 if (process.env.webpack) {
     require('./modal.scss');
@@ -86,18 +86,18 @@ export const ModalInner: React.FC<IModalProps> = (props: IModalProps) => {
 
     useLayoutEffect(() => {
         if (props.isOpen) {
-            Helpers.disableScroll();
+            disableScroll();
 
             if (element.current) {
                 element.current.focus();
             }
         } else {
-            Helpers.enableScroll();
+            enableScroll();
         }
 
         return (): void => {
             if (props.isOpen) {
-                Helpers.enableScroll();
+                enableScroll();
             }
         };
     }, [props.isOpen]);

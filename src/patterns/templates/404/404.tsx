@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Container from '@container';
+import { Container } from '../../components/container';
 
 export interface ITemplate404Props {
     title: string;

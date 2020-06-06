@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig.paths.json",
   "compileOnSave": false,
   "compilerOptions": {
     "lib": [
@@ -23,11 +22,9 @@
       "./node_modules/@types",
       "./types"
     ],
-    "baseUrl": "./src/patterns"
   },
   "exclude": [
     "node_modules",
-    "jspm_packages"
   ],
   "include": [
     "src/**/*"
