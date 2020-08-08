@@ -17,8 +17,11 @@ export interface IRadioProps {
 }
 
 const Radio = (props: IRadioProps): JSX.Element => {
+    const {
+        defaultChecked = false,
+    } = props;
     const className: string = classNames('radio', props.modifier, props.className);
-    const [checked, setChecked] = useState(props.defaultChecked);
+    const [checked, setChecked] = useState(defaultChecked);
 
     const handleChange: (event: React.FormEvent<HTMLInputElement>) => void = (event: React.FormEvent<HTMLInputElement>): void => {
         const nextValue: boolean = event.currentTarget.checked;
@@ -52,10 +55,6 @@ const Radio = (props: IRadioProps): JSX.Element => {
             </label>
         </div>
     );
-};
-
-Radio.defaultProps = {
-    defaultChecked: false,
 };
 
 export default Radio;

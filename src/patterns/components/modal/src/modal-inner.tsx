@@ -14,9 +14,9 @@ export interface IModalInnerProps {
     className?: string;
 }
 
-export const ModalInner: React.FC<IModalInnerProps> = (props: IModalInnerProps) => {
+export const ModalInner = (props: IModalInnerProps): JSX.Element => {
     const element: React.MutableRefObject<null | HTMLDivElement> = useRef(null);
-    const { isOpen, modifier, className, children, id } = props;
+    const { isOpen = false, modifier, className, children, id } = props;
 
     const handleBackdropClick: (event: React.MouseEvent<HTMLDivElement>) => void = (event: React.MouseEvent<HTMLDivElement>): void => {
         if (event.target === event.currentTarget && props.onClose) {
@@ -80,7 +80,7 @@ export const ModalInner: React.FC<IModalInnerProps> = (props: IModalInnerProps) 
     };
 
     useLayoutEffect(() => {
-        if (props.isOpen) {
+        if (isOpen) {
             disableScroll();
 
             if (element.current) {
@@ -91,11 +91,11 @@ export const ModalInner: React.FC<IModalInnerProps> = (props: IModalInnerProps) 
         }
 
         return (): void => {
-            if (props.isOpen) {
+            if (isOpen) {
                 enableScroll();
             }
         };
-    }, [props.isOpen]);
+    }, [isOpen]);
 
     return renderContainer();
 };

@@ -18,7 +18,3 @@ export const Modal = (props: IModalProps): JSX.Element => {
 
     return isMounted ? ReactDOM.createPortal(<ModalInner {...props} />, document.body) : <React.Fragment />;
 };
-
-Modal.defaultProps = {
-    isOpen: false,
-};

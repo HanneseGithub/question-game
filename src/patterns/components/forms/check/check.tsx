@@ -19,8 +19,11 @@ export interface ICheckProps {
 }
 
 const Check = (props: ICheckProps): JSX.Element => {
+    const {
+        defaultChecked = false,
+    } = props;
     const className: string = classNames('check', props.modifier, props.className);
-    const [checked, setChecked] = useState(props.defaultChecked);
+    const [checked, setChecked] = useState(defaultChecked);
 
     const handleChange: (event: React.FormEvent<HTMLInputElement>) => void = (event: React.FormEvent<HTMLInputElement>): void => {
         const nextValue: boolean = event.currentTarget.checked;
@@ -56,10 +59,6 @@ const Check = (props: ICheckProps): JSX.Element => {
             </label>
         </div>
     );
-};
-
-Check.defaultProps = {
-    defaultChecked: false,
 };
 
 export default Check;

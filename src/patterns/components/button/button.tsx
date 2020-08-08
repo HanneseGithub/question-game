@@ -12,6 +12,9 @@ export interface IButtonProps {
 }
 
 const Button = (props: IButtonProps): JSX.Element => {
+    const {
+        type = 'button',
+    } = props;
     const ButtonTag: 'a' | 'button' = props.url ? 'a' : 'button';
     const className: string = classNames('button', props.modifier, props.className);
 
@@ -19,16 +22,12 @@ const Button = (props: IButtonProps): JSX.Element => {
         <ButtonTag
             className={className}
             onClick={props.onClick}
-            type={props.url ? undefined : props.type}
+            type={props.url ? undefined : type}
             href={props.url}
         >
             {props.text}
         </ButtonTag>
     );
-};
-
-Button.defaultProps = {
-    type: 'button',
 };
 
 export default Button;

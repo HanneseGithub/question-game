@@ -23,8 +23,12 @@ export interface ITextFieldProps {
 }
 
 const TextField = (props: ITextFieldProps): JSX.Element => {
+    const {
+        defaultValue = '',
+        type = 'text',
+    } = props;
     const [isFocused, setIsFocused] = useState(false);
-    const [value, setValue] = useState(props.defaultValue);
+    const [value, setValue] = useState(defaultValue);
     const className: string = classNames(
         'textfield',
         {
@@ -67,7 +71,7 @@ const TextField = (props: ITextFieldProps): JSX.Element => {
                 <InputElement
                     {...props.attributes}
                     className={inputClassName}
-                    type={props.element === 'textarea' ? undefined : props.type}
+                    type={props.element === 'textarea' ? undefined : type}
                     id={props.id}
                     name={props.name}
                     disabled={props.disabled}
@@ -93,11 +97,6 @@ const TextField = (props: ITextFieldProps): JSX.Element => {
             )}
         </div>
     );
-};
-
-TextField.defaultProps = {
-    defaultValue: '',
-    type: 'text',
 };
 
 export default TextField;
