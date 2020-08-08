@@ -4,17 +4,17 @@
             @content;
         }
     }
-    @elseif $point == sm-min {
+    @else if $point == sm-min {
         @media only screen and (min-width: #{$bp-sm-min}) {
             @content;
         }
     }
-    @elseif $point == md-min {
+    @else if $point == md-min {
         @media only screen and (min-width: #{$bp-md-min}) {
             @content;
         }
     }
-    @elseif $point == lg-min {
+    @else if $point == lg-min {
         @media only screen and (min-width: #{$bp-lg-min}) {
             @content;
         }

@@ -165,20 +165,6 @@ class gotoAndReact {
                         use: 'ts-loader',
                     },
                     {
-                        test: require.resolve('react'),
-                        use: [{
-                            loader: 'expose-loader',
-                            options: 'React',
-                        }],
-                    },
-                    {
-                        test: require.resolve('react-dom'),
-                        use: [{
-                            loader: 'expose-loader',
-                            options: 'ReactDOM',
-                        }],
-                    },
-                    {
                         test: /\.(css|scss)$/,
                         use: [
                             {
