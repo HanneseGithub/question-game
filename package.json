@@ -2,7 +2,6 @@
   "name": "react-base",
   "version": "0.0.0",
   "description": "A base project for React apps.",
-  "main": "index.js",
   "scripts": {
     "predev": "rimraf app",
     "dev": "webpack --env.styleguide --env.app",
@@ -17,7 +16,7 @@
     "lint": "eslint --ignore-path .gitignore ."
   },
   "author": "gotoAndPlay <info@play.ee> (https://play.ee)",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "devDependencies": {
     "@frctl/fractal": "^1.3.0",
     "@gotoandplay/fractal-tsx-adapter": "^0.11.0",
