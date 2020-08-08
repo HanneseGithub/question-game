@@ -52,16 +52,16 @@ definitions:
         script:
           - *make-directory-for-styleguide
           - *upload-styleguide
-          # - *make-directory-for-static-build
-          # - *upload-static-build
+          - *make-directory-for-app
+          - *upload-app
     - step: &deploy-staging
         name: deploy:staging
         deployment: staging
         script:
           - *make-directory-for-styleguide
           - *upload-styleguide
-          # - *make-directory-for-static-build
-          # - *upload-static-build
+          - *make-directory-for-app
+          - *upload-app
     - step: &deploy-production
         name: deploy:production
         deployment: production
@@ -69,8 +69,8 @@ definitions:
         script:
           - *make-directory-for-styleguide
           - *upload-styleguide
-          # - *make-directory-for-static-build
-          # - *upload-static-build
+          - *make-directory-for-app
+          - *upload-app
   pipelines:
     build-and-deploy-to-test: &build-and-deploy-to-test
       - step: *test-node
