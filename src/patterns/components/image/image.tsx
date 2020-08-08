@@ -20,7 +20,14 @@ const Image: React.FC<IImageProps> = (props: IImageProps) => {
     const className: string = classNames('image', props.modifier, props.className);
 
     const renderImg: () => JSX.Element = () => (
-        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-srcset={srcset} data-sizes="auto" alt={alt} className="image__img lazyload" />
+        <img
+            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            data-srcset={srcset}
+            data-sizes="auto"
+            alt={alt}
+            className="image__img lazyload"
+            key={srcset}
+        />
     );
 
     const renderSources: () => JSX.Element[] | null = () => {
@@ -28,9 +35,9 @@ const Image: React.FC<IImageProps> = (props: IImageProps) => {
             return null;
         }
 
-        return props.sources.map((source: IImageSource, index: number) => (
+        return props.sources.map((source: IImageSource) => (
             <source
-                key={index}
+                key={source.srcset}
                 srcSet="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                 data-srcset={source.srcset}
                 media={source.media}
