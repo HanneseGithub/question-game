@@ -1,7 +1,12 @@
 import React from 'react';
 
-const Login = (): JSX.Element => (
-    <div>LOGIN</div>
+import { RouteComponentProps } from '@reach/router';
+
+const Login = (props: RouteComponentProps): JSX.Element => (
+    <div>
+        <h1>LOGIN</h1>
+        <div>{props.path}</div>
+    </div>
 );
 
 export default Login;
