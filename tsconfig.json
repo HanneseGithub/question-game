@@ -10,6 +10,7 @@
     "target": "es5",
     "strict": true,
     "esModuleInterop": true,
+    "importsNotUsedAsValues": "preserve",
     "jsx": "react",
     "sourceMap": true,
     "removeComments": false,

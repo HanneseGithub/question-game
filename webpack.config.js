@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const SvgStorePlugin = require('external-svg-sprite-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
-
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const fractal = require('./fractal.config.js');
 const pkg = require('./package.json');
@@ -55,6 +55,11 @@ class gotoAndReact {
             new StyleLintPlugin(),
             new webpack.EnvironmentPlugin({
                 webpack: true,
+            }),
+            new ForkTsCheckerWebpackPlugin({
+                eslint: {
+                    files: '.',
+                },
             }),
         ];
 
@@ -161,14 +166,14 @@ class gotoAndReact {
             module: {
                 rules: [
                     {
-                        enforce: 'pre',
-                        loader: 'eslint-loader',
-                        test: /\.tsx?$/,
-                    },
-                    {
                         exclude: /node_modules/,
                         test: /\.tsx?$/,
-                        use: 'ts-loader',
+                        use: [{
+                            loader: 'ts-loader',
+                            options: {
+                                transpileOnly: true,
+                            },
+                        }],
                     },
                     {
                         test: /\.(css|scss)$/,
