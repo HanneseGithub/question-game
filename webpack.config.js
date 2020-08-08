@@ -5,10 +5,16 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const SvgStorePlugin = require('external-svg-sprite-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+
 
 const fractal = require('./fractal.config.js');
 const pkg = require('./package.json');
 const FractalPlugin = require('./packages/fractal-webpack-plugin');
+
+const smp = new SpeedMeasurePlugin({
+    disable: true,
+});
 
 /**
  * gotoAndReact class
@@ -147,7 +153,7 @@ class gotoAndReact {
     }
 
     getConfig(name) {
-        return {
+        return smp.wrap({
             devServer: this.getDevServer(name),
             devtool: this.options.production ? 'source-map' : 'cheap-module-source-map',
             entry: this.getEntry(name),
@@ -271,7 +277,7 @@ class gotoAndReact {
                 modules: false,
             },
             watch: !this.options.production,
-        };
+        });
     }
 
 }
