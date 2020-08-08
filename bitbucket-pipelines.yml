@@ -1,0 +1,95 @@
+definitions:
+  steps:
+    - step: &make-directory-for-styleguide
+        pipe: atlassian/ssh-run:0.2.6
+        variables:
+          SSH_USER: '$SSH_USER'
+          SERVER: '$SSH_SERVER'
+          COMMAND: 'mkdir -p $SSH_PATH/styleguide/'
+          PORT: '$SSH_PORT'
+    - step: &upload-styleguide
+        pipe: atlassian/rsync-deploy:0.4.3
+        variables:
+          USER: '$SSH_USER'
+          SERVER: '$SSH_SERVER'
+          REMOTE_PATH: '~/$SSH_PATH/styleguide/'
+          LOCAL_PATH: 'build/styleguide/'
+          SSH_PORT: '$SSH_PORT'
+    - step: &make-directory-for-app
+        pipe: atlassian/ssh-run:0.2.6
+        variables:
+          SSH_USER: '$SSH_USER'
+          SERVER: '$SSH_SERVER'
+          COMMAND: 'mkdir -p $SSH_PATH/app/'
+          PORT: '$SSH_PORT'
+    - step: &upload-app
+        pipe: atlassian/rsync-deploy:0.4.3
+        variables:
+          USER: '$SSH_USER'
+          SERVER: '$SSH_SERVER'
+          REMOTE_PATH: '~/$SSH_PATH/app/'
+          LOCAL_PATH: 'build/app/'
+          SSH_PORT: '$SSH_PORT'
+    - step: &build
+        name: build
+        script:
+          - node -v
+          - npm -v
+          - npm ci
+          - npm run build
+        artifacts:
+          - build/**
+    - step: &test-node
+        name: test:node
+        script:
+          - node -v
+          - npm -v
+          - npm ci
+          - npm test
+    - step: &deploy-test
+        name: deploy:test
+        deployment: test
+        script:
+          - *make-directory-for-styleguide
+          - *upload-styleguide
+          # - *make-directory-for-static-build
+          # - *upload-static-build
+    - step: &deploy-staging
+        name: deploy:staging
+        deployment: staging
+        script:
+          - *make-directory-for-styleguide
+          - *upload-styleguide
+          # - *make-directory-for-static-build
+          # - *upload-static-build
+    - step: &deploy-production
+        name: deploy:production
+        deployment: production
+        trigger: manual
+        script:
+          - *make-directory-for-styleguide
+          - *upload-styleguide
+          # - *make-directory-for-static-build
+          # - *upload-static-build
+  pipelines:
+    build-and-deploy-to-test: &build-and-deploy-to-test
+      - step: *test-node
+      - step: *build
+      - step: *deploy-test
+    build-and-deploy-to-staging: &build-and-deploy-to-staging
+      - step: *test-node
+      - step: *build
+      - step: *deploy-staging
+      - step: *deploy-production
+
+image: node:12
+pipelines:
+  pull-requests:
+    '**':
+      - step: *test-node
+      - step: *build
+      - step:
+          <<: *deploy-test
+          trigger: manual
+  branches:
+    main: *build-and-deploy-to-staging
