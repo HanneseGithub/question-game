@@ -15,7 +15,7 @@ export interface IImageProps {
     className?: string;
 }
 
-const Image: React.FC<IImageProps> = (props: IImageProps) => {
+const Image = (props: IImageProps): JSX.Element => {
     const { alt, srcset } = props;
     const className: string = classNames('image', props.modifier, props.className);
 

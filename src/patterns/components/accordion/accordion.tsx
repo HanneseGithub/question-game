@@ -3,7 +3,7 @@ import React from 'react';
 import { Accordion, IAccordionProps } from './src/accordion';
 import { AccordionItem } from './src/accordion-item';
 
-const AccordionExample: React.FC<IAccordionProps> = (props: IAccordionProps) => (
+const AccordionExample = (props: IAccordionProps): JSX.Element => (
     <Accordion {...props}>
         <AccordionItem
             id="accordion-item-1"

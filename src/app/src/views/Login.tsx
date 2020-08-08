@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { RouteComponentProps } from '@reach/router';
-
-const Login: React.FC<RouteComponentProps> = () => (
+const Login = (): JSX.Element => (
     <div>LOGIN</div>
 );
 

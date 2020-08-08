@@ -7,7 +7,7 @@ export interface IViewLoginProps extends IViewBaseProps {
     login: ITemplateLoginProps;
 }
 
-const ViewLogin: React.FC<IViewLoginProps> = (props: IViewLoginProps) => {
+const ViewLogin = (props: IViewLoginProps): JSX.Element => {
     const { login, ...viewBaseProps } = props;
 
     return (

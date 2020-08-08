@@ -7,7 +7,7 @@ interface IGridExampleProps extends IGridProps {
     columns: IGridColumnProps[];
 }
 
-const GridExample: React.FC<IGridExampleProps> = (props: IGridExampleProps) => {
+const GridExample = (props: IGridExampleProps): JSX.Element => {
     const { columns, ...rest } = props;
 
     return (

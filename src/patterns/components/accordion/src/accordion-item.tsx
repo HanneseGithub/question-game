@@ -10,7 +10,7 @@ export interface IAccordionItemProps {
     children: React.ReactNode;
 }
 
-export const AccordionItem: React.FC<IAccordionItemProps> = (props: IAccordionItemProps) => {
+export const AccordionItem = (props: IAccordionItemProps): JSX.Element => {
     const { value, toggle } = useContext(AccordionContext);
     const className: string = classNames(
         'accordion__item',

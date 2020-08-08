@@ -13,7 +13,7 @@ const renderHeader: (header: IHeaderProps) => JSX.Element = (header: IHeaderProp
     <Header {...header} />
 );
 
-const ViewBase: React.FC<IViewBaseProps> = (props: IViewBaseProps) => (
+const ViewBase = (props: IViewBaseProps): JSX.Element => (
     <React.Fragment>
         {props.header && renderHeader(props.header)}
         <Main>

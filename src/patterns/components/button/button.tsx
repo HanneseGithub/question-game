@@ -11,7 +11,7 @@ export interface IButtonProps {
     onClick?: (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
 }
 
-const Button: React.FC<IButtonProps> = (props: IButtonProps) => {
+const Button = (props: IButtonProps): JSX.Element => {
     const ButtonTag: 'a' | 'button' = props.url ? 'a' : 'button';
     const className: string = classNames('button', props.modifier, props.className);
 

@@ -10,7 +10,7 @@ export interface ILogoProps {
     className?: string;
 }
 
-const Logo: React.FC<ILogoProps> = (props: ILogoProps) => {
+const Logo = (props: ILogoProps): JSX.Element => {
     const className: string = classNames('logo', props.className);
 
     return (

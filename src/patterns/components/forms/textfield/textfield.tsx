@@ -22,7 +22,7 @@ export interface ITextFieldProps {
     className?: string;
 }
 
-const TextField: React.FC<ITextFieldProps> = (props: ITextFieldProps) => {
+const TextField = (props: ITextFieldProps): JSX.Element => {
     const [isFocused, setIsFocused] = useState(false);
     const [value, setValue] = useState(props.defaultValue);
     const className: string = classNames(

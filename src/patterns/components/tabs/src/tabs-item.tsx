@@ -9,7 +9,7 @@ export interface ITabsItemProps extends ITabsNavItem {
     children: React.ReactNode;
 }
 
-export const TabsItem: React.FC<ITabsItemProps> = (props: ITabsItemProps) => {
+export const TabsItem = (props: ITabsItemProps): JSX.Element => {
     const { value } = useContext(TabsContext);
     const className: string = classNames(
         'tabs__content-item',

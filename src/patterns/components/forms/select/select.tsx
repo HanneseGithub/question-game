@@ -29,7 +29,7 @@ export interface ISelectProps {
     className?: string;
 }
 
-const Select: React.FC<ISelectProps> = (props: ISelectProps) => {
+const Select = (props: ISelectProps): JSX.Element => {
     const [value, setValue] = useState(props.defaultValue);
     const className: string = classNames(
         'select',

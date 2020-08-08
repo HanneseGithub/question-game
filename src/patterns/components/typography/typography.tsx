@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Typography: React.FC = () => (
+const Typography = (): JSX.Element => (
     <div className="text">
         <h1>Heading 1</h1>
         <p>This is a paragraph. <em>This text is cursive</em>, <strong>but this text is bold</strong>. <a href="#">This is a link</a> voluptatum delectus, similique et dolorem dolorum natus eaque debitis dolores, est dolore maxime! Quidem maiores nihil nobis quia unde provident.</p>

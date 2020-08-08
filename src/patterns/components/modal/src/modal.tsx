@@ -5,7 +5,7 @@ import { ModalInner, IModalInnerProps } from './modal-inner';
 
 export type IModalProps = IModalInnerProps;
 
-export const Modal: React.FC<IModalProps> = (props: IModalProps) => {
+export const Modal = (props: IModalProps): JSX.Element => {
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {

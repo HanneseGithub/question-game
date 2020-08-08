@@ -8,7 +8,7 @@ export interface IModalExampleState {
     isOpen: boolean;
 }
 
-const ModalExample: React.FC = () => {
+const ModalExample = (): JSX.Element => {
     const [isOpen, setIsOpen] = useState(false);
 
     const openModal = (): void => {

@@ -4,7 +4,7 @@ import { Router } from '@reach/router';
 
 import Login from './views/Login';
 
-const App: React.FC = () => (
+const App = (): JSX.Element => (
     <Router>
         <Login path="/" />
     </Router>

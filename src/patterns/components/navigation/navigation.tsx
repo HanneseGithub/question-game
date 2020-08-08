@@ -14,7 +14,7 @@ export interface INavigationProps {
     className?: string;
 }
 
-export const NavigationItem: React.FC<INavigationItemProps> = (props: INavigationItemProps) => {
+export const NavigationItem = (props: INavigationItemProps): JSX.Element => {
     const className: string = classNames(
         'navigation__item',
         {
@@ -29,7 +29,7 @@ export const NavigationItem: React.FC<INavigationItemProps> = (props: INavigatio
     );
 };
 
-const Navigation: React.FC<INavigationProps> = (props: INavigationProps) => {
+const Navigation = (props: INavigationProps): JSX.Element => {
     const className: string = classNames('navigation', props.className);
 
     const renderItems: () => JSX.Element[] = (): JSX.Element[] => props.items.map((item: INavigationItemProps, index: number) => (

@@ -6,7 +6,7 @@ export interface ITemplate404Props {
     title: string;
 }
 
-const Template404: React.FC<ITemplate404Props> = (props: ITemplate404Props) => (
+const Template404 = (props: ITemplate404Props): JSX.Element => (
     <Container>
         <h1>{props.title}</h1>
     </Container>

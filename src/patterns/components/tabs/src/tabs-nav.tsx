@@ -19,7 +19,7 @@ export interface ITabsNavItemProps extends ITabsNavItem {
     onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
-export const TabsNavItem: React.FC<ITabsNavItemProps> = (props: ITabsNavItemProps) => {
+export const TabsNavItem = (props: ITabsNavItemProps): JSX.Element => {
     const className: string = classNames(
         'tabs__nav-item',
         {
@@ -40,7 +40,7 @@ export const TabsNavItem: React.FC<ITabsNavItemProps> = (props: ITabsNavItemProp
     );
 };
 
-export const TabsNav: React.FC<ITabsNavProps> = (props: ITabsNavProps) => {
+export const TabsNav = (props: ITabsNavProps): JSX.Element => {
     const { value, setValue } = useContext(TabsContext);
 
     return (

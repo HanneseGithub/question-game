@@ -12,7 +12,7 @@ export interface IGridProps {
     className?: string;
 }
 
-export const Grid: React.FC<IGridProps> = (props: IGridProps) => {
+export const Grid = (props: IGridProps): JSX.Element => {
     const className: string = classNames(
         'grid',
         {

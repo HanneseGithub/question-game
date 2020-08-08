@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { TextField, ITextFieldProps } from '../textfield';
 
-const TextArea: React.FC<ITextFieldProps> = (props: ITextFieldProps) => {
+const TextArea = (props: ITextFieldProps): JSX.Element => {
     const className: string = classNames('textarea', props.className);
     const inputClassName: string = classNames('textarea__input', props.inputClassName);
 

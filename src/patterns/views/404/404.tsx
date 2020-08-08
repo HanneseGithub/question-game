@@ -7,7 +7,7 @@ export interface IView404Props extends IViewBaseProps {
     template: ITemplate404Props;
 }
 
-const View404: React.FC<IView404Props> = (props: IView404Props) => {
+const View404 = (props: IView404Props): JSX.Element => {
     const { template, ...viewBaseProps } = props;
 
     return (

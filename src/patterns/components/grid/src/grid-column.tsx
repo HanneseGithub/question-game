@@ -11,7 +11,7 @@ export interface IGridColumnProps {
     className?: string;
 }
 
-export const GridColumn: React.FC<IGridColumnProps> = (props: IGridColumnProps) => {
+export const GridColumn = (props: IGridColumnProps): JSX.Element => {
     const className: string = classNames(
         'grid__col',
         props.width && props.width.map((width: string) => 'grid__col--' + width),

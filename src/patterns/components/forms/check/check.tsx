@@ -18,7 +18,7 @@ export interface ICheckProps {
     className?: string;
 }
 
-const Check: React.FC<ICheckProps> = (props: ICheckProps) => {
+const Check = (props: ICheckProps): JSX.Element => {
     const className: string = classNames('check', props.modifier, props.className);
     const [checked, setChecked] = useState(props.defaultChecked);
 

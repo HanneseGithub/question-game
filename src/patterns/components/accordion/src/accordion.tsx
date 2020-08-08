@@ -28,7 +28,7 @@ export interface IAccordionMultiple extends IAccordionBase {
 
 export type IAccordionProps = IAccordionSingle | IAccordionMultiple;
 
-export const Accordion: React.FC<IAccordionProps> = (props: IAccordionProps) => {
+export const Accordion = (props: IAccordionProps): JSX.Element => {
     const className: string = classNames('accordion', props.className);
     const [value, setValue] = useState(getValue(props.defaultValue));
 

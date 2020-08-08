@@ -10,7 +10,7 @@ export interface IIconProps {
     className?: string;
 }
 
-const Icon: React.FC<IIconProps> = (props: IIconProps) => {
+const Icon = (props: IIconProps): JSX.Element => {
     const { getPath } = React.useContext(IconContext);
     const className: string = classNames('icon', props.modifier, props.className);
 

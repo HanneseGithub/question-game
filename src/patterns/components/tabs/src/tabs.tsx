@@ -25,7 +25,7 @@ export const TabsContext: React.Context<ITabsContext> = React.createContext<ITab
     value: '',
 });
 
-export const Tabs: React.FC<ITabsProps> = (props: ITabsProps) => {
+export const Tabs = (props: ITabsProps): JSX.Element => {
     const className: string = classNames('tabs', props.className);
     const [value, setValue] = useState(props.defaultValue || '');
 

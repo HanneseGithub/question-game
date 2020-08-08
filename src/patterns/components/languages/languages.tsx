@@ -15,7 +15,7 @@ export interface ILanguagesProps {
     className?: string;
 }
 
-export const LanguagesItem: React.FC<ILanguagesItemProps> = (props: ILanguagesItemProps) => {
+export const LanguagesItem = (props: ILanguagesItemProps): JSX.Element => {
     const className: string = classNames(
         'languages__item',
         {
@@ -36,7 +36,7 @@ export const LanguagesItem: React.FC<ILanguagesItemProps> = (props: ILanguagesIt
     );
 };
 
-const Languages: React.FC<ILanguagesProps> = (props: ILanguagesProps) => {
+const Languages = (props: ILanguagesProps): JSX.Element => {
     const className: string = classNames(
         'languages',
         props.modifier,

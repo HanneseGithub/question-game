@@ -4,7 +4,7 @@ import { Tabs } from './src/tabs';
 import { TabsItem } from './src/tabs-item';
 import { ITabsNavItem } from './src/tabs-nav';
 
-const TabsExample: React.FC = () => {
+const TabsExample = (): JSX.Element => {
     const items: ITabsNavItem[] = [
         {
             id: 'tabs-item-1',

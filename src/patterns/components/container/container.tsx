@@ -7,7 +7,7 @@ export interface IContainerProps {
     className?: string;
 }
 
-const Container: React.FC<IContainerProps> = (props: IContainerProps) => {
+const Container = (props: IContainerProps): JSX.Element => {
     const className: string = classNames('container', props.className);
 
     return (

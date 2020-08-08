@@ -11,7 +11,7 @@ export interface IHeaderProps {
     languages: ILanguagesProps;
 }
 
-const Header: React.FC<IHeaderProps> = (props: IHeaderProps) => (
+const Header = (props: IHeaderProps): JSX.Element => (
     <header className="header">
         <Container>
             <div className="header__inner">

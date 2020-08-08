@@ -4,7 +4,7 @@ export interface IMainProps {
     children: React.ReactNode;
 }
 
-const Main: React.FC<IMainProps> = (props: IMainProps) => (
+const Main = (props: IMainProps): JSX.Element => (
     <div className="main">
         {props.children}
     </div>

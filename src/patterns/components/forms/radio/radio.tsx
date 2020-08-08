@@ -16,7 +16,7 @@ export interface IRadioProps {
     className?: string;
 }
 
-const Radio: React.FC<IRadioProps> = (props: IRadioProps) => {
+const Radio = (props: IRadioProps): JSX.Element => {
     const className: string = classNames('radio', props.modifier, props.className);
     const [checked, setChecked] = useState(props.defaultChecked);
 

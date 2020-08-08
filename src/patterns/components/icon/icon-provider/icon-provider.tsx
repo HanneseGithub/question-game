@@ -9,7 +9,7 @@ export interface IIconProviderProps extends IIconContext {
     children: React.ReactNode;
 }
 
-const IconProvider: React.FC<IIconProviderProps> = (props: IIconProviderProps) => {
+const IconProvider = (props: IIconProviderProps): JSX.Element => {
     const { getPath } = props;
     const contextValue: IIconContext = {
         getPath,

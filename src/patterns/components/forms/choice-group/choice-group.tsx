@@ -35,7 +35,7 @@ export interface IRadioGroupProps extends IChoiceGroupBase {
 
 export type IChoiceGroupProps = IRadioGroupProps | ICheckGroupProps;
 
-const ChoiceGroup: React.FC<IChoiceGroupProps> = (props: IChoiceGroupProps) => {
+const ChoiceGroup = (props: IChoiceGroupProps): JSX.Element => {
     const [value, setValue] = useState(getValue(props.defaultValue));
     const isControlled = typeof props.value !== 'undefined';
     const className: string = classNames(
