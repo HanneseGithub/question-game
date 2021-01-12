@@ -2,7 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import { IconContext } from '../icon-provider/icon-context';
+import { IconContext } from '../icon-provider';
 
 export interface IIconProps {
     name: string;
