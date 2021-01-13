@@ -1,9 +1,13 @@
 import React from 'react';
 
-import {
-    IconContext,
-    IIconContext,
-} from './icon-context';
+export interface IIconContext {
+    getPath: (name: string) => string;
+}
+
+export const IconContext: React.Context<IIconContext> = React.createContext<IIconContext>({
+    getPath: (name: string) => '#' + name,
+});
+
 
 export interface IIconProviderProps extends IIconContext {
     children: React.ReactNode;
