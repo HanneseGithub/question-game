@@ -1,3 +1,5 @@
+global.isRunningTests = true; // affects fractal.config.js
+
 const HtmlValidate = require('html-validate').HtmlValidate;
 const format = require('html-validate/build/formatters/stylish').default;
 

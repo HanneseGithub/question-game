@@ -12,7 +12,9 @@ const fractal = module.exports = require('@frctl/fractal').create();
 const pkg = require('./package.json');
 const nighthawkTheme = require('@gotoandplay/nighthawk');
 const tsxAdapter = require('@gotoandplay/fractal-tsx-adapter')({
-    ssr: false, // Enable this if your app uses server-side rendering
+    // If your app uses server-side rendering, change this to 'ssr: true'.
+    // Otherwise SSR is only used for tests.
+    ssr: global.isRunningTests === true,
     wrapperElements: [
         {
             component: '@icon-provider',
