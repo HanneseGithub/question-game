@@ -12,6 +12,7 @@ const fractal = module.exports = require('@frctl/fractal').create();
 const pkg = require('./package.json');
 const nighthawkTheme = require('@gotoandplay/nighthawk');
 const tsxAdapter = require('@gotoandplay/fractal-tsx-adapter')({
+    ssr: false, // Enable this if your app uses server-side rendering
     wrapperElements: [
         {
             component: '@icon-provider',
@@ -67,4 +68,11 @@ fractal.web.set('server.syncOptions', {
 fractal.web.set('static.path', 'temp/public');
 fractal.web.set('builder.dest', 'build/styleguide');
 
-fractal.web.theme(nighthawkTheme());
+fractal.web.theme(nighthawkTheme({
+    /*
+     * nighthawk also uses an 'html' panel by default, which is empty when not using SSR.
+     * If you use SSR, you can remove this option to restore the HTML panel, but be
+     * aware of its performance cost as all components will then be rendered twice.
+     */
+    panels: ['preview', 'view', 'context', 'resources', 'info'],
+}));
