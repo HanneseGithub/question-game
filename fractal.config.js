@@ -56,13 +56,14 @@ fractal.components.set('default.status', null);
 fractal.components.set('default.context.language', 'en-US');
 fractal.components.set('ext', '.tsx');
 
-/**
- * Tell the Fractal web preview plugin where to look for static assets.
- */
 fractal.web.set('server.sync', true);
 fractal.web.set('server.syncOptions', {
     open: true,
 });
+
+/**
+ * Tell the Fractal web preview plugin where to look for static assets.
+ */
 fractal.web.set('static.path', 'temp/public');
 fractal.web.set('builder.dest', 'build/styleguide');
 
