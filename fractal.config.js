@@ -9,8 +9,8 @@ const { create: createFractal } = require('@frctl/fractal');
 const nighthawkTheme = require('@gotoandplay/nighthawk');
 const createTsxAdapter = require('@gotoandplay/fractal-tsx-adapter');
 
+const parseWebpackArgs = require('./config/parse-webpack-args');
 const pkg = require('./package.json');
-const parseWebpackArgs = require('./parse-webpack-args');
 
 const fractal = createFractal();
 
