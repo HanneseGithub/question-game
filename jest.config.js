@@ -14,6 +14,7 @@ if (process.env.CI) {
 module.exports = {
     reporters,
     setupFilesAfterEnv: ['jest-expect-message'],
+    testEnvironment: 'node', // Do not use jsdom
     testPathIgnorePatterns: [
         '/node_modules/',
         '/vendor/',
