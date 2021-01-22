@@ -5,16 +5,22 @@ global.app = {
     publicFolder: '/',
 };
 
-/**
- * Require the Fractal module
- */
-const fractal = module.exports = require('@frctl/fractal').create();
-const pkg = require('./package.json');
+const { create: createFractal } = require('@frctl/fractal');
 const nighthawkTheme = require('@gotoandplay/nighthawk');
-const tsxAdapter = require('@gotoandplay/fractal-tsx-adapter')({
-    // If your app uses server-side rendering, change this to 'ssr: true'.
-    // Otherwise SSR is only used for tests.
-    ssr: global.isRunningTests === true,
+const createTsxAdapter = require('@gotoandplay/fractal-tsx-adapter');
+
+const pkg = require('./package.json');
+const parseWebpackArgs = require('./parse-webpack-args');
+
+const fractal = createFractal();
+
+module.exports = fractal;
+
+const { env, mode } = parseWebpackArgs();
+const isSsrEnabled = Boolean(env.ssr || mode !== 'development');
+
+const tsxAdapter = createTsxAdapter({
+    ssr: isSsrEnabled,
     wrapperElements: [
         {
             component: '@icon-provider',
@@ -70,11 +76,11 @@ fractal.web.set('server.syncOptions', {
 fractal.web.set('static.path', 'temp/public');
 fractal.web.set('builder.dest', 'build/styleguide');
 
-fractal.web.theme(nighthawkTheme({
-    /*
-     * nighthawk also uses an 'html' panel by default, which is empty when not using SSR.
-     * If you use SSR, you can remove this option to restore the HTML panel, but be
-     * aware of its performance cost as all components will then be rendered twice.
-     */
-    panels: ['preview', 'view', 'context', 'resources', 'info'],
-}));
+const nighthawkOptions = {};
+
+if (!isSsrEnabled) {
+    // Omit 'html' panel, as it would be empty
+    nighthawkOptions.panels = ['preview', 'view', 'context', 'resources', 'info'];
+}
+
+fractal.web.theme(nighthawkTheme(nighthawkOptions));
