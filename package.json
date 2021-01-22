@@ -4,13 +4,13 @@
   "description": "A base project for React apps.",
   "scripts": {
     "predev": "rimraf app",
-    "dev": "webpack --env.styleguide --env.app",
-    "dev:styleguide": "webpack --env.styleguide",
-    "dev:app": "webpack-dev-server --env.app",
+    "dev": "webpack --mode=development --env styleguide --env app",
+    "dev:styleguide": "webpack --mode=development --env styleguide",
+    "dev:app": "webpack serve --mode=development --env app",
     "prebuild": "rimraf app",
-    "build": "webpack -p --env.production --env.styleguide --env.app",
-    "build:styleguide": "webpack -p --env.production --env.styleguide",
-    "build:app": "webpack -p --env.production --env.app",
+    "build": "webpack --mode=production --env styleguide --env app",
+    "build:styleguide": "webpack --mode=production --env styleguide",
+    "build:app": "webpack --mode=production --env app",
     "test": "npm run lint && npm run jest",
     "jest": "node ./test/generate-tests.js && jest",
     "lint": "eslint --ignore-path .gitignore ."
@@ -58,7 +58,7 @@
     "ts-loader": "^8.0.2",
     "typescript": "^3.9.7",
     "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
+    "webpack-cli": "^4.4.0",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
