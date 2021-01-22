@@ -36,6 +36,7 @@ const tsxAdapter = createTsxAdapter({
  */
 fractal.set('project.title', 'Project Web Style Guide');
 fractal.set('project.version', pkg.version);
+fractal.set('ssr', isSsrEnabled);
 
 /**
  * Tell Fractal where to look for components.

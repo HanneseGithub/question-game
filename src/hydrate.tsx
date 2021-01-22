@@ -70,10 +70,7 @@ window.setTimeout(() => {
     );
 
     const container: HTMLElement | null = document.getElementById('root');
+    const renderer: ReactDOM.Renderer = window.ssr ? ReactDOM.hydrate : ReactDOM.render;
 
-    if (container?.childElementCount) {
-        ReactDOM.hydrate(element, container);
-    } else {
-        ReactDOM.render(element, container);
-    }
+    renderer(element, container);
 });

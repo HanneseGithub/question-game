@@ -3,6 +3,7 @@ interface Window {
         [key: string]: string;
     };
     componentSettings: IComponentSettings;
+    ssr: boolean;
 }
 
 interface IContext {
