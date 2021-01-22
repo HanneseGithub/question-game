@@ -20,6 +20,7 @@ export interface IPreviewTarget {
 export interface IPreviewConfig {
     jsAssets: string[];
     cssAssets: string[];
+    ssr: boolean;
 }
 
 export interface IPreviewProps {
@@ -65,6 +66,15 @@ export default class Preview extends React.Component<IPreviewProps> {
         );
     }
 
+    getSsrScript(): JSX.Element {
+        const isSsrEnabled = this.props._config.ssr;
+        const content = `window.ssr = ${JSON.stringify(isSsrEnabled)};`;
+
+        return (
+            <script dangerouslySetInnerHTML={{ __html: content }} />
+        );
+    }
+
     renderRoot(): JSX.Element {
         return (
             <div id="root" dangerouslySetInnerHTML={{ __html: this.props.yield }} />
@@ -90,6 +100,7 @@ export default class Preview extends React.Component<IPreviewProps> {
                         {this.props.children ? this.props.children : this.renderRoot()}
                     </div>
                     {this.getHydrateScript()}
+                    {this.getSsrScript()}
                     {this.getScripts()}
                 </body>
             </html>

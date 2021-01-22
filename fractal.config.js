@@ -5,13 +5,22 @@ global.app = {
     publicFolder: '/',
 };
 
-/**
- * Require the Fractal module
- */
-const fractal = module.exports = require('@frctl/fractal').create();
-const pkg = require('./package.json');
+const { create: createFractal } = require('@frctl/fractal');
 const nighthawkTheme = require('@gotoandplay/nighthawk');
-const tsxAdapter = require('@gotoandplay/fractal-tsx-adapter')({
+const createTsxAdapter = require('@gotoandplay/fractal-tsx-adapter');
+
+const parseWebpackArgs = require('./config/parse-webpack-args');
+const pkg = require('./package.json');
+
+const fractal = createFractal();
+
+module.exports = fractal;
+
+const { env, mode } = parseWebpackArgs();
+const isSsrEnabled = Boolean(env.ssr || mode !== 'development');
+
+const tsxAdapter = createTsxAdapter({
+    ssr: isSsrEnabled,
     wrapperElements: [
         {
             component: '@icon-provider',
@@ -27,6 +36,7 @@ const tsxAdapter = require('@gotoandplay/fractal-tsx-adapter')({
  */
 fractal.set('project.title', 'Project Web Style Guide');
 fractal.set('project.version', pkg.version);
+fractal.set('ssr', isSsrEnabled);
 
 /**
  * Tell Fractal where to look for components.
@@ -67,4 +77,11 @@ fractal.web.set('server.syncOptions', {
 fractal.web.set('static.path', 'temp/public');
 fractal.web.set('builder.dest', 'build/styleguide');
 
-fractal.web.theme(nighthawkTheme());
+const nighthawkOptions = {};
+
+if (!isSsrEnabled) {
+    // Omit 'html' panel, as it would be empty
+    nighthawkOptions.panels = ['preview', 'view', 'context', 'resources', 'info'];
+}
+
+fractal.web.theme(nighthawkTheme(nighthawkOptions));

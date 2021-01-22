@@ -63,12 +63,14 @@ window.setTimeout(() => {
         return icons + '#' + name;
     };
 
-    ReactDOM.hydrate(
-        (
-            <IconProvider getPath={getIconPath}>
-                <Component {...props} />
-            </IconProvider>
-        ),
-        document.getElementById('root'),
+    const element: JSX.Element = (
+        <IconProvider getPath={getIconPath}>
+            <Component {...props} />
+        </IconProvider>
     );
+
+    const container: HTMLElement | null = document.getElementById('root');
+    const renderer: ReactDOM.Renderer = window.ssr ? ReactDOM.hydrate : ReactDOM.render;
+
+    renderer(element, container);
 });

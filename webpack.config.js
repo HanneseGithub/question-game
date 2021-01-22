@@ -20,13 +20,13 @@ const smp = new SpeedMeasurePlugin({
  * gotoAndReact class
  */
 class gotoAndReact {
-    constructor(env) {
+    constructor(env, argv) {
         this.options = {
             app: false,
             path: '/',
-            production: false,
             styleguide: false,
             ...env,
+            production: argv.mode === 'production',
         };
 
         return this.getCompilers();
@@ -52,13 +52,16 @@ class gotoAndReact {
                 filename: this.options.app && this.options.production ? 'css/[name].[chunkhash].css' : 'css/[name].css',
             }),
             new SvgStorePlugin(),
-            new StyleLintPlugin(),
+            new StyleLintPlugin({ ignorePath: '.gitignore' }),
             new webpack.EnvironmentPlugin({
                 webpack: true,
             }),
             new ForkTsCheckerWebpackPlugin({
                 eslint: {
                     files: '.',
+                    options: {
+                        ignorePath: '.gitignore',
+                    },
                 },
             }),
         ];
@@ -162,7 +165,6 @@ class gotoAndReact {
             devServer: this.getDevServer(name),
             devtool: this.options.production ? 'source-map' : 'cheap-module-source-map',
             entry: this.getEntry(name),
-            mode: this.options.production ? 'production' : 'development',
             module: {
                 rules: [
                     {
@@ -287,4 +289,4 @@ class gotoAndReact {
 
 }
 
-module.exports = (env) => new gotoAndReact(env);
+module.exports = (env, argv) => new gotoAndReact(env, argv);
