@@ -1,5 +1,5 @@
 const HtmlValidate = require('html-validate').HtmlValidate;
-const format = require('html-validate/build/formatters/stylish').default;
+const format = require('html-validate/dist/formatters/stylish').default;
 
 const fractal = require('../fractal.config.js');
 const { components } = require('../temp/components.json');

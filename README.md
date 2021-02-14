@@ -2,7 +2,8 @@
 This is our base project for React projects.
 
 ## Global dependencies
-- [Node.js](https://nodejs.org/) (including [npm](https://www.npmjs.com/), currently v6) - use LTS, currently v12
+- [Node.js](https://nodejs.org/) (including [npm](https://www.npmjs.com/), currently v6) - use v12
+  - The current LTS version (v14) is incompatible with chokidar 2.x and fsevents 1.x used by webpack-dev-server 3.x
 
 ## Styleguide
 ### Developing front-end styleguide
@@ -24,4 +25,4 @@ To create the ssl certificate for the webpack-dev-server go to `node_modules\web
 Run `npm run build:app`. This will build a app to `app/build`.
 
 ## Copyright
-© gotoAndPlay 2020
+© gotoAndPlay 2021

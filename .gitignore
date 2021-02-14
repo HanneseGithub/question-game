@@ -5,12 +5,14 @@
 # Ignore node_modules in this directory
 node_modules/
 
-#Ignore all following pre-dot directories and files
+# Ignore all following pre-dot directories and files
 .sass-cache
 .tscache
 
-#Ignore sublime specific
-# cache files for sublime text
+# Editor-specific
+# - VS Code
+.vscode
+# - Sublime
 *.tmlanguage.cache
 *.tmPreferences.cache
 *.stTheme.cache
@@ -35,7 +37,7 @@ ehthumbs.db
 .LSOverride
 ._*
 
-#Ignore log files
+# Ignore log files
 .log
 .map
 .tmp.txt
