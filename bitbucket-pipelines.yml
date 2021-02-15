@@ -71,16 +71,6 @@ definitions:
           - *upload-styleguide
           - *make-directory-for-app
           - *upload-app
-  pipelines:
-    build-and-deploy-to-test: &build-and-deploy-to-test
-      - step: *test-node
-      - step: *build
-      - step: *deploy-test
-    build-and-deploy-to-staging: &build-and-deploy-to-staging
-      - step: *test-node
-      - step: *build
-      - step: *deploy-staging
-      - step: *deploy-production
 
 image: node:12
 pipelines:
@@ -92,4 +82,8 @@ pipelines:
           <<: *deploy-test
           trigger: manual
   branches:
-    main: *build-and-deploy-to-staging
+    main:
+      - step: *test-node
+      - step: *build
+      - step: *deploy-staging
+      - step: *deploy-production
