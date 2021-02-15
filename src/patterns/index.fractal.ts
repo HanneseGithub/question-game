@@ -1,4 +1,3 @@
-import './core/utils.scss';
 import '../hydrate.tsx';
 
 export * from './';
