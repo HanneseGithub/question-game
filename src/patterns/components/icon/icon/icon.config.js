@@ -25,6 +25,7 @@ module.exports = {
     collated: true,
     meta: {
         cache: true,
+        ssr: true,
     },
     variants,
 };
