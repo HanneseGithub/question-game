@@ -1,14 +1,14 @@
 definitions:
   steps:
     - step: &make-directory-for-styleguide
-        pipe: atlassian/ssh-run:0.2.6
+        pipe: atlassian/ssh-run:0.3.0
         variables:
           SSH_USER: '$SSH_USER'
           SERVER: '$SSH_SERVER'
           COMMAND: 'mkdir -p $SSH_PATH/styleguide/'
           PORT: '$SSH_PORT'
     - step: &upload-styleguide
-        pipe: atlassian/rsync-deploy:0.4.3
+        pipe: atlassian/rsync-deploy:0.4.4
         variables:
           USER: '$SSH_USER'
           SERVER: '$SSH_SERVER'
@@ -16,14 +16,14 @@ definitions:
           LOCAL_PATH: 'build/styleguide/'
           SSH_PORT: '$SSH_PORT'
     - step: &make-directory-for-app
-        pipe: atlassian/ssh-run:0.2.6
+        pipe: atlassian/ssh-run:0.3.0
         variables:
           SSH_USER: '$SSH_USER'
           SERVER: '$SSH_SERVER'
           COMMAND: 'mkdir -p $SSH_PATH/app/'
           PORT: '$SSH_PORT'
     - step: &upload-app
-        pipe: atlassian/rsync-deploy:0.4.3
+        pipe: atlassian/rsync-deploy:0.4.4
         variables:
           USER: '$SSH_USER'
           SERVER: '$SSH_SERVER'
