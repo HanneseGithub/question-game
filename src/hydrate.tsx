@@ -4,11 +4,7 @@ import ReactDOM from 'react-dom';
 import JsxParser from 'react-jsx-parser';
 
 import IconProvider from './patterns/components/icon/icon-provider/icon-provider';
-import icons from './patterns/components/icon/icon/icons';
-
-interface IIconObject {
-    symbol: string;
-}
+import { getIconPath } from './patterns/components/icon/icon/icons';
 
 const wrapChildren: (children: string) => JSX.Element = (children: string) => (
     <JsxParser
@@ -53,15 +49,6 @@ const getContext: (context: IContext) => IContext = (context: IContext) => {
 window.setTimeout(() => {
     const Component: string = window.components[window.componentSettings.className];
     const props: IContext = getContext(window.componentSettings.context);
-    const getIconPath: (name: string) => string = (name: string) => {
-        const iconObject: IIconObject = icons[name] as unknown as IIconObject;
-
-        if (iconObject) {
-            return iconObject.symbol;
-        }
-
-        return icons + '#' + name;
-    };
 
     const element: JSX.Element = (
         <IconProvider getPath={getIconPath}>

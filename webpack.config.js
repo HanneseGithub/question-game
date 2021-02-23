@@ -49,7 +49,7 @@ class gotoAndReact {
             new SvgStorePlugin(),
             new StyleLintPlugin({ ignorePath: '.gitignore' }),
             new webpack.EnvironmentPlugin({
-                webpack: true,
+                publicPath: this.options.path,
             }),
             new ForkTsCheckerWebpackPlugin({
                 eslint: {
