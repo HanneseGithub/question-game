@@ -8,7 +8,7 @@ depth within that tree will render correctly.
 
 Example:
 
-```tsx
+```
 <IconProvider getPath={(name) => 'path/to/icons.svg#' + name}>
     <ComponentA>
         <ComponentB>
