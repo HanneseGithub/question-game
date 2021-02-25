@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Router } from '@reach/router';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { IconProvider } from '../../patterns';
 import { getIconPath } from '../../patterns/components/icon/icon/icons';
@@ -10,9 +10,11 @@ const publicPath = process.env.publicPath || '/';
 
 const App = (): JSX.Element => (
     <IconProvider getPath={getIconPath}>
-        <Router basepath={publicPath}>
-            <Login path="/" />
-        </Router>
+        <BrowserRouter basename={publicPath}>
+            <Switch>
+                <Route path="/"><Login /></Route>
+            </Switch>
+        </BrowserRouter>
     </IconProvider>
 );
 
