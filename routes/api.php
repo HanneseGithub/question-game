@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QuestionGameController;
+use App\Http\Controllers\QuestionCreationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Quiz routes
+Route::get('/', [QuestionGameController::class, 'index'])->name('questiongame.start');
+Route::post('/{answer:secret_id}', [QuestionGameController::class, 'store'])
+        ->name('questiongame.play')
+        ->missing(function (Request $request) {
+            return redirect()->route('questiongame.start');
+        });
