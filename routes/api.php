@@ -23,3 +23,9 @@ Route::post('/{answer:secret_id}', [QuestionGameController::class, 'store'])
         ->missing(function (Request $request) {
             return redirect()->route('questiongame.start');
         });
+
+// Question creation routes
+Route::post('/question/create', [QuestionCreationController::class, 'store'])->name('questioncreation');
+
+
+
