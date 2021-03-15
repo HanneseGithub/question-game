@@ -1,0 +1,70 @@
+@import '../../../patterns/core/mixins.scss';
+@import '../../../patterns/core/variables.scss';
+
+.question {
+    display: flex;
+    flex-direction: column;
+}
+
+.question__title {
+    .question & {
+        margin-bottom: 64px;
+        margin-top: 32px;
+
+        color: #f46c24;
+
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 48px;
+
+        @include bp(sm-min) {
+            margin-top: 0;
+        }
+    }
+
+    .question-wrapper & {
+        text-align: center;
+    }
+}
+
+.question__text {
+    .question & {
+        margin-bottom: 64px;
+
+        color: #353635;
+
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 48px;
+    }
+
+    .question-wrapper & {
+        text-align: center;
+    }
+}
+
+.question-wrapper {
+    display: flex;
+
+    min-height: 100vh;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.question__answers {
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    .question.question--finished & {
+        justify-content: space-around;
+
+        @include bp(sm-min) {
+            justify-content: flex-start;
+        }
+    }
+}

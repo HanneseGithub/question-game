@@ -1,0 +1,89 @@
+@import '../../../patterns/core/mixins.scss';
+@import '../../../patterns/core/variables.scss';
+
+.answer {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 300;
+
+    overflow: hidden;
+
+    min-height: 250px;
+    width: 350px;
+
+    padding: 24px;
+
+    background-color: #f5f5f5;
+    border-radius: 10px;
+
+    transition: all .3s ease-in-out;
+    transition-property: background-color, box-shadow;
+
+    margin: 16px 0;
+
+    @include bp(sm-min) {
+        margin: 12px 16px;
+    }
+
+    &.answer--first {
+        @include bp(sm-min) {
+            margin-right: 16px;
+        }
+    }
+
+    &.answer--small {
+        min-height: 130px;
+        width: 150px;
+
+        &.answer--correct {
+            box-shadow: 0 0 4px 4px #008000;
+        }
+
+        &.answer--incorrect {
+            box-shadow: 0 0 4px 4px #ff0000;
+        }
+    }
+
+    &:hover {
+        background-color: #d9d9d9;
+        cursor: pointer;
+    }
+
+    &:active {
+        box-shadow: #353635 0 0 10px 2px;
+    }
+}
+
+.answer__text {
+    .answer & {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+
+        color: #353635;
+    }
+
+    .answer.answer--small & {
+        font-size: 16px;
+    }
+}
+
+.answer__number {
+    .answer & {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 36px;
+
+        color: #353635;
+    }
+
+    .answer.answer--small & {
+        font-size: 24px;
+    }
+}

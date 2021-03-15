@@ -1,0 +1,28 @@
+{
+    "meta": {
+        "previewDisplay": {
+          "margin": 20
+        }
+    },
+    "context": {
+        "score": 3,
+        "answers": [
+            {
+                "text": "Lorem",
+                "guess": "false"
+            },
+            {
+                "text": "Ipsum",
+                "guess": "true"
+            },
+            {
+                "text": "Lorem2",
+                "guess": "false"
+            },
+            {
+                "text": "Ipsum2",
+                "guess": "false"
+            }
+        ]
+    }
+}

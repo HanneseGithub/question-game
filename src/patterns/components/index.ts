@@ -1,7 +1,9 @@
 export * from './accordion';
+export * from './answer';
 export * from './button';
 export * from './container';
 export * from './forms';
+export * from './finish';
 export * from './grid';
 export * from './helpers';
 export * from './icon/icon';
@@ -12,4 +14,5 @@ export * from './logo';
 export * from './main';
 export * from './modal';
 export * from './navigation';
+export * from './question';
 export * from './tabs';

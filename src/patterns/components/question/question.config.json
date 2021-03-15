@@ -1,0 +1,21 @@
+{
+    "meta": {
+        "previewDisplay": {
+          "margin": 20
+        }
+    },
+    "context": {
+        "questionNumber": 1,
+        "text": "Lorem or ipsum?",
+        "answers": [
+            {
+                "text": "Lorem",
+                "secretId": "a34ugioredgkdnvkdsfslfsflslkvdfk"
+            },
+            {
+                "text": "Ipsum",
+                "secretId": "dbdkfbldflkbösölrksddfölbkdöbdfg"
+            }
+        ]
+    }
+}

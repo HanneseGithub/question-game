@@ -1,0 +1,37 @@
+{
+    "meta": {
+      "previewDisplay": {
+        "margin": 20
+      }
+    },
+    "context": {
+      "index": 1,
+      "text": "Lorem"
+    },
+    "variants": [
+      {
+        "name": "Small answer",
+        "context": {
+          "modifier": "answer--small",
+          "index": 1,
+          "text": "Lorem"
+        }
+      },
+      {
+        "name": "Correct Small answer",
+        "context": {
+          "modifier": "answer--small answer--correct",
+          "index": 1,
+          "text": "Lorem"
+        }
+      },
+      {
+        "name": "Incorrect Small answer",
+        "context": {
+          "modifier": "answer--small answer--incorrect",
+          "index": 1,
+          "text": "Lorem"
+        }
+      }
+    ]
+  }
